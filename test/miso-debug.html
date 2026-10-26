@@ -1,0 +1,12 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head>
+<body style="margin:0;background:#333">
+<canvas id="big" width="640" height="640" style="image-rendering:pixelated"></canvas>
+<script src="../src/sprites.js"></script>
+<script>
+  const s = PIXEL_PALS.build('miso');
+  const c = document.getElementById('big');
+  const g = c.getContext('2d');
+  g.imageSmoothingEnabled = false;
+  g.drawImage(s.layers.body, 0, 0, 640, 640);
+  window.DONE = true;
+</script></body></html>

@@ -1,0 +1,39 @@
+name: Feature Request
+description: Suggest an idea, interaction, sound, or new pet for Pixel Pals
+title: "[Idea]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have an idea for a new pet, interaction, mini-game, or reminder? We'd love to hear it.
+  - type: textarea
+    id: idea
+    attributes:
+      label: Proposal
+      description: Describe the feature or improvement you would like to see.
+      placeholder: What should happen? How should it feel?
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context & Motivation
+      description: Why would this be a great addition to Pixel Pals?
+      placeholder: E.g., helpful for long work sessions, cute visual detail, etc.
+    validations:
+      required: false
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - New Pet / Sprite Art
+        - Interactions & Animation
+        - Questions & Mini-games
+        - Timers & Productivity
+        - Sound Effects (WebAudio)
+        - Settings & System Tray
+        - Other
+    validations:
+      required: true

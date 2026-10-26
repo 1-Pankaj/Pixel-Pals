@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:">
+<title>Pixel Pals — Adopt a buddy</title>
+<link rel="stylesheet" href="picker.css">
+</head>
+<body>
+  <div id="app">
+    <header id="titlebar">
+      <div class="tb-dots"><i></i><i></i><i></i></div>
+      <div class="tb-title">Pixel Pals</div>
+      <button id="tb-close" title="Close">&#10005;</button>
+    </header>
+
+    <main>
+      <h1 class="logo">Pixel Pals</h1>
+      <p class="sub">Adopt a tiny buddy to live on your desktop.<br>It talks, asks you questions, plays games, eats snacks, dances, naps — with <b>2,500+</b> things to say.<br><span class="kbd-hint">Tip: arrow keys to browse, Enter to adopt, Esc to close.</span></p>
+
+      <section id="cards"></section>
+
+      <footer class="hint">You can switch pals anytime from the tray icon near your clock.</footer>
+    </main>
+  </div>
+
+  <script src="sprites.js"></script>
+  <script src="sounds.js"></script>
+  <script src="picker.js"></script>
+</body>
+</html>

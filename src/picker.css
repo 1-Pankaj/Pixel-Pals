@@ -1,0 +1,209 @@
+/* Pixel Pals — picker window styles */
+@font-face {
+  font-family: 'Press Start 2P';
+  src: url('../assets/fonts/press-start-2p-latin-400-normal.woff2') format('woff2');
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'Pixelify Sans';
+  src: url('../assets/fonts/pixelify-sans-latin-400-normal.woff2') format('woff2');
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'Pixelify Sans';
+  src: url('../assets/fonts/pixelify-sans-latin-700-normal.woff2') format('woff2');
+  font-weight: 700;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 540px;
+  height: 840px;
+  overflow: hidden;
+  background: transparent;
+  user-select: none;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #fdf3e3 0%, #ffeef3 100%);
+  border: 3px solid #3a2b20;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ---------- titlebar ---------- */
+#titlebar {
+  -webkit-app-region: drag;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: #3a2b20;
+  flex: 0 0 auto;
+}
+.tb-dots { display: flex; gap: 6px; }
+.tb-dots i { width: 10px; height: 10px; border-radius: 50%; display: block; }
+.tb-dots i:nth-child(1) { background: #ff6d8a; }
+.tb-dots i:nth-child(2) { background: #ffd76e; }
+.tb-dots i:nth-child(3) { background: #7ed6a0; }
+.tb-title {
+  font-family: 'Pixelify Sans', sans-serif;
+  font-weight: 700;
+  color: #fff4e3;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+#tb-close {
+  -webkit-app-region: no-drag;
+  margin-left: auto;
+  border: none;
+  background: transparent;
+  color: #fff4e3;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+#tb-close:hover { background: #ff6d8a; }
+
+/* ---------- content ---------- */
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 18px 22px 14px;
+  overflow-y: auto;
+}
+
+.logo {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 20px;
+  color: #3a2b20;
+  text-shadow: 3px 3px 0 #ffd76e;
+  margin: 8px 0 10px;
+}
+
+.sub {
+  font-family: 'Pixelify Sans', sans-serif;
+  font-size: 15.5px;
+  color: #6b5138;
+  text-align: center;
+  line-height: 1.35;
+  margin-bottom: 14px;
+}
+
+#cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: #fffdf6;
+  border: 3px solid #3a2b20;
+  border-radius: 12px;
+  padding: 10px 10px 12px;
+  box-shadow: 0 4px 0 rgba(58, 43, 32, 0.22);
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 0 rgba(58, 43, 32, 0.22);
+}
+.card.current { outline: 3px solid #7ed6a0; outline-offset: 2px; }
+
+.card canvas {
+  width: 84px;
+  height: 84px;
+  image-rendering: pixelated;
+  background: repeating-conic-gradient(#f7ecd9 0% 25%, #fbf3e4 0% 50%) 0 0 / 14px 14px;
+  border: 2px solid #e5d5bc;
+  border-radius: 10px;
+  flex: 0 0 auto;
+  margin-bottom: 8px;
+}
+
+.card .info { flex: 1; min-width: 0; width: 100%; }
+.card .name {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  color: #3a2b20;
+  margin-bottom: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.card .badge {
+  font-family: 'Pixelify Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  color: #fff;
+  background: #7ed6a0;
+  border-radius: 20px;
+  padding: 2px 7px 3px;
+  display: none;
+}
+.card.current .badge { display: inline-block; }
+.card .species {
+  font-family: 'Pixelify Sans', sans-serif;
+  font-weight: 700;
+  font-size: 12.5px;
+  color: #b0793f;
+  margin-bottom: 3px;
+}
+.card .tagline {
+  font-family: 'Pixelify Sans', sans-serif;
+  font-size: 12.5px;
+  color: #6b5138;
+  line-height: 1.22;
+}
+
+.card .adopt {
+  flex: 0 0 auto;
+  margin-top: 8px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  color: #3a2b20;
+  background: #ffd76e;
+  border: 3px solid #3a2b20;
+  border-radius: 10px;
+  padding: 8px 12px;
+  cursor: pointer;
+  box-shadow: 0 3px 0 #3a2b20;
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+.card .adopt:hover { background: #ffe094; }
+.card .adopt:active { transform: translateY(3px); box-shadow: 0 0 0 #3a2b20; }
+
+.hint {
+  margin-top: 16px;
+  font-family: 'Pixelify Sans', sans-serif;
+  font-size: 13.5px;
+  color: #97805f;
+  text-align: center;
+}
+
+/* keyboard navigation focus ring */
+.card.kb-focus {
+  outline: 3px solid #ffd76e;
+  outline-offset: 2px;
+}
+
+.kbd-hint {
+  font-size: 11px;
+  opacity: 0.65;
+  letter-spacing: 0.2px;
+}

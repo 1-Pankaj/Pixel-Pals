@@ -1,0 +1,73 @@
+{
+  "name": "pixel-pals",
+  "productName": "Pixel Pals",
+  "version": "1.2.1",
+  "description": "A cute pixelated desktop pet that lives on top of your windows - 6 pals, eyes that follow your mouse, 2500+ things to say, questions with choices, games, stories, keyboard shortcuts, breathing breaks, timers, and gentle reminders.",
+  "main": "main.js",
+  "author": "Pixel Pals",
+  "license": "MIT",
+  "scripts": {
+    "desktop": "electron .",
+    "start": "electron .",
+    "dev": "electron . --debug",
+    "test": "node test/validate-messages.js",
+    "preview:sprites": "electron test/preview-sprites.js",
+    "preview:app": "electron test/preview-app.js",
+    "dist": "electron-builder --win",
+    "dist:portable": "electron-builder --win portable"
+  },
+  "keywords": [
+    "desktop-pet",
+    "pixel-art",
+    "electron",
+    "virtual-pet",
+    "tamagotchi",
+    "cozy",
+    "focus-timer",
+    "productivity"
+  ],
+  "devDependencies": {
+    "@fontsource/pixelify-sans": "^5.3.0",
+    "@fontsource/press-start-2p": "^5.3.0",
+    "@fontsource/vt323": "^5.3.0",
+    "electron": "^37.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.pixelpals.desktop",
+    "productName": "Pixel Pals",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "src/**/*",
+      "assets/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "shortcutName": "Pixel Pals"
+    }
+  }
+}
