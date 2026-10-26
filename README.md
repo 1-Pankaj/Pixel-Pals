@@ -1,218 +1,191 @@
-# Pixel Pals 🐱🐶🟢👻🐰🩷
-
-[![CI](https://github.com/1-Pankaj/Pixel-Pals/actions/workflows/ci.yml/badge.svg)](https://github.com/1-Pankaj/Pixel-Pals/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey.svg)](https://github.com/1-Pankaj/Pixel-Pals)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+# Pixel Pals
 
 <p align="center">
-  <img src="assets/demo.gif" alt="Pixel Pals Demo" width="340">
+  <img src="assets/icon.png" alt="Pixel Pals Icon" width="72">
 </p>
 
-A cute pixelated desktop pet that lives **on top of your windows**. Adopt one of **six pals**, watch its eyes follow your mouse, drag it around (or fling it), pet it, feed it snacks, start a dance party — and enjoy **2,500+ hand-written messages**. It will also **ask YOU questions with clickable choice buttons**, play games with you, tell stories, guide breathing breaks, and help you focus with timers and gentle reminders. No AI, no accounts, no nonsense — just a tiny friend.
+<p align="center">
+  <strong>A cozy pixelated desktop companion that lives on top of your windows.</strong><br>
+  Adopt one of six handcrafted pals with global mouse-tracking eyes, 2,500+ dialogue lines, interactive choice questions, mini-games, snack feeding, breathing breaks, focus timers, and a live synthesized sound engine.
+</p>
 
-Built with **Electron**. Works on **Windows** (and macOS/Linux).
+<p align="center">
+  <a href="https://github.com/1-Pankaj/Pixel-Pals/actions/workflows/ci.yml"><img src="https://github.com/1-Pankaj/Pixel-Pals/actions/workflows/ci.yml/badge.svg" alt="CI Status"></a>
+  <a href="https://github.com/1-Pankaj/Pixel-Pals/releases"><img src="https://img.shields.io/github/v/release/1-Pankaj/Pixel-Pals?include_prereleases&color=fab387&label=release" alt="GitHub Release"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
+  <a href="https://github.com/1-Pankaj/Pixel-Pals"><img src="https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-blue.svg" alt="Platform"></a>
+  <a href="https://github.com/1-Pankaj/Pixel-Pals/discussions"><img src="https://img.shields.io/badge/Discussions-Join%20In-green.svg" alt="GitHub Discussions"></a>
+  <a href="CONTRIBUTING.md"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome"></a>
+</p>
+
+<p align="center">
+  <img src="assets/demo.gif" alt="Pixel Pals in Action" width="340" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+</p>
 
 ---
 
-## Quick start
+## The Six Pals
+
+<p align="center">
+  <img src="assets/pals-banner.png" alt="Pixel Pals Lineup" width="100%" style="border-radius: 8px;">
+</p>
+
+| Pal | Species | Personality & Quirks |
+|:---|:---|:---|
+| **Mochi** | Orange Tabby | Professional napper. Judgy about your playlist, but loves you anyway. |
+| **Biscuit** | Shiba Inu | Maximum loyalty, minimum chill. Will do backflips for any snack. |
+| **Pudding** | Mint Slime | Small, squishy, bouncy, and full of gelatinous dreams. |
+| **Luna** | Little Ghost | Cozy hovering vibes. Floats gently above your desktop without haunting. |
+| **Clover** | Bunny | High-altitude ears, soft heart, and rapid-fire hops. |
+| **Miso** | Axolotl | Perpetual cheerful grin. Scientifically incapable of frowning. |
+
+Each buddy features custom 32×32 pixel art, 5 distinct facial expressions, wagging tails, sway overlays, and **40 unique personality lines** in addition to the shared message pool.
+
+---
+
+## Core Highlights
+
+- 🫧 **Transparent & Non-Intrusive**: Always-on-top, frameless window with forward mouse-event pass-through. Clicks fall through everywhere except the pet and active choice bubbles, so it never interrupts your work.
+- 👀 **Global Eye Tracking**: Your pal's eyes follow your mouse cursor across any monitor, even when working inside other applications.
+- 💬 **2,500+ Handcrafted Messages**: No AI, no cloud accounts, and zero subscriptions. Time-aware greetings (morning, afternoon, evening, night), weekday/weekend quips, trivia, shower thoughts, and anti-repeat shuffle bags.
+- 🎯 **Interactive Question Bubbles**: The pet asks *you* questions. The speech bubble expands with clickable buttons for Yes/No dilemmas, This-or-That, three-choice Trivia, and emotional check-ins.
+- 🎲 **Mini-Games**: Play Rock-Paper-Scissors with drumroll reveals, flip coins, shake the Magic 8-Ball, or go through multi-step Knock-Knock jokes.
+- 🍪 **Snack Time**: Feed your buddy a cookie, donut, or boba cup. Features 3 animated crunchy bites, crumbs, and mood boosts.
+- 🔊 **Zero-Asset WebAudio Synthesizer**: No external audio files. Sounds are synthesized live through custom oscillator nodes, filtered noise bursts, lowpass filters, and compressors for soft, warm, kawaii-game tones.
+- ⏱️ **Gentle Productivity & Wellness**: Main-process focus timers (15/25/50 min), countdown alarms, guided 1-minute 4-4-4 breathing exercises, water reminders, and stretch nudges.
+- 🧲 **Fling Physics**: Pick up and drag your pal with 1:1 cursor follow. Flinging calculates release velocity and adds gravity with elastic screen-edge bouncing.
+
+---
+
+## Controls
+
+### Mouse Gestures
+
+| Action | Result |
+|:---|:---|
+| **Single click** | Poke reaction: jump, giggle, spin, or squish (3 quick pokes triggers dizzy stars) |
+| **Double click** | Dance party! Wiggle animation + music notes |
+| **Hold (≈0.5s)** | Squish! Squeezes the pet with bursting hearts |
+| **Drag** | Pick it up — dangles with wide eyes (speech bubble stays anchored to the head) |
+| **Shake during drag** | Rapidly wiggle cursor left and right to make the pet dizzy on drop |
+| **Fling** | Fast drag + release launches the pet with bouncy edge collisions |
+| **Tickle** | Wiggle cursor over the pet to trigger a giggle fit |
+| **Scroll wheel** | Scroll up = happy hops; Scroll down = squish flat |
+| **Right click** | Open in-game context menu (feed, question, dance, focus, nap, switch pal) |
+| **System Tray** | Access all settings, timers, reminders, pal switching, or quit |
+
+### Global Keyboard Shortcuts
+
+Because the pet window intentionally avoids stealing window focus, interactions can be triggered system-wide via keyboard shortcuts (toggleable in tray):
+
+| Shortcut | Action |
+|:---|:---|
+| `Alt+Shift+P` | Pet (burst hearts) |
+| `Alt+Shift+B` | Say something |
+| `Alt+Shift+F` | Drop a snack |
+| `Alt+Shift+D` | Start dance party |
+| `Alt+Shift+N` | Toggle nap / wake |
+| `Alt+Shift+T` | Ask current time |
+| `Alt+Shift+S` | Hangout statistics |
+| `Alt+Shift+Q` | Ask a random question |
+| `Alt+Shift+R` | Rock, Paper, Scissors |
+| `Alt+Shift+C` | Flip a coin |
+| `Alt+Shift+M` | Ask Magic 8-ball |
+| `Alt+Shift+K` | Tell a knock-knock joke |
+| `Alt+Shift+Y` | Tell a 3-part story |
+| `Alt+Shift+E` | Guided breathing break (1 min) |
+| `Alt+Shift+G` | Start 25-minute focus timer |
+| `Alt+Shift+H` | Stop focus timer |
+| `Alt+Shift+1` / `2` / `3` | Answer open question choice 1, 2, or 3 |
+| `Alt+Shift+X` | Dismiss bubble / question |
+
+---
+
+## Getting Started
+
+### Option 1: Download Pre-built Executable (Windows)
+
+Visit the [Releases](https://github.com/1-Pankaj/Pixel-Pals/releases) page to download:
+- **`Pixel Pals.exe`** — Standalone portable version (no installation needed, run directly).
+- **`Pixel Pals Setup.exe`** — Standard Windows installer.
+
+### Option 2: Run from Source
+
+**Prerequisites**: [Node.js](https://nodejs.org/) 18 or higher.
 
 ```bash
+# Clone repository
+git clone https://github.com/1-Pankaj/Pixel-Pals.git
+cd Pixel-Pals
+
+# Install dependencies
 npm install
+
+# Launch desktop app
 npm run desktop
 ```
 
-That's it. On first launch the **adopt-a-buddy** picker appears — choose your pal and it spawns on your desktop.
+On first launch, the **Adopt-a-Buddy** picker window opens. Select your buddy to spawn them on your desktop!
 
-> Requires Node.js 18+ and internet access for the first `npm install` (Electron downloads its runtime).
+---
 
-## Mouse controls
-
-| Action | What happens |
-|---|---|
-| **Click (tap)** | Poke! Random reaction: jump-scare, giggle, spin, squish — 3 fast pokes = dizzy stars |
-| **Double-click** | Dance party! Wiggle + music notes + a little melody |
-| **Hold (≈0.5s)** | Squish! Squeeze hearts out of it |
-| **Drag** | Pick it up — it dangles with wide eyes (the speech bubble stays glued to its head) |
-| **Shake while dragging** | Wiggle the cursor back & forth fast — it gets dizzy when you put it down |
-| **Fling (fast drag + release)** | Physics! It tumbles, shows speed streaks, and bounces off screen edges |
-| **Tickle (wiggle mouse over it)** | Giggle fit with hearts and wiggling |
-| **Scroll wheel over it** | Scroll up = happy hops. Scroll down = squish flat |
-| **Right-click** | Context menu (pet, snack, question, RPS, story, dance, time, focus, nap, switch pal, quit) |
-| **Just leave it alone** | It wanders, blinks, wags, chats, occasionally asks you a question... then naps with Zzz |
-| **Tray icon (near the clock)** | All settings, games, timers, pet switching, quit |
-
-## Keyboard shortcuts (global, toggleable in the tray menu)
-
-The pet window never steals focus, so keyboard control uses system-wide shortcuts:
-
-| Keys | Action |
-|---|---|
-| `Alt+Shift+P` | Pet it (hearts!) |
-| `Alt+Shift+B` | Say something |
-| `Alt+Shift+F` | Drop a snack |
-| `Alt+Shift+D` | Dance party |
-| `Alt+Shift+N` | Nap / wake |
-| `Alt+Shift+T` | What time is it? |
-| `Alt+Shift+S` | How long have we hung out? |
-| `Alt+Shift+Q` | Ask me a question (random) |
-| `Alt+Shift+R` | Rock, paper, scissors |
-| `Alt+Shift+C` | Flip a coin |
-| `Alt+Shift+M` | Magic 8-ball |
-| `Alt+Shift+K` | Knock-knock joke |
-| `Alt+Shift+A` | Snack, please? (pet picks) |
-| `Alt+Shift+Y` | Tell me a story |
-| `Alt+Shift+E` | One-minute breathing break |
-| `Alt+Shift+G` | Start 25-min focus timer |
-| `Alt+Shift+H` | Stop focus timer |
-| `Alt+Shift+1` / `2` / `3` | Answer the open question choice 1/2/3 |
-| `Alt+Shift+X` | Dismiss bubble / question |
-
-In the **picker window**: arrow keys browse, `Enter` adopts, `Esc` closes.
-
-## Questions & games
-
-Your pal asks **you** things — the speech bubble grows clickable choice buttons:
-
-- **Yes / No** — "Do you like rainy days?" (28 questions, each with tailored reactions)
-- **This or that** — "Cats or dogs?" (30 dilemmas, including a *Both!* escape)
-- **Trivia** — 3 choices, gentle right/wrong reactions, hearts for correct answers (34 questions)
-- **How are you feeling?** — it actually adapts its mood to your answer
-- **Snack, please?** — Cookie / Donut / Boba, and it eats the one you pick
-- **Rock, paper, scissors** — with a drumroll and outcome lines
-- **Coin flip** and **Magic 8-ball** — it shakes and answers
-- **Knock-knock jokes** — full 3-step setup with buttons
-- Plus it pops an unprompted question every so often while you work
-
-## The six pals
-
-| Pet | Species | Personality |
-|---|---|---|
-| **Mochi** 🐱 | Orange Tabby | Professional napper. Will judge your playlist, lovingly. |
-| **Biscuit** 🐶 | Shiba Inu | Maximum loyalty, minimum chill. 10/10 would fetch. |
-| **Pudding** 🟢 | Mint Slime | Small, squishy, full of big dreams and jelly. |
-| **Luna** 👻 | Little Ghost | Mostly here for the cozy vibes and gentle hovering. (Actually floats!) |
-| **Clover** 🐰 | Bunny | Ears at maximum altitude. Heart at maximum softness. |
-| **Miso** 🩷 | Axolotl | Always smiling. Scientifically unable to frown. |
-
-Each pal has its own **40 personality lines**, on top of the shared collection:
-greetings (time-of-day aware), 130+ jokes, 150+ fun facts, compliments,
-encouragement, whimsy, shower thoughts, procrastination nudges, 16 multi-part
-stories, 22 knock-knock jokes, Monday/Friday/weekend lines, and reactions to
-everything you do to it.
-
-## Feature list
-
-- 🎨 **Hand-authored pixel art** — 32×32 sprites, 5 face expressions per pet, wagging tails, swaying sprout, baked blush and gloss
-- 👀 **Eyes follow your mouse** — globally, even when the cursor is outside the pet window (toggleable)
-- 🫧 **Floats above everything** — always-on-top, frameless, transparent, click-through everywhere except the pet (and its question bubbles)
-- 🖥️ **Crisp at any display scaling** — DPR-aware rendering (no blurry/shrunken sprite at 125%–200% Windows scaling)
-- 🖱️ **Drag with real physics** — direct 1:1 follow, velocity tracking, flinging with gravity + bouncy screen-edge collisions
-- 💬 **2,500+ messages** with anti-repeat shuffle bags, time-of-day greetings, day-aware lines
-- 🗣️ **Animalese** — it "speaks" its lines with tiny pentatonic voice-blips while text types out
-- ❤️ **Interactions** — petting, hold-to-squish, poke reactions, dizzy combo, tickling, scroll reactions, shake detection, snack feeding, dance parties
-- 🧁 **Snack time** — cookie, donut, or boba (with pearls!); 3 crunchy bites, crumbs, hearts
-- 🎲 **Questions & games** — clickable choice bubbles (see above)
-- 📖 **Story time** — 16 three-part cozy stories told one bubble at a time
-- 🌬️ **Breathing break** — one minute of guided 4-4-4 breathing; the pet inflates and deflates with you
-- 🔔 **Useful stuff**:
-  - **Focus timer** (15/25/50 min) — meditation face, half-time encouragement, celebration
-  - **Countdown timer** (1/5/10/20/30 min) — sweet alarm + stars when time is up
-  - **Water break reminder** — gentle drop particles + a nudge to hydrate
-  - **Stretch reminder** — it demonstrates a big stretch so you copy it
-  - **Hourly chime** — soft bell + the time and day-progress
-  - **"What time is it?"** and **hangout stats** on demand
-- 🌡️ **Hidden mood system** — pets and snacks raise it, neglect lowers it; sad pets ask for attention (politely)
-- 😴 **Sleep mode** — after ~2.5 min of ignoring it (faster at night) it dozes off with floating Z's
-- 🚶 **Wandering** — occasionally hops across your screen on its own
-- 🔊 **Soft cozy sound engine** — synthesized live with WebAudio (no audio files): warm plucks, bells, purrs, giggles, drumrolls, gentle alarms — all through a lowpass + compressor
-- ⌨️ **Global keyboard shortcuts** — full control without the mouse (toggleable)
-- ⚙️ **Tray menu** — pets, fun, questions & games, useful timers, reminders, toggles
-- 🧠 **Remembers everything** — chosen pet, screen position, and settings persist between runs
-- 🪟 **Single instance** — launching twice just focuses the existing app
-
-## Project structure
+## Project Architecture
 
 ```
-pixel-pals/
-├── main.js              # Electron main process (windows, tray, drag/fling physics, timers, shortcuts, state)
-├── preload.js           # Safe IPC bridge (contextBridge)
-├── package.json         # Scripts + electron-builder config
+Pixel-Pals/
+├── main.js              # Electron main process (lifecycle, physics, timers, tray, shortcuts)
+├── preload.js           # Safe contextBridge IPC layer
 ├── assets/
-│   ├── icon.png/.ico    # App icon (generated from the pixel art)
-│   ├── tray-*.png       # Per-pet tray icons (6 pets)
-│   └── fonts/           # Bundled pixel fonts (woff2)
+│   ├── icon.ico/.png    # App icons
+│   ├── tray-*.png       # System tray icons for each pet
+│   ├── demo.gif         # Showcase animation
+│   ├── pals-banner.png  # Character lineup banner
+│   └── fonts/           # Local WOFF2 pixel fonts (Pixelify Sans, Press Start 2P, VT323)
 ├── src/
-│   ├── sprites.js       # Pixel-art engine + all 6 pets (half-mirrored maps, underlays, centered eye anchors)
-│   ├── messages.js      # Core messages (hello, greetings, idle, personalities)
-│   ├── messages-fun.js  # Jokes, facts, stories, knock-knocks...
-│   ├── messages-react.js# Reactions to every interaction
-│   ├── messages-ask.js  # The question bank (choices, trivia, games)
-│   ├── sounds.js        # WebAudio soft-cozy synth engine
-│   ├── pet.html/css/js  # Pet window (DPR canvas, state machine, particles, snacks, question bubbles)
-│   └── picker.html/css/js  # Adopt-a-buddy window with live previews + keyboard nav
-└── test/                # Dev-only preview, probe & screenshot harnesses
+│   ├── pet.html/css/js  # Pet window: DPR canvas, state machine, particles, choice bubbles
+│   ├── picker.html/css/js # Adopt-a-buddy window with live preview rendering
+│   ├── sprites.js       # Hand-authored 32x32 sprite generator & palette tables
+│   ├── sounds.js        # Pure WebAudio synthesizer (zero audio assets)
+│   ├── messages.js      # Core greetings, idle lines, pet personalities
+│   ├── messages-fun.js  # Jokes, facts, stories, knock-knock jokes
+│   ├── messages-react.js# Interaction reactions (petting, flinging, naps, timers)
+│   └── messages-ask.js  # Questions, trivia, games (RPS, coin, 8-ball)
+└── test/                # Test harnesses, validation suites, and recorders
 ```
 
-## Scripts
+### Technical Highlights
+- **Bubble Anchoring**: The speech bubble is anchored by a GPU-composited CSS `transform` on `#bubble-anchor` updated per frame, cleanly decoupled from layout styling. This completely prevents the bubble from sliding or trailing behind during window drags.
+- **DPR Scaling**: Canvas dimensions and transforms dynamically respect `window.devicePixelRatio`, ensuring crisp pixel art on high-DPI displays (125%–200% Windows scaling).
+- **Main-Process Timers**: Pomodoro and countdown timers run directly in Electron's main process, surviving renderer reloads without losing time.
+- **Memory Footprint**: Offscreen canvases pre-bake pet layer frames once at startup, keeping idle CPU usage near 0%.
 
-| Command | What it does |
-|---|---|
-| `npm run desktop` | Run the app (same as `npm start`) |
+---
+
+## Development Scripts
+
+| Command | Purpose |
+|:---|:---|
+| `npm run desktop` | Run the desktop app |
 | `npm run dev` | Run the app with detached DevTools enabled |
 | `npm test` | Run the automated message validation suite |
-| `npm run preview:sprites` | Screenshot sheet of every pet frame (saved to `out/sprites.png`) |
-| `npm run preview:app` | Launch the adopt-a-buddy picker preview window |
-| `npm run record:gif` | Record an automated demo sequence to `assets/demo.gif` |
-| `npm run dist` | Build Windows installer (NSIS) + portable `.exe` with electron-builder |
-| `npm run dist:portable` | Build just the portable `.exe` |
+| `npm run preview:sprites` | Render full sprite sheet of all pet frames to `out/sprites.png` |
+| `npm run preview:app` | Launch the adopt-a-buddy picker in standalone preview mode |
+| `npm run record:gif` | Run automated headless demo recorder to compile `assets/demo.gif` |
+| `npm run dist` | Build Windows NSIS installer and portable `.exe` with electron-builder |
+| `npm run dist:portable` | Build only the portable `.exe` binary |
 
-## Building a distributable for Windows
+---
 
-```bash
-npm run dist
-```
+## Community & Discussions
 
-Output lands in `release/` — an NSIS installer and a portable exe. The portable exe is the easiest way to share the pet with friends: one file, no install.
+- Have questions, feature suggestions, or custom pet ideas? Head over to **[GitHub Discussions](https://github.com/1-Pankaj/Pixel-Pals/discussions)**!
+- Found a bug? Open a structured report using our **[Bug Report Form](https://github.com/1-Pankaj/Pixel-Pals/issues/new?template=bug_report.yml)**.
+- Want to contribute? Check out our **[Contributing Guide](CONTRIBUTING.md)** and **[Code of Conduct](CODE_OF_CONDUCT.md)**.
 
-## Customizing
-
-- **Add your own messages** → edit any `src/messages-*.js` file. Each category is a plain array; anti-repeat is automatic. Templates: `%TIME`, `%PCT` (day progress), `%DUR` (session length), `%MIN` (timer minutes).
-- **Tune behavior** → in `src/pet.js`: chatter frequency (`scheduleChatter`), sleep timeouts (search `lastInteraction`), wander distance (`startWander`), question frequency (`chatterTick`), particle counts.
-- **Add a new pet** → add a palette + half-map layers in `src/sprites.js`, register it in `main.js` (`PET_META`), `src/messages.js` (`hello`, `pets`), `src/picker.js`, and `test/asset-gen.html` (tray icon).
-- **Change sprite size** → `SCALE` in `src/pet.js` and window size in `main.js`.
-
-## Troubleshooting
-
-- **Pet window looks black / no transparency** — update your GPU drivers, or run with `npx electron . --disable-gpu`. Some remote-desktop sessions disable window transparency entirely.
-- **Pet hides behind a fullscreen game** — fullscreen exclusive apps draw above everything; use borderless-window mode in the game.
-- **Global shortcuts don't respond** — another app may own them; try toggling "Global keyboard shortcuts" off and on in the tray menu, or pick different keys in `main.js` (`SHORTCUT_DEFS`).
-- **No tray icon on Linux** — some distros need an appindicator extension; the app still runs.
-- **"Start with Windows" doesn't work in dev** — Windows autostart points at the dev electron binary; use the packaged build (`npm run dist`) for a proper entry.
-
-## Tech notes
-
-- Context isolation is on, the preload exposes a minimal typed API (`window.petAPI`), and the CSP blocks remote code.
-- The pet window uses `setIgnoreMouseEvents(true, { forward: true })` with hover detection so clicks fall through everywhere except the sprite and interactive bubbles.
-- **Bubble anchoring**: the speech bubble is positioned by a GPU-composited `transform` on a wrapper element (updated once per frame), never by layout writes — so it stays glued to the pet even while the OS window is being dragged around (fixes the "message slides off while dragging" artifact on Windows).
-- **Drag**: the window follows the cursor 1:1 (no smoothing chase), which also removes the transparent-window content-trail during sustained movement.
-- All sprite frames are baked once at startup to offscreen canvases; the render loop just composites them, so CPU usage stays tiny.
-- The canvas applies a devicePixelRatio base transform, so the sprite stays pixel-perfect at any Windows display scale.
-- Eye states (open/blink/happy/wide) are baked **centered on a shared anchor** per pet, so faces never jump between expressions.
-- The focus and countdown timers run in the main process, so they keep ticking even if the pet window reloads.
-- Question choice buttons are plain DOM buttons inside the bubble; the hover detector treats the open bubble as part of the pet so clicks never fall through mid-question.
-
-## Chat pacing (v1.2.1)
-
-- **No message ever gets cut short.** New lines wait for the current one to finish showing (reading time scales with length, minimum ~2.4s) — this fixes the "message appears and disappears suddenly" artifact.
-- **Multi-step chats flow calmly**: knock-knock jokes, rock-paper-scissors reveals, and breathing cues chain *after* the previous line has fully displayed, instead of swapping on a blind timer.
-- **All 2,500+ lines use simple, friendly English** — no programmer talk, easy for anyone to read.
-
-## Contributing
-
-Contributions are welcome! Please check out [CONTRIBUTING.md](CONTRIBUTING.md) for architecture details, message syntax, and guidelines on adding new pets. All contributors are expected to follow our [Code of Conduct](CODE_OF_CONDUCT.md).
+---
 
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
-Bundled pixel fonts are open source under the SIL Open Font License 1.1 — see [CREDITS.md](CREDITS.md) for details.
+
+Bundled pixel fonts are open-source under the SIL Open Font License 1.1. See [CREDITS.md](CREDITS.md) for full font notices and designer credits.
