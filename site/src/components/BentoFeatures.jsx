@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Eye, MousePointerClick, HeartHandshake, Wind, Timer, Compass } from 'lucide-react';
+import { Eye, MousePointer, Wind, Timer, Sparkles, Smile, ShieldCheck } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export function BentoFeatures() {
-  // Breathing animation phase
   const [breathePhase, setBreathePhase] = useState('Inhale');
-  const [breatheCount, setBreatheCount] = useState(4);
 
   useEffect(() => {
-    const phases = ['Inhale (4s)', 'Hold (4s)', 'Exhale (4s)'];
+    const phases = ['Inhale...', 'Hold...', 'Exhale...'];
     let idx = 0;
     const interval = setInterval(() => {
       idx = (idx + 1) % phases.length;
@@ -17,126 +16,155 @@ export function BentoFeatures() {
   }, []);
 
   return (
-    <section id="features" className="relative py-24 px-4 max-w-6xl mx-auto">
-      {/* Section Header */}
+    <section id="features" className="relative py-28 px-4 max-w-6xl mx-auto">
+      {/* Header */}
       <div className="text-center max-w-2xl mx-auto mb-16">
-        <span className="text-xs font-mono text-peach uppercase tracking-widest block mb-2">
-          Engineered With Care
-        </span>
-        <h2 className="text-3xl sm:text-4xl font-pixel font-bold text-white tracking-wide">
-          Built for Everyday Focus & Joy
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-300 text-sm font-semibold mb-3">
+          <Sparkles className="w-4 h-4 text-pink-400" />
+          <span>Thoughtfully Designed</span>
+        </div>
+        <h2 className="text-4xl sm:text-5xl md:text-6xl font-heading font-black text-white tracking-tight">
+          Everything You'll Love About It
         </h2>
-        <p className="mt-3 text-subtext text-sm sm:text-base font-sans">
-          No cloud connections, no CPU hogging. Every detail from GPU-composited bubble anchors to DPR scaling was designed to make Pixel Pals feel like a native desktop friend.
+        <p className="mt-4 text-lg sm:text-xl text-zinc-300 font-sans max-w-xl mx-auto leading-relaxed">
+          No complicated setup, no lag, and zero annoying popups. Just a sweet little friend that makes using your computer more joyful.
         </p>
       </div>
 
-      {/* Bento Grid */}
+      {/* Bento Grid (Human & Visual, ZERO Code or Terminals) */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Card 1: Forward Click Pass-Through (2 Cols) */}
-        <div className="md:col-span-2 bg-[#121320] border border-card-border hover:border-peach/40 transition-all duration-300 rounded-3xl p-7 relative overflow-hidden group shadow-lg">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="p-2.5 rounded-xl bg-peach/15 text-peach border border-peach/20">
-              <MousePointerClick className="w-5 h-5" />
+        {/* Card 1: Click Pass-Through (Wide 2-Columns) */}
+        <div className="md:col-span-2 bg-[#10111a] border border-[#222336] hover:border-pink-500/40 transition-all duration-300 rounded-3xl p-8 sm:p-10 flex flex-col justify-between shadow-xl">
+          <div>
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-3 rounded-2xl bg-pink-500/10 text-pink-400 border border-pink-500/20">
+                <MousePointer className="w-6 h-6" />
+              </div>
+              <div>
+                <h3 className="font-heading text-2xl sm:text-3xl font-bold text-white">
+                  Never in Your Way
+                </h3>
+                <span className="text-sm font-medium text-pink-400">Click right through empty space</span>
+              </div>
             </div>
-            <div>
-              <h3 className="font-pixel text-xl font-bold text-white">Always-On-Top, Never in Your Way</h3>
-              <span className="text-xs font-mono text-subtext">Zero-obstruction click pass-through</span>
-            </div>
+            <p className="text-base sm:text-lg text-zinc-300 leading-relaxed mb-8">
+              Your pet floats gently on top of your windows, but your mouse clicks pass straight through! You can type notes, watch videos, or browse the web underneath them without ever getting blocked.
+            </p>
           </div>
-          <p className="text-sm font-sans text-subtext/90 max-w-lg mb-6 leading-relaxed">
-            The pet floats above everything, but uses forward click-routing. You can type, select code, or browse web pages directly through the transparent regions—clicks only register when touching the pet or its active choice bubbles.
-          </p>
-          {/* Visual simulation mockup */}
-          <div className="bg-[#0b0c14] border border-card-border/70 rounded-2xl p-4 font-mono text-xs text-subtext/70 relative overflow-hidden shadow-inner">
-            <div className="flex items-center justify-between pb-2 mb-2 border-b border-card-border/50 text-[10px]">
-              <span>// Your active workspace</span>
-              <span className="text-mint font-bold">✓ Clicks pass right through</span>
+
+          <div className="p-6 rounded-2xl bg-[#09090f] border border-[#1b1c2b] flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <span className="w-3 h-3 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-sm sm:text-base font-medium text-zinc-200">
+                Transparent click-routing is always active
+              </span>
             </div>
-            <div className="space-y-1">
-              <p className="text-sky/80">const <span className="text-gold">companion</span> = <span className="text-peach">new</span> PixelPal('mochi');</p>
-              <p className="text-subtext/60">companion.alwaysOnTop = <span className="text-mint">true</span>;</p>
-              <p className="text-subtext/60">companion.forwardMouseEvents = <span className="text-mint">true</span>; <span className="text-subtext/40">// Zero drag lag</span></p>
-            </div>
+            <span className="text-xs sm:text-sm font-bold bg-emerald-500/10 text-emerald-400 px-3 py-1 rounded-full border border-emerald-500/20">
+              Zero Distraction
+            </span>
           </div>
         </div>
 
-        {/* Card 2: 4-4-4 Guided Breathing */}
-        <div className="bg-[#121320] border border-card-border hover:border-sky/40 transition-all duration-300 rounded-3xl p-7 flex flex-col justify-between shadow-lg">
+        {/* Card 2: 4-4-4 Breathing Reset */}
+        <div className="bg-[#10111a] border border-[#222336] hover:border-sky-400/40 transition-all duration-300 rounded-3xl p-8 sm:p-10 flex flex-col justify-between shadow-xl">
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="p-2.5 rounded-xl bg-sky/15 text-sky border border-sky/20">
-                <Wind className="w-5 h-5" />
+              <div className="p-3 rounded-2xl bg-sky-500/10 text-sky-400 border border-sky-500/20">
+                <Wind className="w-6 h-6" />
               </div>
-              <h3 className="font-pixel text-xl font-bold text-white">4-4-4 Breathing</h3>
+              <h3 className="font-heading text-2xl font-bold text-white">
+                Take a Deep Breath
+              </h3>
             </div>
-            <p className="text-xs sm:text-sm font-sans text-subtext/90 leading-relaxed mb-6">
-              When work gets overwhelming, press <code className="text-sky bg-[#18192a] px-1.5 py-0.5 rounded font-mono">Alt+Shift+E</code>. Your pet inflates and deflates to guide a calming 1-minute reset.
+            <p className="text-base text-zinc-300 leading-relaxed mb-6">
+              When work gets hectic, one shortcut starts a guided 1-minute breathing circle. Your buddy gently expands and deflates with you.
             </p>
           </div>
-          {/* Interactive pulsating circle */}
-          <div className="flex flex-col items-center justify-center p-4 bg-[#0b0c14] rounded-2xl border border-card-border/60">
-            <div className="relative flex items-center justify-center w-24 h-24">
-              <div className={`absolute inset-0 rounded-full bg-sky/20 border border-sky/40 transition-all duration-1000 ${
-                breathePhase.startsWith('Inhale') ? 'scale-125' : breathePhase.startsWith('Hold') ? 'scale-125 animate-pulse' : 'scale-90'
-              }`} />
-              <span className="relative z-10 text-xs font-mono font-bold text-sky">{breathePhase}</span>
+
+          <div className="flex flex-col items-center justify-center p-6 bg-[#09090f] rounded-2xl border border-[#1b1c2b]">
+            <div className="relative flex items-center justify-center w-28 h-28">
+              <div
+                className={`absolute inset-0 rounded-full bg-sky-500/20 border border-sky-400/50 transition-all duration-1000 ${
+                  breathePhase.startsWith('Inhale')
+                    ? 'scale-125'
+                    : breathePhase.startsWith('Hold')
+                    ? 'scale-125 animate-pulse'
+                    : 'scale-90'
+                }`}
+              />
+              <span className="relative z-10 text-base font-bold text-sky-300">
+                {breathePhase}
+              </span>
             </div>
           </div>
         </div>
 
         {/* Card 3: Eye Tracking */}
-        <div className="bg-[#121320] border border-card-border hover:border-gold/40 transition-all duration-300 rounded-3xl p-7 shadow-lg flex flex-col justify-between">
+        <div className="bg-[#10111a] border border-[#222336] hover:border-amber-400/40 transition-all duration-300 rounded-3xl p-8 sm:p-10 flex flex-col justify-between shadow-xl">
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="p-2.5 rounded-xl bg-gold/15 text-gold border border-gold/20">
-                <Eye className="w-5 h-5" />
+              <div className="p-3 rounded-2xl bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                <Eye className="w-6 h-6" />
               </div>
-              <h3 className="font-pixel text-xl font-bold text-white">Eye Tracking</h3>
+              <h3 className="font-heading text-2xl font-bold text-white">
+                Eyes That Watch You
+              </h3>
             </div>
-            <p className="text-xs sm:text-sm font-sans text-subtext/90 leading-relaxed mb-6">
-              Eyes dynamically calculate angular offset from mouse coordinates across any screen display—even when another application has focus.
+            <p className="text-base text-zinc-300 leading-relaxed mb-6">
+              Wherever you move your cursor—even on a second monitor—your pet’s eyes will curiously follow your pointer.
             </p>
           </div>
-          <div className="p-3 bg-[#0b0c14] rounded-2xl border border-card-border/60 font-mono text-xs text-center text-gold flex items-center justify-center gap-2">
-            <Compass className="w-4 h-4 animate-spin text-gold" style={{ animationDuration: '6s' }} />
-            <span>Multi-Monitor Polling</span>
+
+          <div className="p-5 bg-[#09090f] rounded-2xl border border-[#1b1c2b] text-center">
+            <span className="text-sm font-semibold text-amber-300">
+              Tracks Across Any Monitor
+            </span>
           </div>
         </div>
 
-        {/* Card 4: Fling Physics */}
-        <div className="bg-[#121320] border border-card-border hover:border-rose/40 transition-all duration-300 rounded-3xl p-7 shadow-lg flex flex-col justify-between">
+        {/* Card 4: Fling & Toss Physics */}
+        <div className="bg-[#10111a] border border-[#222336] hover:border-rose-400/40 transition-all duration-300 rounded-3xl p-8 sm:p-10 flex flex-col justify-between shadow-xl">
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="p-2.5 rounded-xl bg-rose/15 text-rose border border-rose/20">
-                <HeartHandshake className="w-5 h-5" />
+              <div className="p-3 rounded-2xl bg-rose-500/10 text-rose-400 border border-rose-500/20">
+                <Smile className="w-6 h-6" />
               </div>
-              <h3 className="font-pixel text-xl font-bold text-white">Fling Physics</h3>
+              <h3 className="font-heading text-2xl font-bold text-white">
+                Playful Fling Physics
+              </h3>
             </div>
-            <p className="text-xs sm:text-sm font-sans text-subtext/90 leading-relaxed mb-6">
-              Pick up your pet and fling them across the desktop. Velocity vectors calculate momentum with gravitational drop and screen-edge bounce.
+            <p className="text-base text-zinc-300 leading-relaxed mb-6">
+              Pick them up and throw them across the screen! They will tumble, bounce off window edges, and land safely with dizzy stars.
             </p>
           </div>
-          <div className="p-3 bg-[#0b0c14] rounded-2xl border border-card-border/60 font-mono text-xs text-center text-rose">
-            <span>Momentum • Elastic Collision</span>
+
+          <div className="p-5 bg-[#09090f] rounded-2xl border border-[#1b1c2b] text-center">
+            <span className="text-sm font-semibold text-rose-300">
+              Drag, Shake, Toss & Squish
+            </span>
           </div>
         </div>
 
-        {/* Card 5: Main-Process Pomodoro */}
-        <div className="bg-[#121320] border border-card-border hover:border-mint/40 transition-all duration-300 rounded-3xl p-7 shadow-lg flex flex-col justify-between">
+        {/* Card 5: Focus & Study Sessions */}
+        <div className="bg-[#10111a] border border-[#222336] hover:border-purple-400/40 transition-all duration-300 rounded-3xl p-8 sm:p-10 flex flex-col justify-between shadow-xl">
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="p-2.5 rounded-xl bg-mint/15 text-mint border border-mint/20">
-                <Timer className="w-5 h-5" />
+              <div className="p-3 rounded-2xl bg-purple-500/10 text-purple-400 border border-purple-500/20">
+                <Timer className="w-6 h-6" />
               </div>
-              <h3 className="font-pixel text-xl font-bold text-white">Focus Sessions</h3>
+              <h3 className="font-heading text-2xl font-bold text-white">
+                Study & Focus Timers
+              </h3>
             </div>
-            <p className="text-xs sm:text-sm font-sans text-subtext/90 leading-relaxed mb-6">
-              15, 25, and 50-minute Pomodoro timers run in Electron's main process, keeping time accurately even if windows reload.
+            <p className="text-base text-zinc-300 leading-relaxed mb-6">
+              Set 15, 25, or 50-minute Pomodoro study sessions. When time is up, your pet celebrates with stars and sweet chimes.
             </p>
           </div>
-          <div className="p-3 bg-[#0b0c14] rounded-2xl border border-card-border/60 font-mono text-xs text-center text-mint">
-            <span>25:00 Focus • Chime Celebrations</span>
+
+          <div className="p-5 bg-[#09090f] rounded-2xl border border-[#1b1c2b] text-center">
+            <span className="text-sm font-semibold text-purple-300">
+              Celebration Chimes & Star Alarms
+            </span>
           </div>
         </div>
       </div>

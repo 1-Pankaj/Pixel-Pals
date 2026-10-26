@@ -1,74 +1,69 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { PIXEL_PALS } from '../lib/sprites';
 import { PET_SFX } from '../lib/sounds';
-import { Volume2, Sparkles, Heart, Check } from 'lucide-react';
+import { Volume2, Heart, Sparkles, Cookie, Star } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-const PALS_DATA = [
+const PALS = [
   {
     id: 'mochi',
     name: 'Mochi',
-    species: 'Orange Tabby Cat',
-    tagline: 'Professional napper. Will judge your playlist, lovingly.',
-    color: '#fab387',
-    badge: 'Lazy & Sweet',
-    snack: 'Cookie',
-    soundPitch: 'C5 (Warm Purrs)',
-    quip: '"I watched you stare at that same line of code for 12 minutes. Inspiring."'
+    title: 'The Orange Tabby Cat',
+    bio: 'A professional napper who will quietly judge your playlist with pure love.',
+    color: '#ff7a59',
+    favoriteTreat: 'Warm Cookies',
+    voice: 'Cozy Purrs & Meow Blips',
+    sampleLine: '“I watched you stare at your screen for 20 minutes without blinking. Very impressive.”'
   },
   {
     id: 'biscuit',
     name: 'Biscuit',
-    species: 'Shiba Inu',
-    tagline: 'Maximum loyalty, minimum chill. 10/10 would fetch.',
-    color: '#f9e2af',
-    badge: 'Loyal & Energetic',
-    snack: 'Donut',
-    soundPitch: 'E5 (Joyful Bark-Blips)',
-    quip: '"10/10 would fetch that file for you. If I had arms. And files were balls."'
+    title: 'The Energetic Shiba Inu',
+    bio: 'Maximum loyalty, minimum chill. Will do virtual backflips for any snack.',
+    color: '#facc15',
+    favoriteTreat: 'Glazed Donuts',
+    voice: 'Joyful High-Pitch Barks',
+    sampleLine: '“10/10 would fetch that window for you if I had arms and windows were balls!”'
   },
   {
     id: 'pudding',
     name: 'Pudding',
-    species: 'Mint Slime',
-    tagline: 'Small, squishy, full of big dreams and jelly.',
-    color: '#a6e3a1',
-    badge: 'Squishy & Cute',
-    snack: 'Boba',
-    soundPitch: 'G5 (Springy Squelch)',
-    quip: '"Slime secret: we taste like mint, bounce like springs, and love like giants."'
+    title: 'The Mint Jelly Slime',
+    bio: 'Small, squishy, bouncy, and full of gelatinous dreams and good vibes.',
+    color: '#4ade80',
+    favoriteTreat: 'Boba Pearls',
+    voice: 'Bouncy Spring Squelches',
+    sampleLine: '“Slime secret: we taste like mint, bounce like springs, and love like giants!”'
   },
   {
     id: 'luna',
     name: 'Luna',
-    species: 'Little Ghost',
-    tagline: 'Mostly here for the cozy vibes and gentle hovering.',
-    color: '#cba6f7',
-    badge: 'Gentle Floater',
-    snack: 'Boba',
-    soundPitch: 'A5 (Ethereal Chimes)',
-    quip: '"Boo! Did I scare you? No? Good. I am actually quite delicate."'
+    title: 'The Friendly Little Ghost',
+    bio: 'Mostly here for gentle hovering and calming company. (Actually floats above windows!)',
+    color: '#c084fc',
+    favoriteTreat: 'Sweet Boba',
+    voice: 'Soft Ethereal Chimes',
+    sampleLine: '“Boo! Did I startle you? No? Good, because I am actually quite delicate.”'
   },
   {
     id: 'clover',
     name: 'Clover',
-    species: 'Bunny',
-    tagline: 'Ears at maximum altitude. Heart at maximum softness.',
-    color: '#f5c2e7',
-    badge: 'Rapid Hopper',
-    snack: 'Cookie',
-    soundPitch: 'C6 (High-Pitch Hops)',
-    quip: '"My ears rotate like tiny radar dishes. Currently detecting: snack opportunities."'
+    title: 'The Soft Hearted Bunny',
+    bio: 'Ears at maximum altitude, heart at maximum softness. Loves quick hops.',
+    color: '#f472b6',
+    favoriteTreat: 'Crunchy Biscuits',
+    voice: 'Sweet High-Speed Hops',
+    sampleLine: '“My ears rotate like tiny radar dishes. Currently detecting: snack opportunities!”'
   },
   {
     id: 'miso',
     name: 'Miso',
-    species: 'Axolotl',
-    tagline: 'Always smiling. Scientifically unable to frown.',
-    color: '#eba0ac',
-    badge: 'Perpetual Grin',
-    snack: 'Donut',
-    soundPitch: 'D5 (Bubble Giggles)',
-    quip: '"My gills look like frilly pink party hats. Because every day is a party."'
+    title: 'The Grinning Axolotl',
+    bio: 'Always smiling. Scientifically and biologically incapable of frowning.',
+    color: '#fb7185',
+    favoriteTreat: 'Donut Crumbs',
+    voice: 'Playful Bubble Giggles',
+    sampleLine: '“My gills look like frilly pink party hats because every single day is a party!”'
   }
 ];
 
@@ -77,30 +72,32 @@ export function PalsShowcase({ onAdopt }) {
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
   const canvasRef = useRef(null);
 
-  const pal = PALS_DATA.find((p) => p.id === selectedId) || PALS_DATA[0];
+  const pal = PALS.find((p) => p.id === selectedId) || PALS[0];
 
-  // Draw animated sprite for selected pal
+  // Razor-sharp canvas rendering for selected pet
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     let animId;
 
+    ctx.imageSmoothingEnabled = false;
     const pet = PIXEL_PALS.build(pal.id);
 
     const render = (t) => {
-      ctx.clearRect(0, 0, 180, 180);
+      ctx.clearRect(0, 0, 240, 240);
+      ctx.imageSmoothingEnabled = false;
+
       ctx.save();
-      ctx.translate(90, 160);
-      const bob = Math.sin(t * 0.003) * 4;
+      ctx.translate(120, 210);
       const squish = 1 + Math.sin(t * 0.005) * 0.04;
-      ctx.scale(squish * 4.2, (2 - squish) * 4.2);
-      ctx.translate(-16, -30 + (pet.meta.float ? Math.sin(t * 0.004) * 2 : 0));
+      ctx.scale(squish * 5.6, (2 - squish) * 5.6);
+      ctx.translate(-16, -30 + (pet.meta.float ? Math.sin(t * 0.004) * 2.5 : 0));
 
       pet.draw(ctx, {
         face: Math.sin(t * 0.002) > 0.95 ? 'blink' : 'open',
-        mouth: Math.sin(t * 0.0015) > 0.6 ? 'smile' : 'idle',
-        tail: Math.floor(t * 0.003) % 2,
+        mouth: Math.sin(t * 0.0018) > 0.6 ? 'smile' : 'idle',
+        tail: Math.floor(t * 0.0035) % 2,
         sprout: Math.floor(t * 0.001) % 2,
         dx: Math.sin(t * 0.002) * 1.5,
         dy: 0
@@ -117,117 +114,117 @@ export function PalsShowcase({ onAdopt }) {
   const testVoice = () => {
     PET_SFX.unlock();
     setIsPlayingAudio(true);
-    // Play sentence in their pitch
-    const text = pal.name.toLowerCase();
-    for (let i = 0; i < text.length; i++) {
-      setTimeout(() => PET_SFX.blip(text[i]), i * 70);
+    const chars = pal.name.toLowerCase();
+    for (let i = 0; i < chars.length; i++) {
+      setTimeout(() => PET_SFX.blip(chars[i]), i * 80);
     }
     setTimeout(() => {
       PET_SFX.chime();
       setIsPlayingAudio(false);
-    }, text.length * 70 + 200);
+    }, chars.length * 80 + 200);
   };
 
-  const handleAdopt = () => {
+  const handleCuddle = () => {
     PET_SFX.unlock();
     PET_SFX.fanfare();
     if (onAdopt) onAdopt(pal.id);
-    const playground = document.getElementById('playground');
-    if (playground) playground.scrollIntoView({ behavior: 'smooth' });
+    const el = document.getElementById('playground');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <section id="pals" className="relative py-24 px-4 max-w-6xl mx-auto">
+    <section id="pals" className="relative py-28 px-4 max-w-6xl mx-auto">
       {/* Section Header */}
       <div className="text-center max-w-2xl mx-auto mb-14">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-peach/10 border border-peach/30 text-peach text-xs font-mono mb-3">
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>Handcrafted Characters</span>
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-300 text-sm font-semibold mb-3">
+          <Sparkles className="w-4 h-4 text-pink-400" />
+          <span>The Six Companions</span>
         </div>
-        <h2 className="text-3xl sm:text-4xl font-pixel font-bold text-white tracking-wide">
-          Meet the Six Pals
+        <h2 className="text-4xl sm:text-5xl md:text-6xl font-heading font-black text-white tracking-tight">
+          Choose Your Best Friend
         </h2>
-        <p className="mt-3 text-subtext text-sm sm:text-base font-sans">
-          Every buddy has their own 40 personality dialogue lines, tailored WebAudio frequency blip pitch, custom half-mirrored pixel art, and unique idle animations.
+        <p className="mt-4 text-lg text-zinc-300 font-sans max-w-xl mx-auto leading-relaxed">
+          Switch between them anytime. Each friend has their own funny dialogue, cheerful sounds, and cute animations.
         </p>
       </div>
 
-      {/* Main 3D Card Showcase */}
-      <div className="bg-[#121320] border border-card-border rounded-3xl p-6 sm:p-10 shadow-2xl shadow-black/60 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-        {/* Left: Sprite Stage */}
-        <div className="md:col-span-5 flex flex-col items-center justify-center p-6 rounded-2xl bg-[#0b0c14] border border-card-border/80 shadow-inner relative overflow-hidden group">
+      {/* Main Character Display Card */}
+      <div className="bg-gradient-to-b from-[#131420] to-[#0a0a0f] border border-[#272738] rounded-3xl p-6 sm:p-12 shadow-2xl grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+        {/* Left: Big Razor-Sharp Animated Sprite Stage */}
+        <div className="md:col-span-5 flex flex-col items-center justify-center p-8 rounded-3xl bg-[#050508] border border-[#1f2030] relative overflow-hidden group shadow-inner">
           <div
-            className="absolute inset-0 opacity-20 blur-2xl transition-all duration-500 rounded-full"
+            className="absolute inset-0 opacity-25 blur-3xl rounded-full transition-all duration-700"
             style={{ background: pal.color }}
           />
+
+          {/* Canvas with forced pixelated rendering */}
           <canvas
             ref={canvasRef}
-            width={180}
-            height={180}
-            className="relative z-10 select-none group-hover:scale-105 transition-transform"
+            width={240}
+            height={240}
+            style={{ imageRendering: 'pixelated' }}
+            className="relative z-10 select-none group-hover:scale-105 transition-transform duration-300"
           />
-          <div className="relative z-10 mt-2 flex items-center gap-2">
-            <span
-              className="text-xs font-mono font-bold px-3 py-1 rounded-full"
-              style={{ background: `${pal.color}25`, color: pal.color, border: `1px solid ${pal.color}40` }}
-            >
-              {pal.badge}
-            </span>
+
+          <div className="relative z-10 mt-4 flex items-center gap-3">
             <button
               onClick={testVoice}
               disabled={isPlayingAudio}
-              className="flex items-center gap-1.5 text-xs font-mono bg-[#1c1d30] hover:bg-[#282a44] text-white px-3 py-1 rounded-full border border-card-border transition shadow"
-              title="Hear voice pitch in WebAudio"
+              className="flex items-center gap-2 text-sm font-medium bg-[#1a1b2b] hover:bg-[#282942] text-white px-4 py-2 rounded-xl border border-zinc-700 hover:border-zinc-500 transition shadow"
             >
-              <Volume2 className={`w-3.5 h-3.5 ${isPlayingAudio ? 'animate-bounce text-peach' : 'text-subtext'}`} />
-              <span>Voice Sample</span>
+              <Volume2 className={`w-4 h-4 ${isPlayingAudio ? 'animate-bounce text-pink-400' : 'text-zinc-400'}`} />
+              <span>Hear Voice Blip</span>
             </button>
           </div>
         </div>
 
-        {/* Right: Bio & Stats */}
+        {/* Right: Character Story & Attributes */}
         <div className="md:col-span-7 flex flex-col justify-center">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-wrap items-center justify-between gap-3 mb-2">
             <div>
-              <h3 className="text-3xl font-pixel font-bold text-white">{pal.name}</h3>
-              <span className="text-sm font-mono text-subtext">{pal.species}</span>
+              <h3 className="text-4xl sm:text-5xl font-heading font-black text-white">
+                {pal.name}
+              </h3>
+              <p className="text-lg font-medium text-pink-400 mt-1">{pal.title}</p>
             </div>
             <button
-              onClick={handleAdopt}
-              className="flex items-center gap-2 text-xs font-mono font-bold bg-peach hover:bg-gold text-[#11111b] px-4 py-2 rounded-xl transition shadow-lg shadow-peach/20"
+              onClick={handleCuddle}
+              className="flex items-center gap-2 text-sm font-bold bg-white hover:bg-zinc-200 text-black px-5 py-2.5 rounded-xl transition shadow-lg hover:scale-105 active:scale-95"
             >
-              <Heart className="w-3.5 h-3.5 fill-[#11111b]" />
-              <span>Adopt in Sandbox</span>
+              <Heart className="w-4 h-4 fill-rose-500 text-rose-500" />
+              <span>Adopt in Playground</span>
             </button>
           </div>
 
-          <p className="mt-4 text-base font-sans text-subtext/90 italic">
-            "{pal.tagline}"
+          <p className="mt-4 text-xl font-normal text-zinc-200 leading-relaxed">
+            {pal.bio}
           </p>
 
-          {/* Dialogue Quote Box */}
-          <div className="mt-4 p-4 rounded-xl bg-[#0b0c14] border border-card-border font-mono text-xs text-peach/90 shadow-inner">
-            <span className="text-subtext/60 block mb-1 uppercase tracking-wider text-[10px]">Sample Dialogue:</span>
-            {pal.quip}
+          {/* Sample Dialogue Box */}
+          <div className="mt-6 p-5 rounded-2xl bg-[#08080d] border border-zinc-800 text-zinc-300 text-base shadow-inner">
+            <span className="text-xs font-bold text-zinc-500 uppercase tracking-wider block mb-1">
+              Sample Thing They Say:
+            </span>
+            <p className="italic text-pink-200 font-medium">{pal.sampleLine}</p>
           </div>
 
-          {/* Stats Badges */}
-          <div className="mt-6 grid grid-cols-2 gap-3 text-xs font-mono">
-            <div className="p-3 rounded-xl bg-[#18192a] border border-card-border/60">
-              <span className="text-subtext block text-[10px]">Favorite Snack</span>
-              <span className="text-white font-bold">{pal.snack}</span>
+          {/* Cute Attributes */}
+          <div className="mt-6 grid grid-cols-2 gap-4 text-sm">
+            <div className="p-4 rounded-2xl bg-[#12131f] border border-[#222336]">
+              <span className="text-xs text-zinc-400 block font-medium">Favorite Snack</span>
+              <span className="text-white font-bold text-base mt-0.5 block">{pal.favoriteTreat}</span>
             </div>
-            <div className="p-3 rounded-xl bg-[#18192a] border border-card-border/60">
-              <span className="text-subtext block text-[10px]">Voice Pitch</span>
-              <span className="text-white font-bold">{pal.soundPitch}</span>
+            <div className="p-4 rounded-2xl bg-[#12131f] border border-[#222336]">
+              <span className="text-xs text-zinc-400 block font-medium">Cute Voice Tone</span>
+              <span className="text-white font-bold text-base mt-0.5 block">{pal.voice}</span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Pal Selection Dock */}
+      {/* Buddy Selection Dock */}
       <div className="mt-8 flex flex-wrap justify-center gap-3">
-        {PALS_DATA.map((p) => {
+        {PALS.map((p) => {
           const isSelected = p.id === selectedId;
           return (
             <button
@@ -237,18 +234,17 @@ export function PalsShowcase({ onAdopt }) {
                 PET_SFX.click();
                 setSelectedId(p.id);
               }}
-              className={`flex items-center gap-2.5 px-4 py-2.5 rounded-2xl border transition-all duration-200 ${
+              className={`flex items-center gap-2.5 px-5 py-3 rounded-2xl border text-base font-semibold transition-all duration-200 ${
                 isSelected
-                  ? 'bg-[#1e2038] border-peach shadow-lg shadow-peach/20 scale-105 text-white'
-                  : 'bg-[#121320] border-card-border text-subtext hover:text-white hover:border-[#383a58]'
+                  ? 'bg-white text-black border-white shadow-xl shadow-pink-500/20 scale-105 font-bold'
+                  : 'bg-[#10111a] text-zinc-300 border-zinc-800 hover:text-white hover:border-zinc-600 hover:bg-[#181926]'
               }`}
             >
               <span
-                className="w-2.5 h-2.5 rounded-full"
+                className="w-3 h-3 rounded-full"
                 style={{ background: p.color }}
               />
-              <span className="font-pixel text-base">{p.name}</span>
-              <span className="text-xs font-mono opacity-70">({p.species.split(' ')[0]})</span>
+              <span>{p.name}</span>
             </button>
           );
         })}

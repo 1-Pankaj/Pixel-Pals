@@ -1,27 +1,28 @@
 import React, { useState } from 'react';
 import { ChevronDown, HelpCircle } from 'lucide-react';
 import { PET_SFX } from '../lib/sounds';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const FAQS = [
   {
-    q: "Will the pet get in the way of my work or gaming?",
-    a: "Not at all. The pet window uses forward mouse-event pass-through (`setIgnoreMouseEvents(true, { forward: true })`). Clicks fall through everywhere except directly on the sprite and active choice buttons. You can click on code, links, and documents directly behind the pet without interruption."
+    q: "Will the pet get in the way of what I'm doing?",
+    a: "Nope! The pet floats peacefully above everything, but your mouse clicks pass right through empty space. You can click on websites, write essays, or play games right behind the pet without anything getting blocked."
   },
   {
-    q: "Is it safe and privacy-friendly?",
-    a: "100%. Pixel Pals is completely open-source under the MIT license with zero cloud analytics, zero tracking, and zero account logins. All state is stored in a clean local JSON file on your machine."
+    q: "Is it completely free?",
+    a: "Yes, 100% free and open-source. There are no paid tiers, no advertisements, no subscriptions, and no hidden accounts to sign up for."
   },
   {
-    q: "Does eye tracking work with multiple monitors?",
-    a: "Yes! Eye tracking polls the system cursor coordinates globally across all connected displays, so your buddy tracks your cursor even when you are working on a secondary screen."
+    q: "Will it slow down my computer?",
+    a: "Not at all. Pixel Pals is built with lightweight, hand-crafted pixel art and a custom sound engine that uses near 0% CPU when resting. It runs smoothly on any laptop or desktop."
   },
   {
-    q: "How can I add custom messages or design a new pet?",
-    a: "Adding messages is as simple as editing `src/messages-*.js`—each category is a plain array, and anti-repeat shuffle bags handle the rest. To add a new pet, define a 16-pixel left half in `src/sprites.js` and register it. See our CONTRIBUTING.md for full instructions."
+    q: "Can I turn off the sound or make it quieter?",
+    a: "Yes! Right-clicking your pet or clicking its icon in the bottom-right taskbar tray lets you toggle sound effects, random chatter, or sleep mode anytime you want quiet focus."
   },
   {
-    q: "Can I run it on macOS or Linux?",
-    a: "Yes! While the pre-built binaries on our Releases page are for Windows, Pixel Pals is built with Electron and runs smoothly on macOS and Linux from source using `npm install && npm start`."
+    q: "Does it work if I have two or more screens?",
+    a: "Yes! Your pet's eyes will follow your mouse cursor smoothly across all of your monitors."
   }
 ];
 
@@ -35,48 +36,57 @@ export function FaqAccordion() {
   };
 
   return (
-    <section id="faq" className="relative py-20 px-4 max-w-4xl mx-auto">
-      <div className="text-center max-w-xl mx-auto mb-12">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-peach/10 border border-peach/30 text-peach text-xs font-mono mb-3">
-          <HelpCircle className="w-3.5 h-3.5" />
-          <span>Frequently Asked Questions</span>
+    <section id="faq" className="relative py-24 px-4 max-w-4xl mx-auto">
+      <div className="text-center max-w-xl mx-auto mb-16">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-300 text-sm font-semibold mb-3">
+          <HelpCircle className="w-4 h-4 text-pink-400" />
+          <span>Help & Answers</span>
         </div>
-        <h2 className="text-3xl sm:text-4xl font-pixel font-bold text-white tracking-wide">
-          Common Questions
+        <h2 className="text-4xl sm:text-5xl font-heading font-black text-white tracking-tight">
+          Frequently Asked Questions
         </h2>
       </div>
 
-      <div className="space-y-3.5">
+      <div className="space-y-4">
         {FAQS.map((faq, i) => {
           const isOpen = openIdx === i;
           return (
             <div
               key={i}
-              className={`rounded-2xl border transition-all duration-200 overflow-hidden ${
+              className={`rounded-3xl border transition-all duration-200 overflow-hidden ${
                 isOpen
-                  ? 'bg-[#121320] border-peach/40 shadow-lg'
-                  : 'bg-[#0f101c] border-card-border hover:border-card-border/90'
+                  ? 'bg-[#121320] border-pink-500/40 shadow-xl'
+                  : 'bg-[#0b0c14] border-[#1f2030] hover:border-zinc-700'
               }`}
             >
               <button
                 onClick={() => toggle(i)}
-                className="w-full flex items-center justify-between p-5 text-left select-none"
+                className="w-full flex items-center justify-between p-6 sm:p-7 text-left select-none"
               >
-                <span className="font-pixel text-base sm:text-lg text-white font-bold tracking-wide">
+                <span className="font-heading text-xl sm:text-2xl text-white font-bold tracking-tight">
                   {faq.q}
                 </span>
                 <ChevronDown
-                  className={`w-4 h-4 text-peach flex-shrink-0 transition-transform duration-200 ${
+                  className={`w-6 h-6 text-pink-400 flex-shrink-0 transition-transform duration-200 ${
                     isOpen ? 'transform rotate-180' : ''
                   }`}
                 />
               </button>
 
-              {isOpen && (
-                <div className="px-5 pb-5 text-subtext text-sm font-sans leading-relaxed border-t border-card-border/40 pt-3">
-                  {faq.a}
-                </div>
-              )}
+              <AnimatePresence>
+                {isOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <div className="px-6 pb-6 sm:px-7 sm:pb-7 text-zinc-300 text-base sm:text-lg font-sans leading-relaxed border-t border-[#1f2030] pt-4">
+                      {faq.a}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           );
         })}

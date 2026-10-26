@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github, MessageSquare, Heart, Sparkles } from 'lucide-react';
+import { Github, Heart, MessageSquare } from 'lucide-react';
 import { PET_SFX } from '../lib/sounds';
 
 export function Footer() {
@@ -9,39 +9,39 @@ export function Footer() {
   };
 
   return (
-    <footer className="relative border-t border-card-border/80 bg-[#07080e] py-14 px-4 text-subtext text-xs font-mono">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
-        {/* Brand & Tagline */}
-        <div className="flex flex-col items-center md:items-start gap-2">
-          <div className="flex items-center gap-2.5">
-            <img src="./icon.png" alt="Pixel Pals" className="w-6 h-6 rounded" />
-            <span className="font-pixel text-lg text-white font-bold">Pixel Pals</span>
-            <span className="text-[10px] bg-peach/15 text-peach px-2 py-0.5 rounded border border-peach/20">
-              MIT License
+    <footer className="relative border-t border-zinc-800 bg-[#050508] py-16 px-4 text-zinc-400 text-sm">
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
+        {/* Brand */}
+        <div className="flex flex-col items-center md:items-start gap-3">
+          <div className="flex items-center gap-3">
+            <img src="./icon.png" alt="Pixel Pals" className="w-8 h-8 rounded-lg" />
+            <span className="font-heading font-black text-2xl text-white">Pixel Pals</span>
+            <span className="text-xs bg-pink-500/15 text-pink-400 px-3 py-1 rounded-full border border-pink-500/25 font-bold">
+              100% Free • MIT
             </span>
           </div>
-          <p className="text-subtext/70 text-xs font-sans max-w-sm">
-            A cozy pixelated desktop companion living on top of your windows. No AI, zero accounts, pure retro warmth.
+          <p className="text-zinc-400 text-base font-normal max-w-md">
+            An adorable pixelated companion that lives on top of your windows. No AI, zero accounts, just pure friendship.
           </p>
         </div>
 
         {/* Links */}
-        <div className="flex flex-wrap justify-center gap-6 text-xs">
+        <div className="flex flex-wrap justify-center gap-8 text-base font-semibold">
           <a
             href="https://github.com/1-Pankaj/Pixel-Pals"
             target="_blank"
             rel="noreferrer"
             onClick={playClick}
-            className="hover:text-white transition-colors"
+            className="hover:text-pink-400 transition-colors"
           >
-            GitHub Repo
+            GitHub
           </a>
           <a
             href="https://github.com/1-Pankaj/Pixel-Pals/releases"
             target="_blank"
             rel="noreferrer"
             onClick={playClick}
-            className="hover:text-white transition-colors"
+            className="hover:text-pink-400 transition-colors"
           >
             Releases (.exe)
           </a>
@@ -50,7 +50,7 @@ export function Footer() {
             target="_blank"
             rel="noreferrer"
             onClick={playClick}
-            className="hover:text-white transition-colors"
+            className="hover:text-pink-400 transition-colors"
           >
             Discussions
           </a>
@@ -59,7 +59,7 @@ export function Footer() {
             target="_blank"
             rel="noreferrer"
             onClick={playClick}
-            className="hover:text-white transition-colors"
+            className="hover:text-pink-400 transition-colors"
           >
             Contributing
           </a>
@@ -68,16 +68,16 @@ export function Footer() {
             target="_blank"
             rel="noreferrer"
             onClick={playClick}
-            className="hover:text-white transition-colors"
+            className="hover:text-pink-400 transition-colors"
           >
-            MIT License
+            License
           </a>
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto mt-8 pt-6 border-t border-card-border/40 flex flex-col sm:flex-row items-center justify-between text-[11px] text-subtext/60 gap-3">
-        <span>© 2026 Pixel Pals Contributors. Open-source software.</span>
-        <span>Fonts: Pixelify Sans, Press Start 2P & VT323 (SIL Open Font License 1.1)</span>
+      <div className="max-w-6xl mx-auto mt-12 pt-8 border-t border-zinc-800/60 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 gap-3">
+        <span>© 2026 Pixel Pals Contributors. Open-source under the MIT License.</span>
+        <span>Fonts: Pixelify Sans & Press Start 2P (SIL Open Font License 1.1)</span>
       </div>
     </footer>
   );

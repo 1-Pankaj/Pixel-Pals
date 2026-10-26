@@ -2,16 +2,16 @@ import React, { useRef, useEffect } from 'react';
 
 /**
  * Aceternity UI — Sparkles Core
- * Canvas-based particle sparkles effect with smooth twinkle and gentle float.
+ * Exact implementation matching the official Aceternity Sparkles showcase.
  */
 export function SparklesCore({
   id = 'tsparticles',
   background = 'transparent',
-  minSize = 0.6,
-  maxSize = 2.4,
-  particleDensity = 80,
+  minSize = 0.4,
+  maxSize = 1.4,
+  particleDensity = 600,
   className = '',
-  particleColor = '#fab387',
+  particleColor = '#FFFFFF',
 }) {
   const canvasRef = useRef(null);
 
@@ -21,8 +21,9 @@ export function SparklesCore({
     const ctx = canvas.getContext('2d');
     let animationFrameId;
 
-    let w = (canvas.width = canvas.parentElement.offsetWidth);
-    let h = (canvas.height = canvas.parentElement.offsetHeight);
+    const parent = canvas.parentElement || canvas;
+    let w = (canvas.width = parent.offsetWidth || 600);
+    let h = (canvas.height = parent.offsetHeight || 200);
 
     const onResize = () => {
       if (!canvas || !canvas.parentElement) return;
@@ -31,28 +32,28 @@ export function SparklesCore({
     };
     window.addEventListener('resize', onResize);
 
-    const count = Math.floor((w * h) / (10000 / (particleDensity / 10)));
+    // Number of sparkles based on density
+    const count = Math.min(300, Math.max(60, Math.floor((w * h) / (10000 / (particleDensity / 15)))));
     const particles = [];
-    const colors = [particleColor, '#ffd76e', '#ffffff', '#f5c2e7'];
 
     for (let i = 0; i < count; i++) {
       particles.push({
         x: Math.random() * w,
         y: Math.random() * h,
         size: minSize + Math.random() * (maxSize - minSize),
-        vx: (Math.random() - 0.5) * 0.35,
-        vy: -0.2 - Math.random() * 0.45,
+        vx: (Math.random() - 0.5) * 0.25,
+        vy: -0.15 - Math.random() * 0.35,
         alpha: Math.random(),
-        fadeSpeed: 0.005 + Math.random() * 0.015,
+        fadeSpeed: 0.008 + Math.random() * 0.02,
         fadingIn: Math.random() > 0.5,
-        color: colors[Math.floor(Math.random() * colors.length)]
       });
     }
 
     const render = () => {
       ctx.clearRect(0, 0, w, h);
 
-      particles.forEach((p) => {
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
         if (p.fadingIn) {
           p.alpha += p.fadeSpeed;
           if (p.alpha >= 1) {
@@ -61,8 +62,8 @@ export function SparklesCore({
           }
         } else {
           p.alpha -= p.fadeSpeed;
-          if (p.alpha <= 0.1) {
-            p.alpha = 0.1;
+          if (p.alpha <= 0.05) {
+            p.alpha = 0.05;
             p.fadingIn = true;
           }
         }
@@ -76,14 +77,14 @@ export function SparklesCore({
 
         ctx.save();
         ctx.globalAlpha = p.alpha;
-        ctx.fillStyle = p.color;
-        ctx.shadowBlur = p.size * 2.5;
-        ctx.shadowColor = p.color;
+        ctx.fillStyle = particleColor;
+        ctx.shadowBlur = p.size * 2;
+        ctx.shadowColor = particleColor;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fill();
         ctx.restore();
-      });
+      }
 
       animationFrameId = requestAnimationFrame(render);
     };
@@ -103,5 +104,40 @@ export function SparklesCore({
       className={`pointer-events-none absolute inset-0 ${className}`}
       style={{ background }}
     />
+  );
+}
+
+/**
+ * The Exact Aceternity Sparkles Hero Header with Laser Beam
+ */
+export function AceternityHeroSparkles({ title = "Pixel Pals", subtitle = "Your Tiny Desktop Bestie" }) {
+  return (
+    <div className="w-full flex flex-col items-center justify-center overflow-hidden pt-6">
+      <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-heading font-black text-center text-white tracking-tight relative z-20">
+        {title}
+      </h1>
+
+      {/* The Signature Laser Beam + Sparkles Arc */}
+      <div className="w-[44rem] max-w-full h-36 relative mt-1">
+        {/* Glowing laser beams */}
+        <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-pink-500 to-transparent h-[2px] w-3/4 blur-sm" />
+        <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-pink-400 to-transparent h-px w-3/4" />
+        <div className="absolute inset-x-56 top-0 bg-gradient-to-r from-transparent via-sky-400 to-transparent h-[4px] w-1/3 blur-sm" />
+        <div className="absolute inset-x-56 top-0 bg-gradient-to-r from-transparent via-sky-300 to-transparent h-px w-1/3" />
+
+        {/* Dense Sparkle particles */}
+        <SparklesCore
+          background="transparent"
+          minSize={0.4}
+          maxSize={1.2}
+          particleDensity={800}
+          className="w-full h-full"
+          particleColor="#FFFFFF"
+        />
+
+        {/* Radial mask forming the cosmic hemisphere dome */}
+        <div className="absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(350px_160px_at_top,transparent_20%,white)] pointer-events-none" />
+      </div>
+    </div>
   );
 }
