@@ -33,7 +33,10 @@ function Counter({ end, suffix = '', duration = 1200 }) {
   }, [started, end, duration]);
 
   return (
-    <span ref={ref} className="font-heading text-4xl sm:text-5xl font-black text-espresso dark:text-cream tracking-tight">
+    <span
+      ref={ref}
+      className="font-heading text-4xl sm:text-5xl font-black text-espresso dark:text-honey tracking-tight my-1 drop-shadow-xs"
+    >
       {val.toLocaleString()}{suffix}
     </span>
   );
@@ -46,7 +49,7 @@ export function StatsTicker() {
       number: 2507,
       suffix: '+',
       label: 'Warm Dialogues',
-      desc: 'Morning greetings, cozy life advice, funny animal trivia & friendly check-ins',
+      desc: 'Morning greetings, cozy life advice, funny animal trivia & check-ins',
       color: 'bg-coral text-white',
     },
     {
@@ -54,7 +57,7 @@ export function StatsTicker() {
       number: 6,
       suffix: ' Pals',
       label: 'Unique Companions',
-      desc: 'Mochi, Biscuit, Pudding, Luna, Clover & Miso — each with unique sound synthesis',
+      desc: 'Mochi, Biscuit, Pudding, Luna, Clover & Miso with unique voices',
       color: 'bg-honey text-espresso',
     },
     {
@@ -62,7 +65,7 @@ export function StatsTicker() {
       number: 0,
       suffix: ' Audio Lag',
       label: 'Pure WebAudio',
-      desc: 'Live synthesized sound chip creates soft animalese babbles with zero storage waste',
+      desc: 'Live synthesized sound chip creates soft animalese babbles in real-time',
       color: 'bg-mint text-espresso',
     },
     {
@@ -70,13 +73,13 @@ export function StatsTicker() {
       number: 100,
       suffix: '%',
       label: 'Private & Offline',
-      desc: 'Zero telemetry, zero user accounts, zero bloat. Runs purely on your device',
+      desc: 'Zero telemetry, zero user accounts, zero bloat. Runs purely on your PC',
       color: 'bg-sky text-espresso',
     }
   ];
 
   return (
-    <section className="relative z-10 py-12 px-4 max-w-6xl mx-auto">
+    <section className="relative z-10 py-16 px-4 max-w-6xl mx-auto">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {stats.map((s, i) => {
           const Icon = s.icon;
@@ -87,16 +90,16 @@ export function StatsTicker() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="retro-card-light dark:retro-card-dark p-7 flex flex-col items-center text-center group"
+              className="retro-card p-7 flex flex-col items-center text-center group"
             >
               <div className={`p-3.5 rounded-2xl ${s.color} border-2 border-espresso mb-4 shadow-pixel-soft`}>
                 <Icon className="w-6 h-6" />
               </div>
               <Counter end={s.number} suffix={s.suffix} />
-              <span className="text-lg font-bold text-espresso dark:text-honey mt-2 font-pixel">
+              <span className="text-lg font-bold text-espresso dark:text-[#fff8f0] mt-2 font-pixel">
                 {s.label}
               </span>
-              <span className="text-sm text-espresso-muted dark:text-cocoa-muted mt-2 leading-relaxed">
+              <span className="text-sm text-espresso-muted dark:text-[#cfbea9] mt-2 leading-relaxed">
                 {s.desc}
               </span>
             </motion.div>

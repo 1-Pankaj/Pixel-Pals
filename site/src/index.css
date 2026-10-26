@@ -8,95 +8,96 @@
   }
 
   html.dark {
-    background-color: #140f0c;
-    color: #fdf3e3;
+    background-color: #17120e;
+    color: #fff8f0;
   }
 
   html:not(.dark) {
-    background-color: #fdf3e3;
-    color: #3a2b20;
+    background-color: #fcf6ee;
+    color: #2a1d15;
   }
 
   body {
     min-height: 100vh;
+    overflow-x: hidden;
   }
 
-  /* Custom selection color matching our app's honey palette */
   ::selection {
     background-color: #ffd76e;
-    color: #3a2b20;
+    color: #2a1d15;
   }
 
-  /* Retro custom scrollbars */
+  /* Custom styled retro scrollbars */
   ::-webkit-scrollbar {
     width: 10px;
   }
 
   html.dark ::-webkit-scrollbar-track {
-    background: #140f0c;
+    background: #17120e;
   }
   html.dark ::-webkit-scrollbar-thumb {
-    background: #3a2d24;
-    border-radius: 4px;
-    border: 2px solid #140f0c;
+    background: #3d2c20;
+    border-radius: 5px;
+    border: 2px solid #17120e;
   }
   html.dark ::-webkit-scrollbar-thumb:hover {
-    background: #4d3d32;
+    background: #5a412f;
   }
 
   html:not(.dark) ::-webkit-scrollbar-track {
-    background: #fdf3e3;
+    background: #fcf6ee;
   }
   html:not(.dark) ::-webkit-scrollbar-thumb {
-    background: #d4c0a5;
-    border-radius: 4px;
-    border: 2px solid #fdf3e3;
+    background: #d9c5ab;
+    border-radius: 5px;
+    border: 2px solid #fcf6ee;
   }
   html:not(.dark) ::-webkit-scrollbar-thumb:hover {
-    background: #bba284;
+    background: #bfa585;
   }
 }
 
-/* Background Retro Dot Grid for Light & Dark mode */
-.bg-retro-dots-light {
-  background-image: radial-gradient(#3a2b20 1px, transparent 1px);
-  background-size: 24px 24px;
-  opacity: 0.08;
-}
-
-.bg-retro-dots-dark {
-  background-image: radial-gradient(#ffd76e 1px, transparent 1px);
-  background-size: 24px 24px;
-  opacity: 0.07;
-}
-
-/* Authentic Pixel Art Card Styles */
-.retro-card-light {
-  background: #fffdf6;
+/* -------------------------------------------------------------
+ * Universal Retro Card: Guaranteed Perfect Contrast In Both Modes
+ * ------------------------------------------------------------- */
+.retro-card {
+  background-color: #fffdf8;
   border: 3px solid #3a2b20;
-  border-radius: 16px;
-  box-shadow: 0 5px 0 rgba(58, 43, 32, 0.22);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-.retro-card-light:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 9px 0 rgba(58, 43, 32, 0.25);
-}
-
-.retro-card-dark {
-  background: #221b16;
-  border: 3px solid #3a2d24;
-  border-radius: 16px;
-  box-shadow: 0 5px 0 #000000;
+  border-radius: 20px;
+  box-shadow: 0 6px 0 rgba(58, 43, 32, 0.2), 0 12px 24px rgba(58, 43, 32, 0.06);
+  color: #2a1d15;
   transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
 }
-.retro-card-dark:hover {
+.retro-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 9px 0 #000000;
-  border-color: #ffd76e;
+  box-shadow: 0 10px 0 rgba(58, 43, 32, 0.22), 0 16px 32px rgba(58, 43, 32, 0.1);
 }
 
-/* Tactile Push Button */
+html.dark .retro-card {
+  background-color: #241b14;
+  border: 3px solid #4a382a;
+  box-shadow: 0 6px 0 #000000, 0 12px 30px rgba(0, 0, 0, 0.5);
+  color: #fff8f0;
+}
+html.dark .retro-card:hover {
+  border-color: #ffd76e;
+  box-shadow: 0 10px 0 #000000, 0 18px 40px rgba(0, 0, 0, 0.7);
+}
+
+/* Secondary inset surface inside cards */
+.retro-surface {
+  background-color: #f6ecdb;
+  border: 2px solid #3a2b20;
+  border-radius: 14px;
+}
+html.dark .retro-surface {
+  background-color: #1a130e;
+  border-color: #4a382a;
+}
+
+/* -------------------------------------------------------------
+ * Tactile Retro 3D Buttons
+ * ------------------------------------------------------------- */
 .retro-btn {
   display: inline-flex;
   align-items: center;
@@ -104,27 +105,52 @@
   gap: 8px;
   font-weight: 700;
   border: 3px solid #3a2b20;
-  border-radius: 12px;
+  border-radius: 14px;
   box-shadow: 0 4px 0 #3a2b20;
   cursor: pointer;
   user-select: none;
-  transition: transform 0.08s ease, box-shadow 0.08s ease;
+  transition: transform 0.08s ease, box-shadow 0.08s ease, background-color 0.12s ease;
+}
+.retro-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 0 #3a2b20;
 }
 .retro-btn:active {
   transform: translateY(4px);
   box-shadow: 0 0 0 #3a2b20;
 }
 
-html.dark .retro-btn-dark-outline {
-  border-color: #4d3d32;
-  box-shadow: 0 4px 0 #000000;
-}
-html.dark .retro-btn-dark-outline:active {
-  transform: translateY(4px);
-  box-shadow: 0 0 0 #000000;
+/* -------------------------------------------------------------
+ * Animated Aceternity Border Beam / Glow
+ * ------------------------------------------------------------- */
+@keyframes border-beam {
+  0% { offset-distance: 0%; }
+  100% { offset-distance: 100%; }
 }
 
-/* Text stroke for retro badges */
-.text-stroke-espresso {
-  -webkit-text-stroke: 1px #3a2b20;
+/* -------------------------------------------------------------
+ * Crisp Pixel Art
+ * ------------------------------------------------------------- */
+.pixelated {
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+/* -------------------------------------------------------------
+ * 3D Horizon Grid Background (Magic UI / Aceternity inspired)
+ * ------------------------------------------------------------- */
+.retro-horizon-grid {
+  background-image:
+    linear-gradient(to right, rgba(255, 215, 110, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 215, 110, 0.1) 1px, transparent 1px);
+  background-size: 32px 32px;
+  transform: perspective(600px) rotateX(45deg);
+  transform-origin: center top;
+}
+html:not(.dark) .retro-horizon-grid {
+  background-image:
+    linear-gradient(to right, rgba(58, 43, 32, 0.12) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(58, 43, 32, 0.12) 1px, transparent 1px);
 }

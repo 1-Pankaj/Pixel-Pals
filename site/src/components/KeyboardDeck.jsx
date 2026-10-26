@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { PixelSparkle, PixelCheck } from './PixelIcons';
+import { PixelSparkle } from './PixelIcons';
 import { PET_SFX } from '../lib/sounds';
 
 const SHORTCUTS = [
@@ -44,10 +44,10 @@ export function KeyboardDeck() {
           <PixelSparkle className="w-4 h-4 text-coral" />
           <span>Tactile Controls</span>
         </div>
-        <h2 className="text-4xl sm:text-5xl font-heading font-black text-espresso dark:text-cream tracking-tight">
+        <h2 className="text-4xl sm:text-5xl font-heading font-black text-espresso dark:text-[#fff8f0] tracking-tight">
           Keyboard Shortcuts
         </h2>
-        <p className="mt-4 text-lg text-espresso-muted dark:text-cocoa-muted font-sans max-w-lg mx-auto leading-relaxed">
+        <p className="mt-4 text-lg text-espresso-muted dark:text-[#cfbea9] font-sans max-w-lg mx-auto leading-relaxed">
           The pet window never steals focus from your games or code. Press these hotkeys from any application (or click any keycap below!):
         </p>
       </div>
@@ -59,7 +59,7 @@ export function KeyboardDeck() {
             <div
               key={idx}
               onClick={() => triggerAction(s)}
-              className={`retro-card-light dark:retro-card-dark p-6 cursor-pointer flex flex-col justify-between select-none transition-all duration-150 ${
+              className={`retro-card p-6 cursor-pointer flex flex-col justify-between select-none transition-all duration-150 ${
                 isPressed ? 'scale-95 shadow-none translate-y-2' : ''
               }`}
             >
@@ -69,7 +69,7 @@ export function KeyboardDeck() {
                   {s.keys.map((k, ki) => (
                     <span
                       key={ki}
-                      className={`inline-block px-2.5 py-1 text-xs font-arcade text-espresso bg-cream-surface dark:bg-cream border-2 border-espresso rounded-lg shadow-[0_3px_0_#3a2b20] transition-transform ${
+                      className={`inline-block px-2.5 py-1 text-xs font-arcade text-espresso bg-cream-surface border-2 border-espresso rounded-lg shadow-[0_3px_0_#3a2b20] transition-transform ${
                         isPressed ? 'translate-y-[3px] shadow-none' : ''
                       }`}
                     >
@@ -78,15 +78,15 @@ export function KeyboardDeck() {
                   ))}
                 </div>
 
-                <h3 className="font-pixel font-bold text-lg text-espresso dark:text-cream">
+                <h3 className="font-pixel font-bold text-lg text-espresso dark:text-[#fff8f0]">
                   {s.title}
                 </h3>
-                <p className="text-xs text-espresso-muted dark:text-cocoa-muted mt-1 leading-relaxed">
+                <p className="text-xs text-espresso-muted dark:text-[#cfbea9] mt-1 leading-relaxed font-sans">
                   {s.desc}
                 </p>
               </div>
 
-              <div className="mt-4 pt-3 border-t-2 border-espresso/10 dark:border-cocoa-border flex items-center justify-between text-xs font-pixel text-espresso-muted dark:text-cocoa-muted">
+              <div className="mt-4 pt-3 border-t-2 border-espresso/15 flex items-center justify-between text-xs font-pixel text-espresso-muted dark:text-cocoa-muted">
                 <span>Sound feedback</span>
                 <span className="font-bold text-coral">♪ {s.sfx}</span>
               </div>

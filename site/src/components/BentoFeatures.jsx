@@ -3,8 +3,45 @@ import { PixelEye, PixelWind, PixelClock, PixelSparkle, PixelShield, PixelMusic,
 import { PET_SFX } from '../lib/sounds';
 import { motion } from 'framer-motion';
 
+function SpotlightCard({ children, className = "" }) {
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+  const cardRef = useRef(null);
+
+  const handleMouseMove = (e) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    setMousePos({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
+
+  return (
+    <div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className={`retro-card relative overflow-hidden ${className}`}
+    >
+      {/* Aceternity Spotlight Radial Glow */}
+      {isHovered && (
+        <div
+          className="pointer-events-none absolute -inset-px transition-opacity duration-300 z-10"
+          style={{
+            background: `radial-gradient(450px circle at ${mousePos.x}px ${mousePos.y}px, rgba(255, 215, 110, 0.12), transparent 70%)`,
+          }}
+        />
+      )}
+      <div className="relative z-20 h-full flex flex-col justify-between">
+        {children}
+      </div>
+    </div>
+  );
+}
+
 export function BentoFeatures() {
-  // 4-4-4 Breathing State
   const [breathePhase, setBreathePhase] = useState('Inhale');
   const [breatheCount, setBreatheCount] = useState(4);
 
@@ -30,8 +67,6 @@ export function BentoFeatures() {
     return () => clearInterval(interval);
   }, []);
 
-  // Voice Pitch Synthesizer State
-  const [voicePitch, setVoicePitch] = useState(1.5);
   const [testText, setTestText] = useState('Pixel Pals');
 
   const handleTestVoice = () => {
@@ -44,7 +79,6 @@ export function BentoFeatures() {
     }
   };
 
-  // Mini Eye Tracker State
   const eyeCardRef = useRef(null);
   const [pupilOffset, setPupilOffset] = useState({ x: 0, y: 0 });
 
@@ -68,27 +102,27 @@ export function BentoFeatures() {
       <div className="text-center max-w-2xl mx-auto mb-16">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-honey/20 border-2 border-honey text-espresso dark:text-honey text-sm font-pixel font-bold mb-3">
           <PixelSparkle className="w-4 h-4 text-coral" />
-          <span>Thoughtfully Crafted</span>
+          <span>Aceternity Card Spotlight Bento</span>
         </div>
-        <h2 className="text-4xl sm:text-5xl md:text-6xl font-heading font-black text-espresso dark:text-cream tracking-tight">
+        <h2 className="text-4xl sm:text-5xl md:text-6xl font-heading font-black text-espresso dark:text-[#fff8f0] tracking-tight">
           Everything You'll Love
         </h2>
-        <p className="mt-4 text-lg text-espresso-muted dark:text-cocoa-muted font-sans max-w-xl mx-auto leading-relaxed">
-          No complex menus, zero annoying notifications, and never gets in your way. Just a friendly companion to make screen time warm and joyful.
+        <p className="mt-4 text-lg text-espresso-muted dark:text-[#cfbea9] font-sans max-w-xl mx-auto leading-relaxed">
+          Hover over each spotlight card to explore interactive physics, breathing circles, and voice synthesis.
         </p>
       </div>
 
       {/* Bento Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Card 1: Click Pass-Through (Wide 2-Columns) */}
-        <div className="md:col-span-2 retro-card-light dark:retro-card-dark p-8 sm:p-10 flex flex-col justify-between">
+        <SpotlightCard className="md:col-span-2 p-8 sm:p-10">
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="p-3 rounded-2xl bg-coral/20 text-coral border-2 border-espresso">
+              <div className="p-3 rounded-2xl bg-coral text-white border-2 border-espresso shadow-xs">
                 <PixelShield className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="font-heading text-2xl sm:text-3xl font-bold text-espresso dark:text-cream">
+                <h3 className="font-heading text-2xl sm:text-3xl font-bold">
                   Never in Your Way
                 </h3>
                 <span className="text-sm font-pixel font-bold text-coral">
@@ -96,16 +130,15 @@ export function BentoFeatures() {
                 </span>
               </div>
             </div>
-            <p className="text-base sm:text-lg text-espresso-muted dark:text-cocoa-muted leading-relaxed mb-6 font-sans">
-              Your pal floats gently above your browser or code editor, but empty space around them lets your mouse clicks pass straight through! You can type notes, click buttons, or scrub videos underneath them without ever getting blocked.
+            <p className="text-base sm:text-lg text-espresso-muted dark:text-[#cfbea9] leading-relaxed mb-6 font-sans">
+              Your pal floats above your browser or code editor, but empty space around them lets your mouse clicks pass straight through! You can type notes or click buttons underneath them without interruption.
             </p>
           </div>
 
-          {/* Interactive Click Test Playground */}
-          <div className="p-5 rounded-2xl bg-cream-surface/70 dark:bg-cocoa-canvas border-2 border-espresso flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="p-5 rounded-2xl retro-surface flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <span className="w-3.5 h-3.5 rounded-full bg-mint animate-pulse border border-espresso/30" />
-              <span className="text-sm font-pixel font-bold text-espresso dark:text-cream">
+              <span className="text-sm font-pixel font-bold">
                 Click-through active: Click the button behind the buddy!
               </span>
             </div>
@@ -117,24 +150,24 @@ export function BentoFeatures() {
               <span>Test Click Target</span>
             </button>
           </div>
-        </div>
+        </SpotlightCard>
 
         {/* Card 2: 4-4-4 Calm Breathing Companion */}
-        <div className="retro-card-light dark:retro-card-dark p-8 flex flex-col justify-between text-center items-center">
-          <div>
-            <div className="inline-flex p-3 rounded-2xl bg-sky/20 text-sky border-2 border-espresso mb-4">
+        <SpotlightCard className="p-8 text-center items-center">
+          <div className="flex flex-col items-center">
+            <div className="inline-flex p-3 rounded-2xl bg-sky text-espresso border-2 border-espresso mb-4 shadow-xs">
               <PixelWind className="w-6 h-6" />
             </div>
-            <h3 className="font-heading text-2xl font-bold text-espresso dark:text-cream mb-1">
+            <h3 className="font-heading text-2xl font-bold mb-1">
               Calm Breathing Circle
             </h3>
-            <p className="text-sm text-espresso-muted dark:text-cocoa-muted mb-4 font-sans">
+            <p className="text-sm text-espresso-muted dark:text-[#cfbea9] mb-4 font-sans">
               A peaceful 4-second box-breathing rhythm to reset your stress when work gets hectic.
             </p>
           </div>
 
           {/* Animated Pulsing Ring */}
-          <div className="my-4 flex flex-col items-center justify-center">
+          <div className="my-3 flex flex-col items-center justify-center">
             <div className="relative w-32 h-32 flex items-center justify-center">
               <motion.div
                 animate={{
@@ -142,10 +175,10 @@ export function BentoFeatures() {
                   opacity: [0.6, 1, 0.6]
                 }}
                 transition={{ duration: 4, ease: 'easeInOut' }}
-                className="absolute inset-0 rounded-full bg-sky/25 border-3 border-sky"
+                className="absolute inset-0 rounded-full bg-sky/30 border-3 border-sky"
               />
               <div className="relative z-10 flex flex-col items-center">
-                <span className="font-pixel font-bold text-lg text-espresso dark:text-cream">
+                <span className="font-pixel font-bold text-lg">
                   {breathePhase}
                 </span>
                 <span className="font-arcade text-xs text-sky font-bold">
@@ -155,20 +188,20 @@ export function BentoFeatures() {
             </div>
           </div>
 
-          <span className="text-xs font-pixel text-espresso-muted dark:text-cocoa-muted">
+          <span className="text-xs font-pixel text-espresso-muted dark:text-[#cfbea9]">
             Right-click pet anytime → "Breathe with Pal"
           </span>
-        </div>
+        </SpotlightCard>
 
         {/* Card 3: Animalese Speech Synthesizer */}
-        <div className="retro-card-light dark:retro-card-dark p-8 flex flex-col justify-between">
+        <SpotlightCard className="p-8">
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="p-3 rounded-2xl bg-honey/20 text-espresso dark:text-honey border-2 border-espresso">
+              <div className="p-3 rounded-2xl bg-honey text-espresso border-2 border-espresso shadow-xs">
                 <PixelMusic className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="font-heading text-2xl font-bold text-espresso dark:text-cream">
+                <h3 className="font-heading text-2xl font-bold">
                   Animalese Chatter
                 </h3>
                 <span className="text-xs font-pixel font-bold text-honey">
@@ -176,18 +209,18 @@ export function BentoFeatures() {
                 </span>
               </div>
             </div>
-            <p className="text-sm text-espresso-muted dark:text-cocoa-muted font-sans leading-relaxed mb-4">
+            <p className="text-sm text-espresso-muted dark:text-[#cfbea9] font-sans leading-relaxed mb-4">
               Instead of bulky audio files, each letter is synthesized in real-time as a playful Animal Crossing-style retro babble!
             </p>
           </div>
 
-          <div className="p-4 rounded-2xl bg-cream-surface/70 dark:bg-cocoa-canvas border-2 border-espresso space-y-3">
+          <div className="p-4 rounded-2xl retro-surface space-y-3">
             <input
               type="text"
               value={testText}
               onChange={(e) => setTestText(e.target.value)}
               placeholder="Type anything..."
-              className="w-full px-3 py-2 rounded-xl bg-cream-light dark:bg-cocoa-card border-2 border-espresso text-espresso dark:text-cream font-dialogue text-xl tracking-wide focus:outline-none"
+              className="w-full px-3 py-2 rounded-xl bg-cream-light dark:bg-cocoa-canvas border-2 border-espresso font-dialogue text-xl tracking-wide focus:outline-none"
             />
             <button
               onClick={handleTestVoice}
@@ -196,21 +229,21 @@ export function BentoFeatures() {
               <span>Play Animalese Voice ♪</span>
             </button>
           </div>
-        </div>
+        </SpotlightCard>
 
         {/* Card 4: Interactive Eye Follower */}
         <div
           ref={eyeCardRef}
           onMouseMove={handleEyeMove}
-          className="retro-card-light dark:retro-card-dark p-8 flex flex-col justify-between"
+          className="retro-card p-8 flex flex-col justify-between"
         >
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="p-3 rounded-2xl bg-mint/20 text-mint border-2 border-espresso">
+              <div className="p-3 rounded-2xl bg-mint text-espresso border-2 border-espresso shadow-xs">
                 <PixelEye className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="font-heading text-2xl font-bold text-espresso dark:text-cream">
+                <h3 className="font-heading text-2xl font-bold">
                   Eyes That Follow
                 </h3>
                 <span className="text-xs font-pixel font-bold text-mint">
@@ -218,15 +251,15 @@ export function BentoFeatures() {
                 </span>
               </div>
             </div>
-            <p className="text-sm text-espresso-muted dark:text-cocoa-muted font-sans leading-relaxed mb-4">
+            <p className="text-sm text-espresso-muted dark:text-[#cfbea9] font-sans leading-relaxed mb-4">
               Move your mouse around this card. Your buddy’s pupils track your movement smoothly across the screen!
             </p>
           </div>
 
           {/* Interactive Mini Eye Face */}
-          <div className="w-full h-28 flex items-center justify-center gap-6 bg-cream-surface/70 dark:bg-cocoa-canvas rounded-2xl border-2 border-espresso">
+          <div className="w-full h-28 flex items-center justify-center gap-6 retro-surface">
             {/* Left Eye */}
-            <div className="w-12 h-14 bg-cream-light dark:bg-cream rounded-full border-3 border-espresso relative overflow-hidden flex items-center justify-center shadow-inner">
+            <div className="w-12 h-14 bg-white rounded-full border-3 border-espresso relative overflow-hidden flex items-center justify-center shadow-inner">
               <div
                 style={{
                   transform: `translate(${pupilOffset.x}px, ${pupilOffset.y}px)`,
@@ -239,7 +272,7 @@ export function BentoFeatures() {
             </div>
 
             {/* Right Eye */}
-            <div className="w-12 h-14 bg-cream-light dark:bg-cream rounded-full border-3 border-espresso relative overflow-hidden flex items-center justify-center shadow-inner">
+            <div className="w-12 h-14 bg-white rounded-full border-3 border-espresso relative overflow-hidden flex items-center justify-center shadow-inner">
               <div
                 style={{
                   transform: `translate(${pupilOffset.x}px, ${pupilOffset.y}px)`,
@@ -254,14 +287,14 @@ export function BentoFeatures() {
         </div>
 
         {/* Card 5: Lightweight 12MB Footprint */}
-        <div className="retro-card-light dark:retro-card-dark p-8 flex flex-col justify-between">
+        <SpotlightCard className="p-8">
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="p-3 rounded-2xl bg-lavender/20 text-lavender border-2 border-espresso">
+              <div className="p-3 rounded-2xl bg-lavender text-espresso border-2 border-espresso shadow-xs">
                 <PixelClock className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="font-heading text-2xl font-bold text-espresso dark:text-cream">
+                <h3 className="font-heading text-2xl font-bold">
                   0% CPU When Idle
                 </h3>
                 <span className="text-xs font-pixel font-bold text-lavender">
@@ -269,26 +302,26 @@ export function BentoFeatures() {
                 </span>
               </div>
             </div>
-            <p className="text-sm text-espresso-muted dark:text-cocoa-muted font-sans leading-relaxed mb-4">
+            <p className="text-sm text-espresso-muted dark:text-[#cfbea9] font-sans leading-relaxed mb-4">
               Written from the ground up for zero performance overhead. Won't spin your laptop fans or slow down competitive games.
             </p>
           </div>
 
-          <div className="p-4 rounded-2xl bg-cream-surface/70 dark:bg-cocoa-canvas border-2 border-espresso space-y-2 text-xs font-pixel">
-            <div className="flex justify-between text-espresso dark:text-cream">
+          <div className="p-4 rounded-2xl retro-surface space-y-2 text-xs font-pixel">
+            <div className="flex justify-between">
               <span>Memory Usage</span>
               <span className="text-mint font-bold">~12 MB RAM</span>
             </div>
-            <div className="flex justify-between text-espresso dark:text-cream">
+            <div className="flex justify-between">
               <span>Internet Needed</span>
               <span className="text-mint font-bold">0 KB (100% Offline)</span>
             </div>
-            <div className="flex justify-between text-espresso dark:text-cream">
+            <div className="flex justify-between">
               <span>Battery Impact</span>
               <span className="text-mint font-bold">Negligible</span>
             </div>
           </div>
-        </div>
+        </SpotlightCard>
       </div>
     </section>
   );

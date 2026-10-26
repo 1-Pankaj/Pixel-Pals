@@ -71,10 +71,10 @@ export function DailyRoutine() {
           <PixelSparkle className="w-4 h-4 text-coral" />
           <span>A Companion For Every Hour</span>
         </div>
-        <h2 className="text-4xl sm:text-5xl md:text-6xl font-heading font-black text-espresso dark:text-cream tracking-tight">
+        <h2 className="text-4xl sm:text-5xl md:text-6xl font-heading font-black text-espresso dark:text-[#fff8f0] tracking-tight">
           A Day With Your Pal
         </h2>
-        <p className="mt-4 text-lg text-espresso-muted dark:text-cocoa-muted font-sans max-w-xl mx-auto leading-relaxed">
+        <p className="mt-4 text-lg text-espresso-muted dark:text-[#cfbea9] font-sans max-w-xl mx-auto leading-relaxed">
           From your first cup of coffee to late-night focus sessions, your buddy quietly shares the day with you.
         </p>
       </div>
@@ -90,7 +90,7 @@ export function DailyRoutine() {
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-pixel font-bold text-sm transition-all border-2 select-none ${
                 isSelected
                   ? 'bg-honey text-espresso border-espresso shadow-pixel scale-105'
-                  : 'bg-cream-surface dark:bg-cocoa-card text-espresso-muted dark:text-cocoa-muted border-espresso/20 dark:border-cocoa-border hover:border-espresso'
+                  : 'bg-cream-surface dark:bg-cocoa-canvas text-espresso dark:text-cream border-espresso/20 hover:border-espresso'
               }`}
             >
               <span>{step.time}</span>
@@ -109,10 +109,10 @@ export function DailyRoutine() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -12, scale: 0.98 }}
             transition={{ duration: 0.25 }}
-            className="retro-card-light dark:retro-card-dark p-8 sm:p-10 flex flex-col justify-between"
+            className="retro-card p-8 sm:p-10 flex flex-col justify-between"
           >
             <div>
-              <div className="flex items-center justify-between border-b-2 border-espresso/15 dark:border-cocoa-border pb-5 mb-6">
+              <div className="flex items-center justify-between border-b-2 border-espresso/15 pb-5 mb-6">
                 <div className="flex items-center gap-3">
                   <div className={`p-3 rounded-2xl ${current.color} border-2 border-espresso shadow-pixel-soft`}>
                     <Icon className="w-6 h-6" />
@@ -121,27 +121,27 @@ export function DailyRoutine() {
                     <span className="font-arcade text-xs text-coral font-bold block">
                       {current.time}
                     </span>
-                    <h3 className="font-heading text-2xl sm:text-3xl font-bold text-espresso dark:text-cream">
+                    <h3 className="font-heading text-2xl sm:text-3xl font-bold text-espresso dark:text-[#fff8f0]">
                       {current.title}
                     </h3>
                   </div>
                 </div>
 
                 <div className="text-right hidden sm:block">
-                  <span className="text-xs font-pixel text-espresso-muted dark:text-cocoa-muted block">Mood</span>
-                  <span className="font-pixel font-bold text-sm text-espresso dark:text-cream">{current.petMood}</span>
+                  <span className="text-xs font-pixel text-espresso-muted dark:text-[#cfbea9] block">Mood</span>
+                  <span className="font-pixel font-bold text-sm text-espresso dark:text-honey">{current.petMood}</span>
                 </div>
               </div>
 
               {/* Dialogue Quote Balloon */}
-              <div className="p-6 rounded-2xl bg-cream-surface/70 dark:bg-cocoa-canvas border-2 border-espresso mb-6">
-                <p className="font-dialogue text-2xl sm:text-3xl text-espresso dark:text-cream leading-snug">
+              <div className="p-6 rounded-2xl retro-surface mb-6">
+                <p className="font-dialogue text-2xl sm:text-3xl text-espresso dark:text-[#fff8f0] leading-snug">
                   {current.line}
                 </p>
               </div>
             </div>
 
-            <div className="flex items-center gap-2 text-xs sm:text-sm font-pixel text-espresso-muted dark:text-cocoa-muted pt-2">
+            <div className="flex items-center gap-2 text-xs sm:text-sm font-pixel text-espresso-muted dark:text-[#cfbea9] pt-2">
               <PixelSparkle className="w-4 h-4 text-honey" />
               <span>{current.tip}</span>
             </div>
