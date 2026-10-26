@@ -10,6 +10,7 @@
 </p>
 
 <p align="center">
+  <a href="https://1-pankaj.github.io/Pixel-Pals/"><img src="https://img.shields.io/badge/Website-Live%20Playground-fab387?style=flat" alt="Live Website"></a>
   <a href="https://github.com/1-Pankaj/Pixel-Pals/actions/workflows/ci.yml"><img src="https://github.com/1-Pankaj/Pixel-Pals/actions/workflows/ci.yml/badge.svg" alt="CI Status"></a>
   <a href="https://github.com/1-Pankaj/Pixel-Pals/releases"><img src="https://img.shields.io/github/v/release/1-Pankaj/Pixel-Pals?include_prereleases&color=fab387&label=release" alt="GitHub Release"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>

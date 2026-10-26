@@ -13,7 +13,7 @@
   "bugs": {
     "url": "https://github.com/1-Pankaj/Pixel-Pals/issues"
   },
-  "homepage": "https://github.com/1-Pankaj/Pixel-Pals#readme",
+  "homepage": "https://1-pankaj.github.io/Pixel-Pals/",
   "scripts": {
     "desktop": "electron .",
     "start": "electron .",
@@ -22,6 +22,8 @@
     "preview:sprites": "electron test/preview-sprites.js",
     "preview:app": "electron test/preview-app.js",
     "record:gif": "electron test/record-gif.js",
+    "site:dev": "npm --prefix site run dev",
+    "site:build": "npm --prefix site run build",
     "dist": "electron-builder --win",
     "dist:portable": "electron-builder --win portable"
   },
