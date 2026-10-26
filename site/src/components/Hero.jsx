@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { LampContainer } from './LampEffect';
 import { AceternityHeroSparkles } from './Sparkles';
 import { BackgroundBeams } from './BackgroundBeams';
 import { PetPlayground } from './PetPlayground';
@@ -24,57 +23,57 @@ export function Hero({ onSelectPet }) {
   };
 
   return (
-    <section className="relative pt-24 pb-20 px-4 flex flex-col items-center justify-center overflow-hidden">
+    <section className="relative pt-36 pb-20 px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center overflow-hidden">
       {/* Background Animated Beams */}
       <BackgroundBeams />
 
-      {/* 3D Horizon Grid Background */}
-      <div className="absolute inset-x-0 bottom-0 h-96 retro-horizon-grid opacity-30 dark:opacity-40 pointer-events-none" />
+      {/* Radiant Ambient Core Glow (Smooth, soft, zero polygon clipping) */}
+      <div className="absolute top-20 inset-x-0 h-[480px] bg-[radial-gradient(ellipse_60%_50%_at_50%_20%,rgba(255,215,110,0.22),transparent_70%)] pointer-events-none z-0" />
 
       {/* Floating Retro Stars in Background */}
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute top-28 left-[8%] text-honey/60 dark:text-honey/50 animate-float-slow">
+        <div className="absolute top-36 left-[8%] text-honey/50 animate-float-slow">
           <PixelStar className="w-8 h-8" />
         </div>
-        <div className="absolute top-44 right-[10%] text-coral/60 dark:text-coral/50 animate-float-fast">
+        <div className="absolute top-48 right-[10%] text-coral/50 animate-float-fast">
           <PixelStar className="w-7 h-7" />
         </div>
-        <div className="absolute top-80 left-[14%] text-mint/60 dark:text-mint/50 animate-bounce-subtle">
+        <div className="absolute top-84 left-[12%] text-mint/50 animate-bounce-subtle">
           <PixelSparkle className="w-6 h-6" />
         </div>
-        <div className="absolute top-96 right-[12%] text-sky/60 dark:text-sky/50 animate-float-slow">
+        <div className="absolute top-96 right-[14%] text-sky/50 animate-float-slow">
           <PixelStar className="w-7 h-7" />
         </div>
       </div>
 
-      {/* Aceternity Lamp Container */}
-      <LampContainer className="pt-8 pb-4">
-        {/* Top Cute Badge */}
+      {/* Hero Content Container */}
+      <div className="relative z-10 w-full max-w-5xl mx-auto flex flex-col items-center text-center">
+        {/* Top Friendly Badge */}
         <motion.div
           initial={{ opacity: 0, y: -16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-honey text-espresso font-pixel font-bold text-xs sm:text-sm mb-4 border-2 border-espresso shadow-pixel select-none"
+          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-honey text-espresso font-pixel font-bold text-xs sm:text-sm mb-6 border-2 border-espresso shadow-pixel select-none"
         >
           <PixelSparkle className="w-4 h-4 text-coral animate-pulse" />
-          <span>100% Free & Open Source Desktop Companion • No Accounts</span>
+          <span>100% Free & Open Source Desktop Companion • No Logins Needed</span>
         </motion.div>
 
-        {/* Aceternity Sparkles & Big Luxury Headline */}
+        {/* Aceternity Hero Sparkles & Big Unclipped Title */}
         <AceternityHeroSparkles title="Pixel Pals" />
 
-        {/* Human Friendly Subtitle (22px-26px, crystal clear contrast) */}
+        {/* Human-Centered Subtitle */}
         <motion.p
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.5 }}
-          className="text-xl sm:text-2xl md:text-3xl text-espresso-muted dark:text-[#dfd2c0] font-heading font-medium max-w-3xl mx-auto mt-3 mb-8 leading-relaxed text-center px-4 select-none"
+          className="text-xl sm:text-2xl md:text-3xl text-espresso-muted dark:text-[#dfd2c0] font-heading font-medium max-w-3xl mx-auto mt-4 mb-8 leading-relaxed px-4 select-none"
         >
-          An adorable little friend that lives on top of your windows.
+          An adorable little friend that lives right on your computer screen.
           Their eyes follow your cursor, they munch on cookies, and they keep you company while you study or work.
         </motion.p>
 
-        {/* Action Buttons */}
+        {/* Tactile Action Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
@@ -96,65 +95,65 @@ export function Hero({ onSelectPet }) {
             <span>Play with Buddies ↓</span>
           </button>
         </motion.div>
-      </LampContainer>
 
-      {/* Main Interactive Stage */}
-      <div id="playground" className="w-full max-w-4xl mx-auto z-20 mb-6">
-        <PetPlayground onSelectPet={onSelectPet} />
-      </div>
-
-      {/* Spring Dock (MacOS / Tamagotchi spring dock) */}
-      <div className="w-full max-w-4xl mx-auto z-20 mb-12">
-        <SpringDock
-          selectedPet="mochi"
-          onSelectPet={onSelectPet}
-          onAction={(act) => {
-            if (act === 'snack') { PET_SFX.unlock(); PET_SFX.munch(); }
-            else if (act === 'dance') { PET_SFX.unlock(); PET_SFX.dance(); }
-            else if (act === 'pet') { PET_SFX.unlock(); PET_SFX.purr(); }
-          }}
-        />
-      </div>
-
-      {/* Trust Badges */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-4xl text-left z-10">
-        <div className="flex items-center gap-3 p-3.5 rounded-2xl retro-surface">
-          <div className="p-2 rounded-xl bg-coral text-white border-2 border-espresso">
-            <PixelHeart className="w-4 h-4" />
-          </div>
-          <div>
-            <p className="font-pixel font-bold text-sm text-espresso dark:text-cream">6 Companions</p>
-            <p className="font-sans text-xs text-espresso-muted dark:text-cocoa-muted">Cat, Shiba, Slime & more</p>
-          </div>
+        {/* Main Interactive Stage */}
+        <div id="playground" className="w-full max-w-4xl mx-auto z-20 mb-4">
+          <PetPlayground onSelectPet={onSelectPet} />
         </div>
 
-        <div className="flex items-center gap-3 p-3.5 rounded-2xl retro-surface">
-          <div className="p-2 rounded-xl bg-honey text-espresso border-2 border-espresso">
-            <PixelSparkle className="w-4 h-4" />
-          </div>
-          <div>
-            <p className="font-pixel font-bold text-sm text-espresso dark:text-cream">2,500+ Lines</p>
-            <p className="font-sans text-xs text-espresso-muted dark:text-cocoa-muted">Cozy Animalese chatter</p>
-          </div>
+        {/* Interactive Spring Dock */}
+        <div className="w-full max-w-4xl mx-auto z-20 mb-12">
+          <SpringDock
+            selectedPet="mochi"
+            onSelectPet={onSelectPet}
+            onAction={(act) => {
+              if (act === 'snack') { PET_SFX.unlock(); PET_SFX.munch(); }
+              else if (act === 'dance') { PET_SFX.unlock(); PET_SFX.dance(); }
+              else if (act === 'pet') { PET_SFX.unlock(); PET_SFX.purr(); }
+            }}
+          />
         </div>
 
-        <div className="flex items-center gap-3 p-3.5 rounded-2xl retro-surface">
-          <div className="p-2 rounded-xl bg-mint text-espresso border-2 border-espresso">
-            <PixelShield className="w-4 h-4" />
+        {/* Trust Badges */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-4xl text-left z-10">
+          <div className="flex items-center gap-3 p-4 rounded-2xl retro-card shadow-xs">
+            <div className="p-2.5 rounded-xl bg-coral text-white border-2 border-espresso">
+              <PixelHeart className="w-5 h-5" />
+            </div>
+            <div>
+              <p className="font-pixel font-bold text-sm text-espresso dark:text-cream">6 Companions</p>
+              <p className="font-sans text-xs text-espresso-muted dark:text-cocoa-muted">Cat, Shiba, Slime & more</p>
+            </div>
           </div>
-          <div>
-            <p className="font-pixel font-bold text-sm text-espresso dark:text-cream">100% Offline</p>
-            <p className="font-sans text-xs text-espresso-muted dark:text-cocoa-muted">Zero tracking, zero lag</p>
-          </div>
-        </div>
 
-        <div className="flex items-center gap-3 p-3.5 rounded-2xl retro-surface">
-          <div className="p-2 rounded-xl bg-sky text-espresso border-2 border-espresso">
-            <PixelZap className="w-4 h-4" />
+          <div className="flex items-center gap-3 p-4 rounded-2xl retro-card shadow-xs">
+            <div className="p-2.5 rounded-xl bg-honey text-espresso border-2 border-espresso">
+              <PixelSparkle className="w-5 h-5" />
+            </div>
+            <div>
+              <p className="font-pixel font-bold text-sm text-espresso dark:text-cream">2,500+ Lines</p>
+              <p className="font-sans text-xs text-espresso-muted dark:text-cocoa-muted">Sweet Animalese chatter</p>
+            </div>
           </div>
-          <div>
-            <p className="font-pixel font-bold text-sm text-espresso dark:text-cream">Click-Through</p>
-            <p className="font-sans text-xs text-espresso-muted dark:text-cocoa-muted">Never blocks clicks</p>
+
+          <div className="flex items-center gap-3 p-4 rounded-2xl retro-card shadow-xs">
+            <div className="p-2.5 rounded-xl bg-mint text-espresso border-2 border-espresso">
+              <PixelShield className="w-5 h-5" />
+            </div>
+            <div>
+              <p className="font-pixel font-bold text-sm text-espresso dark:text-cream">100% Offline</p>
+              <p className="font-sans text-xs text-espresso-muted dark:text-cocoa-muted">Zero tracking, zero lag</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3 p-4 rounded-2xl retro-card shadow-xs">
+            <div className="p-2.5 rounded-xl bg-sky text-espresso border-2 border-espresso">
+              <PixelZap className="w-5 h-5" />
+            </div>
+            <div>
+              <p className="font-pixel font-bold text-sm text-espresso dark:text-cream">Click-Through</p>
+              <p className="font-sans text-xs text-espresso-muted dark:text-cocoa-muted">Never blocks clicks</p>
+            </div>
           </div>
         </div>
       </div>
