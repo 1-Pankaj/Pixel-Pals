@@ -1,5 +1,10 @@
 # Pixel Pals 🐱🐶🟢👻🐰🩷
 
+[![CI](https://github.com/1-Pankaj/Pixel-Pals/actions/workflows/ci.yml/badge.svg)](https://github.com/1-Pankaj/Pixel-Pals/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey.svg)](https://github.com/1-Pankaj/Pixel-Pals)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+
 A cute pixelated desktop pet that lives **on top of your windows**. Adopt one of **six pals**, watch its eyes follow your mouse, drag it around (or fling it), pet it, feed it snacks, start a dance party — and enjoy **2,500+ hand-written messages**. It will also **ask YOU questions with clickable choice buttons**, play games with you, tell stories, guide breathing breaks, and help you focus with timers and gentle reminders. No AI, no accounts, no nonsense — just a tiny friend.
 
 Built with **Electron**. Works on **Windows** (and macOS/Linux).
