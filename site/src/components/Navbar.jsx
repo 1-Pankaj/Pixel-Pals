@@ -1,10 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { Github, Download, Star, Menu, X, Heart } from 'lucide-react';
+import { useTheme } from '../lib/theme';
 import { PET_SFX } from '../lib/sounds';
+import {
+  PixelGithub,
+  PixelDownload,
+  PixelSun,
+  PixelMoon,
+  PixelVolume,
+  PixelVolumeMute,
+  PixelMenu,
+  PixelClose,
+  PixelHeart
+} from './PixelIcons';
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { isDark, toggleTheme, soundMuted, toggleSound } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -17,149 +29,155 @@ export function Navbar() {
     PET_SFX.click();
   };
 
+  const navLinks = [
+    { name: 'Playground', href: '#playground' },
+    { name: 'Meet Buddies', href: '#pals' },
+    { name: 'Features', href: '#features' },
+    { name: 'Keys', href: '#shortcuts' },
+    { name: 'Daily Routine', href: '#routine' },
+    { name: 'FAQ', href: '#faq' },
+  ];
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-4 pb-2 transition-all duration-300">
+    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-3 pb-2 transition-all duration-300">
       <nav
-        className={`w-full max-w-5xl flex items-center justify-between px-6 py-3.5 rounded-2xl border transition-all duration-300 ${
+        className={`w-full max-w-6xl flex items-center justify-between px-5 sm:px-7 py-3 rounded-2xl border-3 border-espresso transition-all duration-300 select-none ${
           scrolled
-            ? 'bg-black/80 backdrop-blur-xl border-zinc-800 shadow-2xl shadow-black/80'
-            : 'bg-[#0a0a0f]/70 backdrop-blur-md border-[#1f2030]'
+            ? 'bg-cream-light/95 dark:bg-cocoa-canvas/95 backdrop-blur-md shadow-pixel-lg'
+            : 'bg-cream-light/80 dark:bg-cocoa-card/85 backdrop-blur-sm shadow-pixel'
         }`}
       >
-        {/* Brand */}
+        {/* Brand & Traffic Dots */}
         <a
           href="#"
           onClick={playClick}
-          className="flex items-center gap-3 group select-none"
+          className="flex items-center gap-3 group"
         >
+          {/* Authentic App Traffic Dots */}
+          <div className="hidden sm:flex gap-1.5 items-center">
+            <span className="w-3 h-3 rounded-full bg-coral inline-block border border-espresso/40" />
+            <span className="w-3 h-3 rounded-full bg-honey inline-block border border-espresso/40" />
+            <span className="w-3 h-3 rounded-full bg-mint inline-block border border-espresso/40" />
+          </div>
+
           <img
             src="./icon.png"
-            alt="Pixel Pals"
-            className="w-9 h-9 rounded-xl group-hover:scale-110 transition-transform shadow-md"
+            alt="Pixel Pals Logo"
+            className="w-8 h-8 rounded-lg group-hover:scale-110 transition-transform shadow-xs pixelated"
           />
+
           <div className="flex items-center gap-2">
-            <span className="font-heading font-black text-2xl text-white tracking-tight">
-              Pixel Pals
+            <span className="font-arcade text-sm text-espresso dark:text-cream tracking-tight">
+              PIXEL PALS
             </span>
-            <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-pink-500/15 text-pink-400 border border-pink-500/25">
+            <span className="text-[10px] font-pixel font-bold px-2 py-0.5 rounded-full bg-mint text-espresso border border-espresso">
               v1.2.1
             </span>
           </div>
         </a>
 
-        {/* Links */}
-        <div className="hidden md:flex items-center gap-8 text-base font-semibold text-zinc-300">
-          <a
-            href="#playground"
-            onClick={playClick}
-            className="hover:text-pink-400 transition-colors"
-          >
-            Playground
-          </a>
-          <a
-            href="#pals"
-            onClick={playClick}
-            className="hover:text-pink-400 transition-colors"
-          >
-            The Buddies
-          </a>
-          <a
-            href="#features"
-            onClick={playClick}
-            className="hover:text-pink-400 transition-colors"
-          >
-            Features
-          </a>
-          <a
-            href="#shortcuts"
-            onClick={playClick}
-            className="hover:text-pink-400 transition-colors"
-          >
-            Shortcuts
-          </a>
-          <a
-            href="#faq"
-            onClick={playClick}
-            className="hover:text-pink-400 transition-colors"
-          >
-            FAQ
-          </a>
+        {/* Desktop Navigation Links */}
+        <div className="hidden lg:flex items-center gap-7 text-sm font-pixel font-bold text-espresso-muted dark:text-cocoa-muted">
+          {navLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              onClick={playClick}
+              className="hover:text-espresso dark:hover:text-honey transition-colors"
+            >
+              {link.name}
+            </a>
+          ))}
         </div>
 
-        {/* CTA */}
-        <div className="hidden sm:flex items-center gap-3">
+        {/* Controls & CTA buttons */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* Sound Toggle */}
+          <button
+            onClick={toggleSound}
+            aria-label="Toggle Sound Effects"
+            className="p-2 rounded-xl bg-cream-surface dark:bg-cocoa-canvas border-2 border-espresso text-espresso dark:text-cream hover:bg-honey transition-colors"
+            title={soundMuted ? "Unmute Audio" : "Mute Audio"}
+          >
+            {soundMuted ? (
+              <PixelVolumeMute className="w-4 h-4 text-coral" />
+            ) : (
+              <PixelVolume className="w-4 h-4 text-mint" />
+            )}
+          </button>
+
+          {/* Theme Toggle (Light / Dark) */}
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle Theme"
+            className="p-2 rounded-xl bg-cream-surface dark:bg-cocoa-canvas border-2 border-espresso text-espresso dark:text-cream hover:bg-honey transition-colors"
+            title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
+          >
+            {isDark ? (
+              <PixelSun className="w-4 h-4 text-honey" />
+            ) : (
+              <PixelMoon className="w-4 h-4 text-espresso" />
+            )}
+          </button>
+
+          {/* GitHub Star Link */}
           <a
             href="https://github.com/1-Pankaj/Pixel-Pals"
             target="_blank"
             rel="noreferrer"
             onClick={playClick}
-            className="flex items-center gap-2 text-sm font-semibold bg-zinc-900 hover:bg-zinc-800 text-white px-4 py-2.5 rounded-xl border border-zinc-700 hover:border-zinc-500 transition"
+            className="hidden sm:inline-flex items-center gap-2 text-xs font-pixel font-bold bg-cream-surface dark:bg-cocoa-canvas text-espresso dark:text-cream px-3.5 py-2 rounded-xl border-2 border-espresso hover:border-honey transition"
           >
-            <Github className="w-4 h-4" />
+            <PixelGithub className="w-4 h-4" />
             <span>GitHub</span>
           </a>
 
+          {/* Main Download CTA */}
           <a
             href="#download"
             onClick={() => { playClick(); PET_SFX.fanfare(); }}
-            className="flex items-center gap-2 text-sm font-bold bg-pink-500 hover:bg-pink-400 text-black px-5 py-2.5 rounded-xl shadow-lg shadow-pink-500/25 hover:scale-105 active:scale-95 transition"
+            className="retro-btn bg-honey hover:bg-honey-light text-espresso px-4 py-2 text-xs sm:text-sm font-pixel font-bold"
           >
-            <Download className="w-4 h-4" />
+            <PixelDownload className="w-4 h-4" />
             <span>Get Free</span>
           </a>
-        </div>
 
-        {/* Mobile toggle */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="sm:hidden p-2 text-zinc-300 hover:text-white"
-        >
-          {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
+          {/* Mobile hamburger */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="lg:hidden p-2 rounded-xl border-2 border-espresso text-espresso dark:text-cream"
+            aria-label="Toggle Menu"
+          >
+            {mobileMenuOpen ? <PixelClose className="w-4 h-4" /> : <PixelMenu className="w-4 h-4" />}
+          </button>
+        </div>
       </nav>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="sm:hidden absolute top-20 left-4 right-4 bg-[#0a0a0f] border border-zinc-800 p-6 rounded-3xl shadow-2xl flex flex-col gap-4 text-center">
+        <div className="lg:hidden absolute top-20 left-4 right-4 bg-cream-light dark:bg-cocoa-card border-3 border-espresso p-6 rounded-3xl shadow-pixel-xl flex flex-col gap-4 text-center z-50">
+          {navLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              onClick={() => { playClick(); setMobileMenuOpen(false); }}
+              className="text-base font-pixel font-bold text-espresso dark:text-cream hover:text-coral py-1"
+            >
+              {link.name}
+            </a>
+          ))}
           <a
-            href="#playground"
-            onClick={() => setMobileMenuOpen(false)}
-            className="text-lg font-semibold text-zinc-300 hover:text-white py-1"
+            href="https://github.com/1-Pankaj/Pixel-Pals"
+            target="_blank"
+            rel="noreferrer"
+            className="text-sm font-pixel font-bold text-espresso dark:text-cream py-1 border-t-2 border-espresso/15 dark:border-cocoa-border pt-3"
           >
-            Playground
-          </a>
-          <a
-            href="#pals"
-            onClick={() => setMobileMenuOpen(false)}
-            className="text-lg font-semibold text-zinc-300 hover:text-white py-1"
-          >
-            The Buddies
-          </a>
-          <a
-            href="#features"
-            onClick={() => setMobileMenuOpen(false)}
-            className="text-lg font-semibold text-zinc-300 hover:text-white py-1"
-          >
-            Features
-          </a>
-          <a
-            href="#shortcuts"
-            onClick={() => setMobileMenuOpen(false)}
-            className="text-lg font-semibold text-zinc-300 hover:text-white py-1"
-          >
-            Shortcuts
-          </a>
-          <a
-            href="#faq"
-            onClick={() => setMobileMenuOpen(false)}
-            className="text-lg font-semibold text-zinc-300 hover:text-white py-1"
-          >
-            FAQ
+            Star on GitHub ★
           </a>
           <a
             href="#download"
-            onClick={() => setMobileMenuOpen(false)}
-            className="bg-pink-500 text-black py-3 rounded-2xl font-bold text-base mt-2"
+            onClick={() => { playClick(); setMobileMenuOpen(false); }}
+            className="retro-btn bg-honey text-espresso py-3 rounded-2xl font-pixel font-bold text-base mt-2"
           >
             Download Free (.exe)
           </a>

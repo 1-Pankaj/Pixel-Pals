@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Keyboard, Sparkles } from 'lucide-react';
+import { PixelSparkle, PixelCheck } from './PixelIcons';
 import { PET_SFX } from '../lib/sounds';
 
 const SHORTCUTS = [
-  { keys: ['Alt', 'Shift', 'P'], title: 'Pet Your Buddy', desc: 'Squeezes them with love and hearts', sfx: 'purr' },
-  { keys: ['Alt', 'Shift', 'F'], title: 'Drop a Snack', desc: 'Drops a fresh cookie, donut, or boba', sfx: 'pop' },
-  { keys: ['Alt', 'Shift', 'D'], title: 'Dance Party', desc: 'Plays music notes and happy wiggles', sfx: 'dance' },
-  { keys: ['Alt', 'Shift', 'Q'], title: 'Ask a Question', desc: 'Pops a fun dilemma or trivia choice', sfx: 'ask' },
-  { keys: ['Alt', 'Shift', 'R'], title: 'Rock, Paper, Scissors', desc: 'Drumroll reveal against your buddy', sfx: 'drum' },
-  { keys: ['Alt', 'Shift', '1'], title: 'Answer Choice #1', desc: 'Quick answer without using mouse', sfx: 'click' },
-  { keys: ['Alt', 'Shift', 'E'], title: '1-Min Breathing', desc: 'Soothing inhale and exhale guide', sfx: 'chime' },
-  { keys: ['Alt', 'Shift', 'G'], title: '25-Min Focus Timer', desc: 'Pomodoro timer with gentle alarms', sfx: 'bell' }
+  { keys: ['Alt', 'Shift', 'P'], title: 'Pet Your Buddy', desc: 'Squeezes them with love & purrs', sfx: 'purr', color: 'bg-coral' },
+  { keys: ['Alt', 'Shift', 'F'], title: 'Drop a Snack', desc: 'Feeds a fresh crunchy cookie', sfx: 'pop', color: 'bg-honey' },
+  { keys: ['Alt', 'Shift', 'D'], title: 'Dance Party', desc: 'Plays music notes & victory hops', sfx: 'dance', color: 'bg-mint' },
+  { keys: ['Alt', 'Shift', 'Q'], title: 'Ask a Question', desc: 'Pops a fun dilemma or trivia choice', sfx: 'sparkle', color: 'bg-sky' },
+  { keys: ['Alt', 'Shift', 'R'], title: 'Rock, Paper, Scissors', desc: 'Drumroll match against your pal', sfx: 'drum', color: 'bg-lavender' },
+  { keys: ['Alt', 'Shift', '1'], title: 'Answer Choice #1', desc: 'Quick answer without touching mouse', sfx: 'click', color: 'bg-honey' },
+  { keys: ['Alt', 'Shift', 'E'], title: '1-Min Breathing', desc: 'Soothing inhale and exhale guide', sfx: 'chime', color: 'bg-sky' },
+  { keys: ['Alt', 'Shift', 'G'], title: '25-Min Focus Timer', desc: 'Gentle bell when focus period ends', sfx: 'bell', color: 'bg-coral' }
 ];
 
 export function KeyboardDeck() {
@@ -20,7 +20,7 @@ export function KeyboardDeck() {
     PET_SFX.unlock();
     if (PET_SFX[s.sfx]) PET_SFX[s.sfx]();
     setActiveKey(s.keys.join('+'));
-    setTimeout(() => setActiveKey(null), 350);
+    setTimeout(() => setActiveKey(null), 300);
   };
 
   useEffect(() => {
@@ -40,15 +40,15 @@ export function KeyboardDeck() {
   return (
     <section id="shortcuts" className="relative py-28 px-4 max-w-6xl mx-auto">
       <div className="text-center max-w-xl mx-auto mb-16">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-300 text-sm font-semibold mb-3">
-          <Keyboard className="w-4 h-4 text-pink-400" />
-          <span>Interactive Shortcuts</span>
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-honey/20 border-2 border-honey text-espresso dark:text-honey text-sm font-pixel font-bold mb-3">
+          <PixelSparkle className="w-4 h-4 text-coral" />
+          <span>Tactile Controls</span>
         </div>
-        <h2 className="text-4xl sm:text-5xl font-heading font-black text-white tracking-tight">
-          Keyboard Magic
+        <h2 className="text-4xl sm:text-5xl font-heading font-black text-espresso dark:text-cream tracking-tight">
+          Keyboard Shortcuts
         </h2>
-        <p className="mt-4 text-lg text-zinc-300 font-sans max-w-lg mx-auto leading-relaxed">
-          The pet window never takes focus away from what you are doing. Press these keys anywhere in Windows (or click any keycap below to test-drive!):
+        <p className="mt-4 text-lg text-espresso-muted dark:text-cocoa-muted font-sans max-w-lg mx-auto leading-relaxed">
+          The pet window never steals focus from your games or code. Press these hotkeys from any application (or click any keycap below!):
         </p>
       </div>
 
@@ -59,34 +59,36 @@ export function KeyboardDeck() {
             <div
               key={idx}
               onClick={() => triggerAction(s)}
-              className={`cursor-pointer p-6 rounded-3xl bg-[#10111a] border transition-all duration-150 select-none flex flex-col justify-between ${
-                isPressed
-                  ? 'border-pink-500 bg-[#1b1c2b] scale-95 shadow-inner'
-                  : 'border-[#222336] hover:border-pink-500/60 hover:bg-[#151624] shadow-lg'
+              className={`retro-card-light dark:retro-card-dark p-6 cursor-pointer flex flex-col justify-between select-none transition-all duration-150 ${
+                isPressed ? 'scale-95 shadow-none translate-y-2' : ''
               }`}
             >
-              {/* 3D Keycap Row */}
-              <div className="flex gap-2 mb-4">
-                {s.keys.map((k, ki) => (
-                  <span
-                    key={ki}
-                    className={`font-mono text-sm px-3 py-2 rounded-xl font-bold transition-all ${
-                      isPressed
-                        ? 'bg-pink-500 text-black shadow-none translate-y-1'
-                        : 'bg-[#202133] text-white shadow-[0_4px_0_0_#2d2f47] border border-[#2d2f47]'
-                    }`}
-                  >
-                    {k}
-                  </span>
-                ))}
+              <div>
+                {/* 3D Mechanical Keycaps */}
+                <div className="flex items-center gap-1.5 mb-4">
+                  {s.keys.map((k, ki) => (
+                    <span
+                      key={ki}
+                      className={`inline-block px-2.5 py-1 text-xs font-arcade text-espresso bg-cream-surface dark:bg-cream border-2 border-espresso rounded-lg shadow-[0_3px_0_#3a2b20] transition-transform ${
+                        isPressed ? 'translate-y-[3px] shadow-none' : ''
+                      }`}
+                    >
+                      {k}
+                    </span>
+                  ))}
+                </div>
+
+                <h3 className="font-pixel font-bold text-lg text-espresso dark:text-cream">
+                  {s.title}
+                </h3>
+                <p className="text-xs text-espresso-muted dark:text-cocoa-muted mt-1 leading-relaxed">
+                  {s.desc}
+                </p>
               </div>
 
-              <div>
-                <h4 className="text-lg font-bold text-white font-heading">{s.title}</h4>
-                <p className="text-sm text-zinc-400 mt-1">{s.desc}</p>
-                <span className="text-xs font-semibold text-pink-400 mt-3 inline-block">
-                  Click to test sound →
-                </span>
+              <div className="mt-4 pt-3 border-t-2 border-espresso/10 dark:border-cocoa-border flex items-center justify-between text-xs font-pixel text-espresso-muted dark:text-cocoa-muted">
+                <span>Sound feedback</span>
+                <span className="font-bold text-coral">♪ {s.sfx}</span>
               </div>
             </div>
           );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github, Heart, MessageSquare } from 'lucide-react';
+import { PixelGithub, PixelHeart } from './PixelIcons';
 import { PET_SFX } from '../lib/sounds';
 
 export function Footer() {
@@ -9,30 +9,30 @@ export function Footer() {
   };
 
   return (
-    <footer className="relative border-t border-zinc-800 bg-[#050508] py-16 px-4 text-zinc-400 text-sm">
+    <footer className="relative border-t-3 border-espresso bg-cream-surface/60 dark:bg-cocoa-canvas py-16 px-4 transition-colors">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
         {/* Brand */}
         <div className="flex flex-col items-center md:items-start gap-3">
           <div className="flex items-center gap-3">
-            <img src="./icon.png" alt="Pixel Pals" className="w-8 h-8 rounded-lg" />
-            <span className="font-heading font-black text-2xl text-white">Pixel Pals</span>
-            <span className="text-xs bg-pink-500/15 text-pink-400 px-3 py-1 rounded-full border border-pink-500/25 font-bold">
-              100% Free • MIT
+            <img src="./icon.png" alt="Pixel Pals Logo" className="w-8 h-8 rounded-lg pixelated shadow-xs" />
+            <span className="font-arcade text-base text-espresso dark:text-cream">Pixel Pals</span>
+            <span className="text-xs font-pixel font-bold bg-honey text-espresso px-2.5 py-0.5 rounded-full border border-espresso">
+              MIT License
             </span>
           </div>
-          <p className="text-zinc-400 text-base font-normal max-w-md">
-            An adorable pixelated companion that lives on top of your windows. No AI, zero accounts, just pure friendship.
+          <p className="text-espresso-muted dark:text-cocoa-muted text-base font-sans max-w-md">
+            An adorable pixelated desktop companion that lives on top of your windows. Zero telemetry, zero accounts, pure retro comfort.
           </p>
         </div>
 
         {/* Links */}
-        <div className="flex flex-wrap justify-center gap-8 text-base font-semibold">
+        <div className="flex flex-wrap justify-center gap-6 text-sm font-pixel font-bold text-espresso dark:text-cream">
           <a
             href="https://github.com/1-Pankaj/Pixel-Pals"
             target="_blank"
             rel="noreferrer"
             onClick={playClick}
-            className="hover:text-pink-400 transition-colors"
+            className="hover:text-coral transition-colors"
           >
             GitHub
           </a>
@@ -41,7 +41,7 @@ export function Footer() {
             target="_blank"
             rel="noreferrer"
             onClick={playClick}
-            className="hover:text-pink-400 transition-colors"
+            className="hover:text-coral transition-colors"
           >
             Releases (.exe)
           </a>
@@ -50,7 +50,7 @@ export function Footer() {
             target="_blank"
             rel="noreferrer"
             onClick={playClick}
-            className="hover:text-pink-400 transition-colors"
+            className="hover:text-coral transition-colors"
           >
             Discussions
           </a>
@@ -59,25 +59,38 @@ export function Footer() {
             target="_blank"
             rel="noreferrer"
             onClick={playClick}
-            className="hover:text-pink-400 transition-colors"
+            className="hover:text-coral transition-colors"
           >
             Contributing
+          </a>
+          <a
+            href="https://github.com/1-Pankaj/Pixel-Pals/blob/main/CREDITS.md"
+            target="_blank"
+            rel="noreferrer"
+            onClick={playClick}
+            className="hover:text-coral transition-colors"
+          >
+            Credits
           </a>
           <a
             href="https://github.com/1-Pankaj/Pixel-Pals/blob/main/LICENSE"
             target="_blank"
             rel="noreferrer"
             onClick={playClick}
-            className="hover:text-pink-400 transition-colors"
+            className="hover:text-coral transition-colors"
           >
             License
           </a>
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto mt-12 pt-8 border-t border-zinc-800/60 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 gap-3">
+      <div className="max-w-6xl mx-auto mt-12 pt-8 border-t-2 border-espresso/15 dark:border-cocoa-border flex flex-col sm:flex-row items-center justify-between text-xs font-pixel text-espresso-muted dark:text-cocoa-muted gap-3">
         <span>© 2026 Pixel Pals Contributors. Open-source under the MIT License.</span>
-        <span>Fonts: Pixelify Sans & Press Start 2P (SIL Open Font License 1.1)</span>
+        <span className="flex items-center gap-1.5">
+          <span>Crafted with</span>
+          <PixelHeart className="w-3.5 h-3.5 text-coral" />
+          <span>for cozy desks everywhere.</span>
+        </span>
       </div>
     </footer>
   );

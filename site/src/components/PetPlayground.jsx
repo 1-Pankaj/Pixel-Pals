@@ -1,37 +1,86 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { PIXEL_PALS } from '../lib/sprites';
 import { PET_SFX } from '../lib/sounds';
-import { Heart, Cookie, Music, Sparkles, MessageCircleHeart } from 'lucide-react';
+import { PixelHeart, PixelCookie, PixelMusic, PixelSparkle, PixelMessage, PixelSmile } from './PixelIcons';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const PALS_INFO = [
-  { id: 'mochi', name: 'Mochi', color: '#ff7a59', badge: '🐱 Orange Cat' },
-  { id: 'biscuit', name: 'Biscuit', color: '#facc15', badge: '🐶 Shiba Dog' },
-  { id: 'pudding', name: 'Pudding', color: '#4ade80', badge: '🟢 Mint Slime' },
-  { id: 'luna', name: 'Luna', color: '#c084fc', badge: '👻 Sweet Ghost' },
-  { id: 'clover', name: 'Clover', color: '#f472b6', badge: '🐰 Soft Bunny' },
-  { id: 'miso', name: 'Miso', color: '#fb7185', badge: '🩷 Axolotl' }
+  { id: 'mochi', name: 'Mochi', color: '#ff7a59', badge: '🐱 Orange Cat', mood: 'Wants head scratches' },
+  { id: 'biscuit', name: 'Biscuit', color: '#ffd76e', badge: '🐶 Shiba Dog', mood: 'Ready for zoomies' },
+  { id: 'pudding', name: 'Pudding', color: '#7ed6a0', badge: '🟢 Mint Slime', mood: 'Feeling extra squishy' },
+  { id: 'luna', name: 'Luna', color: '#cbb2fe', badge: '👻 Sweet Ghost', mood: 'Hovering serenely' },
+  { id: 'clover', name: 'Clover', color: '#ff6d8a', badge: '🐰 Soft Bunny', mood: 'Sniffing for snacks' },
+  { id: 'miso', name: 'Miso', color: '#7ec8ff', badge: '🩷 Axolotl', mood: 'Splashing happily' }
 ];
+
+const CUTE_LINES = {
+  mochi: [
+    "Purrrr... you are doing great today!",
+    "I saw that bug you fixed. Very majestic.",
+    "Nap time is anytime if you believe in yourself.",
+    "Poke me again! It tickles my whiskers.",
+    "Don't forget to take a sip of water, human!"
+  ],
+  biscuit: [
+    "Woof! Did someone say snack?!",
+    "I will guard your taskbar with my life!",
+    "Zoomies loading... 99% complete!",
+    "Best human ever! 11/10 stars for you!",
+    "Wagging my tail at maximum velocity!"
+  ],
+  pudding: [
+    "Boing! I bounce, therefore I am.",
+    "Mint flavored thoughts, gelatinous love!",
+    "Squelch squelch... squishy hug incoming!",
+    "Can you make me bounce higher?",
+    "100% organic virtual slime, zero mess!"
+  ],
+  luna: [
+    "Boo! Hehe, did I startle you gently?",
+    "I float right over your browser tabs!",
+    "No windows can trap a friendly ghost.",
+    "Sending calming phantom breezes your way...",
+    "Stars are extra cozy tonight."
+  ],
+  clover: [
+    "Twitching my little nose at your screen!",
+    "Hop hop hop! Let's get things done!",
+    "My ears detect good vibes nearby.",
+    "Is that a crunchy cookie I smell?!",
+    "Ears up, heart full, ready to hang out!"
+  ],
+  miso: [
+    "Bloop! Waving my tiny pink frills at you!",
+    "Under the sea or on your desktop, I'm happy!",
+    "Axolotl superpower: infinite cuteness regeneration!",
+    "Can we listen to lo-fi beats together?",
+    "Warm boba pearls make everything better."
+  ]
+};
 
 export function PetPlayground({ selectedPet = 'mochi', onSelectPet }) {
   const canvasRef = useRef(null);
   const [currentPet, setCurrentPet] = useState(selectedPet);
-  const [speech, setSpeech] = useState("Hi friend! Poke me to cuddle, or drop a snack!");
-  const [choices, setChoices] = useState(null);
+  const [speech, setSpeech] = useState("Hi friend! Click me to cuddle, or give me a snack!");
   const [heartCount, setHeartCount] = useState(0);
+  const [isSleeping, setIsSleeping] = useState(false);
+  const [zoomScale, setZoomScale] = useState(6); // Integer scale: 6x is ultra-crisp!
 
   useEffect(() => {
     if (selectedPet && selectedPet !== currentPet) {
       setCurrentPet(selectedPet);
+      const lines = CUTE_LINES[selectedPet] || CUTE_LINES.mochi;
+      setSpeech(lines[Math.floor(Math.random() * lines.length)]);
     }
   }, [selectedPet]);
 
   const stateRef = useRef({
     petId: currentPet,
-    cursor: { x: 140, y: 120 },
+    cursor: { x: 160, y: 150 },
     squash: { sx: 1, sy: 1, vsx: 0, vsy: 0 },
     petUntil: 0,
     danceUntil: 0,
+    sleeping: false,
     particles: [],
     snack: null,
     hopY: 0,
@@ -39,24 +88,25 @@ export function PetPlayground({ selectedPet = 'mochi', onSelectPet }) {
   });
 
   stateRef.current.petId = currentPet;
+  stateRef.current.sleeping = isSleeping;
 
   const spawnParticles = useCallback((type, count = 5) => {
     const p = stateRef.current.particles;
     for (let i = 0; i < count; i++) {
       p.push({
         type,
-        x: 140 + (Math.random() - 0.5) * 60,
+        x: 160 + (Math.random() - 0.5) * 50,
         y: 190 + (Math.random() - 0.5) * 30,
-        vx: (Math.random() - 0.5) * 80,
-        vy: -60 - Math.random() * 80,
+        vx: (Math.random() - 0.5) * 70,
+        vy: -50 - Math.random() * 80,
         life: 0.9 + Math.random() * 0.4,
         age: 0,
-        size: 1 + Math.random() * 0.6
+        size: 1 + Math.random() * 0.5
       });
     }
   }, []);
 
-  // Razor-sharp Canvas Render Loop
+  // Razor-sharp Canvas Render Loop with Integer Scaling
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -64,7 +114,7 @@ export function PetPlayground({ selectedPet = 'mochi', onSelectPet }) {
     let animId;
     let lastT = performance.now();
 
-    // Force pixelated rendering
+    // Disable all browser smoothing for pixel-perfect clarity
     ctx.imageSmoothingEnabled = false;
     if (ctx.webkitImageSmoothingEnabled !== undefined) ctx.webkitImageSmoothingEnabled = false;
     if (ctx.mozImageSmoothingEnabled !== undefined) ctx.mozImageSmoothingEnabled = false;
@@ -73,16 +123,14 @@ export function PetPlayground({ selectedPet = 'mochi', onSelectPet }) {
       const dt = Math.min(0.04, (t - lastT) / 1000);
       lastT = t;
 
-      ctx.clearRect(0, 0, 280, 280);
-
-      // Keep pixel smoothing disabled every frame
+      ctx.clearRect(0, 0, 320, 300);
       ctx.imageSmoothingEnabled = false;
 
       const st = stateRef.current;
       const pet = PIXEL_PALS.build(st.petId);
 
-      // Spring squash physics
-      const k = 170, d = 13;
+      // Spring squash & stretch physics
+      const k = 180, d = 14;
       const ax = -k * (st.squash.sx - 1) - d * st.squash.vsx;
       const ay = -k * (st.squash.sy - 1) - d * st.squash.vsy;
       st.squash.vsx += ax * dt;
@@ -93,108 +141,146 @@ export function PetPlayground({ selectedPet = 'mochi', onSelectPet }) {
       // Hop physics
       if (st.hopVy !== 0 || st.hopY > 0) {
         st.hopY += st.hopVy * dt;
-        st.hopVy -= 480 * dt;
+        st.hopVy -= 500 * dt;
         if (st.hopY <= 0) {
           st.hopY = 0;
           st.hopVy = 0;
-          st.squash.vsy -= 0.15;
+          st.squash.vsy -= 0.18;
         }
       }
 
-      // Snack logic
+      // Snack physics & eating
       if (st.snack) {
-        st.snack.vy += 340 * dt;
+        st.snack.vy += 380 * dt;
         st.snack.y += st.snack.vy * dt;
-        if (st.snack.y >= 200) {
+        if (st.snack.y >= 210) {
           st.snack.bites--;
-          spawnParticles('crumb', 3);
+          spawnParticles('crumb', 4);
           PET_SFX.munch();
-          st.squash.vsy -= 0.12;
+          st.squash.vsy -= 0.15;
           if (st.snack.bites <= 0) {
             st.snack = null;
             spawnParticles('heart', 6);
-            setSpeech("Munch munch munch! Best snack ever!");
+            const lines = [
+              "Om nom nom! That was delicious! ✨",
+              "Crispy cookie power restored! 🍪",
+              "You are the best snack provider ever!"
+            ];
+            setSpeech(lines[Math.floor(Math.random() * lines.length)]);
           } else {
-            st.snack.y = 196;
+            st.snack.y = 205;
           }
         }
       }
 
-      // Eye tracking
-      const dx = (st.cursor.x - 140) * 0.045;
-      const dy = (st.cursor.y - 190) * 0.045;
+      // Eye tracking toward mouse
+      const dx = (st.cursor.x - 160) * 0.04;
+      const dy = (st.cursor.y - 190) * 0.04;
 
       const isHappy = t < st.petUntil || t < st.danceUntil;
       const isDancing = t < st.danceUntil;
 
-      // Soft ground shadow
+      // Ground shadow (drawn as a cute retro ellipse)
       ctx.save();
-      ctx.fillStyle = 'rgba(0,0,0,0.35)';
+      ctx.fillStyle = 'rgba(58, 43, 32, 0.22)';
       ctx.beginPath();
-      const shadowW = 54 * (1 - Math.min(0.6, st.hopY / 100));
-      ctx.ellipse(140, 252, shadowW, 11, 0, 0, Math.PI * 2);
+      const shadowW = Math.max(20, 56 * (1 - Math.min(0.6, st.hopY / 120)));
+      ctx.ellipse(160, 260, shadowW, 11, 0, 0, Math.PI * 2);
       ctx.fill();
       ctx.restore();
 
-      // Render Pet (scaled crisply by 6x)
+      // Render Pet with STRICT INTEGER SCALE
       ctx.save();
-      const danceRotate = isDancing ? Math.sin(t * 0.016) * 0.12 : 0;
-      ctx.translate(140, 248 - st.hopY);
+      const danceRotate = isDancing ? Math.sin(t * 0.018) * 0.12 : 0;
+      const baseY = Math.round(256 - st.hopY);
+      ctx.translate(160, baseY);
       ctx.rotate(danceRotate);
-      ctx.scale(st.squash.sx * 5.8, st.squash.sy * 5.8);
+
+      // Integer scaling with squash
+      ctx.scale(st.squash.sx * zoomScale, st.squash.sy * zoomScale);
       ctx.translate(-16, -30);
 
+      let face = 'open';
+      if (st.sleeping) {
+        face = 'blink';
+      } else if (isHappy) {
+        face = 'happy';
+      } else if (Math.sin(t * 0.002) > 0.94) {
+        face = 'blink';
+      }
+
       pet.draw(ctx, {
-        face: isHappy ? 'happy' : (Math.sin(t * 0.002) > 0.95 ? 'blink' : 'open'),
-        mouth: isHappy ? 'open' : 'idle',
+        face,
+        mouth: isHappy ? 'open' : (st.sleeping ? 'idle' : 'idle'),
         tail: Math.floor(t * 0.0035) % 2,
         sprout: Math.floor(t * 0.001) % 2,
-        dx: dx,
-        dy: dy + (pet.meta.float ? Math.sin(t * 0.004) * 0.5 : 0)
+        dx: st.sleeping ? 0 : dx,
+        dy: st.sleeping ? 1 : dy + (pet.meta.float ? Math.sin(t * 0.004) * 0.5 : 0)
       });
       ctx.restore();
 
-      // Draw snack if falling
+      // Snack rendering
       if (st.snack) {
         ctx.save();
-        ctx.translate(st.snack.x, st.snack.y);
-        ctx.fillStyle = '#f59e0b';
+        ctx.translate(Math.round(st.snack.x), Math.round(st.snack.y));
+        ctx.fillStyle = '#d97706';
         ctx.beginPath();
-        ctx.arc(0, 0, 9 * (st.snack.bites / 3), 0, Math.PI * 2);
+        ctx.arc(0, 0, 10 * (st.snack.bites / 3), 0, Math.PI * 2);
         ctx.fill();
         ctx.fillStyle = '#78350f';
-        ctx.fillRect(-2, -2, 2, 2);
-        ctx.fillRect(1, 2, 2, 2);
+        ctx.fillRect(-2, -3, 3, 3);
+        ctx.fillRect(2, 2, 3, 3);
         ctx.restore();
+      }
+
+      // Sleeping Zzz generator
+      if (st.sleeping && Math.random() < 0.03) {
+        p.push({
+          type: 'zzz',
+          x: 160 + (Math.random() - 0.5) * 20,
+          y: 190,
+          vx: 15 + Math.random() * 15,
+          vy: -35 - Math.random() * 20,
+          life: 1.4,
+          age: 0,
+          size: 14 + Math.random() * 6
+        });
       }
 
       // Draw particle effects
       for (let i = st.particles.length - 1; i >= 0; i--) {
-        const p = st.particles[i];
-        p.age += dt;
-        if (p.age >= p.life) { st.particles.splice(i, 1); continue; }
+        const part = st.particles[i];
+        part.age += dt;
+        if (part.age >= part.life) {
+          st.particles.splice(i, 1);
+          continue;
+        }
 
-        p.x += p.vx * dt;
-        p.y += p.vy * dt;
-        const alpha = Math.max(0, 1 - p.age / p.life);
+        part.x += part.vx * dt;
+        part.y += part.vy * dt;
+        const alpha = Math.max(0, 1 - part.age / part.life);
 
         ctx.save();
         ctx.globalAlpha = alpha;
-        if (p.type === 'heart') {
-          ctx.fillStyle = '#f43f5e';
-          ctx.font = 'bold 20px sans-serif';
-          ctx.fillText('♥', p.x, p.y);
-        } else if (p.type === 'note') {
-          ctx.fillStyle = '#facc15';
-          ctx.font = 'bold 18px sans-serif';
-          ctx.fillText('♪', p.x, p.y);
-        } else if (p.type === 'crumb') {
-          ctx.fillStyle = '#d97706';
-          ctx.fillRect(p.x, p.y, 4, 4);
-        } else if (p.type === 'star') {
-          ctx.fillStyle = '#38bdf8';
-          ctx.font = 'bold 18px sans-serif';
-          ctx.fillText('★', p.x, p.y);
+        if (part.type === 'heart') {
+          ctx.fillStyle = '#ff6d8a';
+          ctx.font = 'bold 20px "Press Start 2P", monospace';
+          ctx.fillText('♥', part.x, part.y);
+        } else if (part.type === 'note') {
+          ctx.fillStyle = '#ffd76e';
+          ctx.font = 'bold 20px "Press Start 2P", monospace';
+          ctx.fillText('♪', part.x, part.y);
+        } else if (part.type === 'crumb') {
+          ctx.fillStyle = '#b0793f';
+          ctx.fillRect(Math.round(part.x), Math.round(part.y), 4, 4);
+        } else if (part.type === 'star') {
+          ctx.fillStyle = '#ffd76e';
+          ctx.font = 'bold 18px "Press Start 2P", monospace';
+          ctx.fillText('★', part.x, part.y);
+        } else if (part.type === 'zzz') {
+          ctx.fillStyle = '#cbb2fe';
+          ctx.font = `bold ${Math.round(part.size)}px "VT323", monospace`;
+          ctx.fillText('Zzz', part.x, part.y);
         }
         ctx.restore();
       }
@@ -204,200 +290,262 @@ export function PetPlayground({ selectedPet = 'mochi', onSelectPet }) {
 
     animId = requestAnimationFrame(loop);
     return () => cancelAnimationFrame(animId);
-  }, []);
+  }, [currentPet, zoomScale, isSleeping, spawnParticles]);
 
+  // Mouse Movement on Playground Stage
   const handleMouseMove = (e) => {
-    if (!canvasRef.current) return;
-    const rect = canvasRef.current.getBoundingClientRect();
-    stateRef.current.cursor = {
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top
-    };
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const rect = canvas.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 320;
+    const y = ((e.clientY - rect.top) / rect.height) * 300;
+    stateRef.current.cursor = { x, y };
   };
 
+  // Actions
   const handlePet = () => {
     PET_SFX.unlock();
-    PET_SFX.boop();
     PET_SFX.purr();
-    setHeartCount((c) => c + 1);
-    stateRef.current.squash.vsy += 0.25;
-    stateRef.current.squash.vsx -= 0.18;
+    setIsSleeping(false);
     stateRef.current.petUntil = performance.now() + 1400;
+    stateRef.current.squash.vsy = -0.32;
+    stateRef.current.squash.vsx = 0.28;
+    setHeartCount(h => h + 1);
     spawnParticles('heart', 6);
 
-    const friendlyMessages = [
-      "Purrrrrr! You give the best head pats! ♥",
-      "Hehehe! That tickles! Keep going!",
+    const lines = [
+      "Purrr... you are the warmest human ever!",
+      "Head scratches! 100% happiness unlocked!",
       "I love sitting with you while you work!",
-      "Squish! Secret cuddle mode activated!",
-      "You are my favorite human today!"
+      "Maximum purr frequency achieved!"
     ];
-    setSpeech(friendlyMessages[Math.floor(Math.random() * friendlyMessages.length)]);
+    setSpeech(lines[Math.floor(Math.random() * lines.length)]);
   };
 
   const handleFeed = () => {
     PET_SFX.unlock();
-    PET_SFX.pop();
-    stateRef.current.snack = { x: 140, y: 20, vy: 40, bites: 3 };
-    setSpeech("Yay! A tasty cookie! Thank you for feeding me!");
+    PET_SFX.boop();
+    setIsSleeping(false);
+    stateRef.current.snack = { x: 160, y: 30, vy: 60, bites: 3 };
+    stateRef.current.hopVy = 160;
+    setSpeech("Gasp! A snack?! Watch this catch!");
   };
 
   const handleDance = () => {
     PET_SFX.unlock();
     PET_SFX.dance();
-    stateRef.current.danceUntil = performance.now() + 2600;
-    stateRef.current.hopVy = 200;
+    setIsSleeping(false);
+    stateRef.current.danceUntil = performance.now() + 2400;
+    stateRef.current.hopVy = 260;
+    stateRef.current.squash.vsx = -0.25;
     spawnParticles('note', 8);
-    setSpeech("Dance party! Wiggle wiggle bounce!");
+    setSpeech("Party mode activated! Look at my tiny victory wiggles!");
   };
 
-  const handleAsk = () => {
+  const handleTalk = () => {
     PET_SFX.unlock();
-    PET_SFX.ask();
-    setSpeech("Quick question: Cats or dogs?");
-    setChoices([
-      { label: "Cats! 🐱", reply: "Purrfect choice! Napping champions!" },
-      { label: "Dogs! 🐶", reply: "Woof! 100% loyal and full of zoomies!" },
-      { label: "Both! ✨", reply: "YES! The ultimate cute combo!" }
-    ]);
+    setIsSleeping(false);
+    const lines = CUTE_LINES[currentPet] || CUTE_LINES.mochi;
+    const text = lines[Math.floor(Math.random() * lines.length)];
+    setSpeech(text);
+
+    // Speak with Animalese blips
+    let i = 0;
+    const interval = setInterval(() => {
+      if (i < text.length && i < 24) {
+        PET_SFX.blip(text[i]);
+        i++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 45);
+
+    stateRef.current.hopVy = 120;
+    stateRef.current.squash.vsy = -0.2;
+    spawnParticles('star', 4);
   };
 
-  const answerChoice = (reply) => {
+  const handleNap = () => {
     PET_SFX.unlock();
-    PET_SFX.sparkle();
-    setSpeech(reply);
-    setChoices(null);
-    stateRef.current.petUntil = performance.now() + 1400;
-    spawnParticles('star', 7);
+    const next = !isSleeping;
+    setIsSleeping(next);
+    if (next) {
+      PET_SFX.chime();
+      setSpeech("Zzz... waking up when you need a buddy...");
+    } else {
+      PET_SFX.pop();
+      setSpeech("I am awake and ready to hang out!");
+    }
   };
 
-  const switchPal = (id) => {
+  const changePet = (id) => {
     PET_SFX.unlock();
-    PET_SFX.click();
-    PET_SFX.chime();
+    PET_SFX.boing();
     setCurrentPet(id);
     if (onSelectPet) onSelectPet(id);
-    stateRef.current.hopVy = 160;
-    spawnParticles('star', 5);
-    const palNames = { mochi: 'Mochi', biscuit: 'Biscuit', pudding: 'Pudding', luna: 'Luna', clover: 'Clover', miso: 'Miso' };
-    setSpeech(`Hello! I'm ${palNames[id]}! Let's be best friends.`);
-    setChoices(null);
   };
 
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      onMouseMove={handleMouseMove}
-      className="relative flex flex-col items-center bg-gradient-to-b from-[#13141f] to-[#0a0a0f] border border-[#27273a] rounded-3xl p-6 sm:p-8 shadow-2xl shadow-pink-500/10 max-w-md w-full mx-auto"
-    >
-      {/* Decorative top bar */}
-      <div className="w-full flex items-center justify-between pb-4 border-b border-[#222233]">
-        <div className="flex items-center gap-2">
-          <span className="w-3.5 h-3.5 rounded-full bg-rose-500/80 shadow-sm" />
-          <span className="w-3.5 h-3.5 rounded-full bg-amber-400/80 shadow-sm" />
-          <span className="w-3.5 h-3.5 rounded-full bg-emerald-400/80 shadow-sm" />
-          <span className="ml-2 font-heading font-bold text-sm text-white tracking-wide">
-            Interactive Pet Stage
-          </span>
-        </div>
-        <div className="flex items-center gap-1.5 text-xs font-medium text-pink-400 bg-pink-500/10 px-3 py-1 rounded-full border border-pink-500/20">
-          <Heart className="w-3 h-3 fill-pink-400" />
-          <span>{heartCount} Pets</span>
-        </div>
-      </div>
+  const activeInfo = PALS_INFO.find(p => p.id === currentPet) || PALS_INFO[0];
 
-      {/* Speech bubble */}
-      <div className="relative z-10 w-full mt-4 mb-2">
-        <motion.div
-          key={speech}
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="bg-[#1b1c2e] border border-pink-500/30 text-white rounded-2xl p-4 text-center shadow-xl shadow-black/40"
-        >
-          <p className="font-sans font-medium text-base text-zinc-100">{speech}</p>
-          {choices && (
-            <div className="flex flex-wrap justify-center gap-2 mt-3">
-              {choices.map((c, i) => (
+  return (
+    <div className="w-full max-w-4xl mx-auto flex flex-col items-center">
+      {/* Interactive Stage Card */}
+      <div className="w-full retro-card-light dark:retro-card-dark p-6 sm:p-8 flex flex-col items-center relative overflow-hidden">
+        {/* Retro Header Bar inside Card */}
+        <div className="w-full flex items-center justify-between border-b-2 border-espresso/15 dark:border-cocoa-border pb-4 mb-6">
+          <div className="flex items-center gap-3">
+            <div className="flex gap-2">
+              <span className="w-3.5 h-3.5 rounded-full bg-coral inline-block border border-espresso/30" />
+              <span className="w-3.5 h-3.5 rounded-full bg-honey inline-block border border-espresso/30" />
+              <span className="w-3.5 h-3.5 rounded-full bg-mint inline-block border border-espresso/30" />
+            </div>
+            <span className="font-pixel font-bold text-lg text-espresso dark:text-cream">
+              Live Desktop Simulation
+            </span>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-honey/20 border border-honey/40 text-espresso dark:text-cream text-xs font-arcade">
+              <span className="text-coral">♥</span> {heartCount} Cuddles
+            </div>
+
+            {/* Zoom selector (Integer Scaling Guarantee) */}
+            <div className="hidden sm:flex items-center gap-1 bg-cream-surface dark:bg-cocoa-canvas p-1 rounded-lg border border-espresso/20 dark:border-cocoa-border">
+              {[5, 6, 7].map(s => (
                 <button
-                  key={i}
-                  onClick={() => answerChoice(c.reply)}
-                  className="text-xs sm:text-sm font-semibold bg-pink-500 hover:bg-pink-400 text-black px-4 py-1.5 rounded-full transition shadow hover:scale-105 active:scale-95"
+                  key={s}
+                  onClick={() => setZoomScale(s)}
+                  className={`text-xs px-2 py-0.5 rounded font-pixel font-bold transition ${
+                    zoomScale === s 
+                      ? 'bg-honey text-espresso shadow-xs' 
+                      : 'text-espresso-muted dark:text-cocoa-muted hover:text-espresso dark:hover:text-cream'
+                  }`}
                 >
-                  {c.label}
+                  {s}x
                 </button>
               ))}
             </div>
-          )}
-        </motion.div>
-        <div className="w-4 h-4 bg-[#1b1c2e] border-r border-b border-pink-500/30 transform rotate-45 mx-auto -mt-2" />
-      </div>
+          </div>
+        </div>
 
-      {/* Razor-Sharp Pixel Canvas */}
-      <div className="relative flex justify-center items-center my-2 select-none">
-        <canvas
-          ref={canvasRef}
-          width={280}
-          height={280}
-          onClick={handlePet}
-          style={{ imageRendering: 'pixelated' }}
-          className="cursor-pointer hover:scale-105 transition-transform duration-200"
-          title="Click to pet!"
-        />
-      </div>
+        {/* Pet Switcher Ribbon */}
+        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-6">
+          {PALS_INFO.map(pal => {
+            const isActive = pal.id === currentPet;
+            return (
+              <button
+                key={pal.id}
+                onClick={() => changePet(pal.id)}
+                className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl font-pixel font-bold text-sm transition-all duration-150 border-2 select-none ${
+                  isActive
+                    ? 'bg-honey text-espresso border-espresso shadow-pixel scale-105'
+                    : 'bg-cream-surface dark:bg-cocoa-card text-espresso-muted dark:text-cocoa-muted border-espresso/20 dark:border-cocoa-border hover:border-espresso dark:hover:border-honey hover:text-espresso dark:hover:text-cream'
+                }`}
+              >
+                <span>{pal.badge}</span>
+              </button>
+            );
+          })}
+        </div>
 
-      {/* Action Buttons */}
-      <div className="grid grid-cols-4 gap-2.5 w-full mt-3">
-        <button
-          onClick={handlePet}
-          className="flex flex-col items-center justify-center p-3 rounded-2xl bg-[#181926] hover:bg-[#25263a] border border-[#2e2f47] hover:border-pink-500 transition-all group"
-        >
-          <Heart className="w-5 h-5 text-pink-400 group-hover:scale-125 transition-transform" />
-          <span className="text-xs font-semibold text-zinc-300 mt-1">Pet</span>
-        </button>
-
-        <button
-          onClick={handleFeed}
-          className="flex flex-col items-center justify-center p-3 rounded-2xl bg-[#181926] hover:bg-[#25263a] border border-[#2e2f47] hover:border-amber-400 transition-all group"
-        >
-          <Cookie className="w-5 h-5 text-amber-400 group-hover:scale-125 transition-transform" />
-          <span className="text-xs font-semibold text-zinc-300 mt-1">Snack</span>
-        </button>
-
-        <button
-          onClick={handleDance}
-          className="flex flex-col items-center justify-center p-3 rounded-2xl bg-[#181926] hover:bg-[#25263a] border border-[#2e2f47] hover:border-sky-400 transition-all group"
-        >
-          <Music className="w-5 h-5 text-sky-400 group-hover:scale-125 transition-transform" />
-          <span className="text-xs font-semibold text-zinc-300 mt-1">Dance</span>
-        </button>
-
-        <button
-          onClick={handleAsk}
-          className="flex flex-col items-center justify-center p-3 rounded-2xl bg-[#181926] hover:bg-[#25263a] border border-[#2e2f47] hover:border-purple-400 transition-all group"
-        >
-          <MessageCircleHeart className="w-5 h-5 text-purple-400 group-hover:scale-125 transition-transform" />
-          <span className="text-xs font-semibold text-zinc-300 mt-1">Talk</span>
-        </button>
-      </div>
-
-      {/* Switch Pal Dock */}
-      <div className="flex flex-wrap justify-center gap-2 mt-4 pt-4 border-t border-[#222233] w-full">
-        {PALS_INFO.map((p) => (
-          <button
-            key={p.id}
-            onClick={() => switchPal(p.id)}
-            className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${
-              currentPet === p.id
-                ? 'bg-white text-black font-bold shadow-lg scale-105'
-                : 'bg-[#181926] text-zinc-400 hover:text-white hover:bg-[#242538]'
-            }`}
+        {/* Central Speech Bubble (Modeled exactly after the App's speech balloon) */}
+        <div className="relative mb-3 z-10 max-w-lg w-full flex justify-center">
+          <motion.div
+            key={speech}
+            initial={{ opacity: 0, y: 6, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+            className="bg-cream-light dark:bg-cocoa-card border-3 border-espresso dark:border-honey rounded-2xl px-6 py-3.5 shadow-pixel-soft dark:shadow-pixel-dark text-center relative max-w-md"
           >
-            {p.name}
+            <p className="font-dialogue text-2xl sm:text-3xl text-espresso dark:text-cream leading-tight tracking-wide">
+              {speech}
+            </p>
+            {/* Pointer arrow */}
+            <div className="absolute -bottom-2.5 left-1/2 -translate-x-1/2 w-4 h-4 bg-cream-light dark:bg-cocoa-card border-r-3 border-b-3 border-espresso dark:border-honey rotate-45" />
+          </motion.div>
+        </div>
+
+        {/* Canvas Display Area */}
+        <div
+          onMouseMove={handleMouseMove}
+          onClick={handlePet}
+          className="relative w-full max-w-sm h-72 sm:h-80 flex items-center justify-center cursor-pointer select-none rounded-2xl bg-gradient-to-b from-cream-surface/50 to-cream/20 dark:from-cocoa-canvas dark:to-cocoa-card/50 border-2 border-dashed border-espresso/20 dark:border-cocoa-border hover:border-honey transition-colors group"
+        >
+          <canvas
+            ref={canvasRef}
+            width={320}
+            height={300}
+            className="pixelated w-full h-full object-contain pointer-events-none"
+          />
+
+          {/* Hover hint */}
+          <div className="absolute bottom-2 inset-x-0 text-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+            <span className="font-pixel text-xs bg-espresso/80 text-cream px-3 py-1 rounded-full backdrop-blur-sm">
+              Click to pet • Move cursor to guide eyes
+            </span>
+          </div>
+        </div>
+
+        {/* Interactive Action Controls */}
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 w-full max-w-xl mt-6">
+          <button
+            onClick={handlePet}
+            className="retro-btn bg-coral hover:bg-coral-light text-white py-3 px-3 text-sm font-pixel"
+            title="Pet your buddy"
+          >
+            <PixelHeart className="w-4 h-4" />
+            <span>Pet Buddy</span>
           </button>
-        ))}
+
+          <button
+            onClick={handleFeed}
+            className="retro-btn bg-honey hover:bg-honey-light text-espresso py-3 px-3 text-sm font-pixel"
+            title="Feed a tasty snack"
+          >
+            <PixelCookie className="w-4 h-4" />
+            <span>Snack</span>
+          </button>
+
+          <button
+            onClick={handleDance}
+            className="retro-btn bg-mint hover:bg-mint-light text-espresso py-3 px-3 text-sm font-pixel"
+            title="Play dance music"
+          >
+            <PixelMusic className="w-4 h-4" />
+            <span>Dance</span>
+          </button>
+
+          <button
+            onClick={handleTalk}
+            className="retro-btn bg-sky hover:bg-sky-light text-espresso py-3 px-3 text-sm font-pixel"
+            title="Chat with Animalese voice"
+          >
+            <PixelMessage className="w-4 h-4" />
+            <span>Talk</span>
+          </button>
+
+          <button
+            onClick={handleNap}
+            className={`retro-btn col-span-2 sm:col-span-1 py-3 px-3 text-sm font-pixel transition-all ${
+              isSleeping 
+                ? 'bg-lavender text-espresso' 
+                : 'bg-cream-surface dark:bg-cocoa-card text-espresso dark:text-cream border-espresso dark:border-cocoa-border'
+            }`}
+            title="Toggle nap mode"
+          >
+            <PixelSmile className="w-4 h-4" />
+            <span>{isSleeping ? 'Wake Up' : 'Take Nap'}</span>
+          </button>
+        </div>
+
+        {/* Pet Meta Tagline */}
+        <div className="mt-6 flex items-center gap-2 text-sm font-pixel text-espresso-muted dark:text-cocoa-muted">
+          <span>Current companion:</span>
+          <span className="font-bold text-espresso dark:text-honey">{activeInfo.badge}</span>
+          <span>•</span>
+          <span>Mood: {activeInfo.mood}</span>
+        </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

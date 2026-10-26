@@ -1,28 +1,32 @@
 import React, { useState } from 'react';
-import { ChevronDown, HelpCircle } from 'lucide-react';
+import { PixelChevronDown, PixelSparkle } from './PixelIcons';
 import { PET_SFX } from '../lib/sounds';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const FAQS = [
   {
     q: "Will the pet get in the way of what I'm doing?",
-    a: "Nope! The pet floats peacefully above everything, but your mouse clicks pass right through empty space. You can click on websites, write essays, or play games right behind the pet without anything getting blocked."
+    a: "Not at all! Your pal floats quietly on top of windows, but your mouse clicks pass straight through empty space. You can write essays, browse articles, or click buttons right underneath them without anything getting blocked."
   },
   {
-    q: "Is it completely free?",
-    a: "Yes, 100% free and open-source. There are no paid tiers, no advertisements, no subscriptions, and no hidden accounts to sign up for."
+    q: "Is Pixel Pals really 100% free?",
+    a: "Yes, completely free and open-source forever. There are no paid subscriptions, no advertisements, no premium skins to buy, and no user accounts to create."
   },
   {
-    q: "Will it slow down my computer?",
-    a: "Not at all. Pixel Pals is built with lightweight, hand-crafted pixel art and a custom sound engine that uses near 0% CPU when resting. It runs smoothly on any laptop or desktop."
+    q: "Will it slow down my computer or battery?",
+    a: "No! Pixel Pals was built with hand-crafted retro pixel art and an ultra-lightweight sound chip. It uses only around 12 MB of RAM and drops to near 0% CPU usage whenever it's idling."
   },
   {
-    q: "Can I turn off the sound or make it quieter?",
-    a: "Yes! Right-clicking your pet or clicking its icon in the bottom-right taskbar tray lets you toggle sound effects, random chatter, or sleep mode anytime you want quiet focus."
+    q: "Can I quiet the sound or turn off random chatter?",
+    a: "Yes! Right-clicking your pet or opening the menu lets you mute sounds, silence speech bubbles, or put your buddy into peaceful Sleep Mode whenever you need 100% quiet focus."
   },
   {
-    q: "Does it work if I have two or more screens?",
-    a: "Yes! Your pet's eyes will follow your mouse cursor smoothly across all of your monitors."
+    q: "Does it work if I use multiple monitors?",
+    a: "Yes! You can drag your pal to any display, and their eyes will smoothly track your mouse cursor across all connected screens."
+  },
+  {
+    q: "How do I feed or play mini-games with my buddy?",
+    a: "You can click on them directly, use the simple right-click menu, or press global keyboard shortcuts like Alt+Shift+F (drop snack), Alt+Shift+D (dance party), or Alt+Shift+R (rock paper scissors)!"
   }
 ];
 
@@ -36,41 +40,48 @@ export function FaqAccordion() {
   };
 
   return (
-    <section id="faq" className="relative py-24 px-4 max-w-4xl mx-auto">
+    <section id="faq" className="relative py-28 px-4 max-w-4xl mx-auto">
+      {/* Header */}
       <div className="text-center max-w-xl mx-auto mb-16">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-300 text-sm font-semibold mb-3">
-          <HelpCircle className="w-4 h-4 text-pink-400" />
-          <span>Help & Answers</span>
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-honey/20 border-2 border-honey text-espresso dark:text-honey text-sm font-pixel font-bold mb-3">
+          <PixelSparkle className="w-4 h-4 text-coral" />
+          <span>Simple Answers</span>
         </div>
-        <h2 className="text-4xl sm:text-5xl font-heading font-black text-white tracking-tight">
+        <h2 className="text-4xl sm:text-5xl font-heading font-black text-espresso dark:text-cream tracking-tight">
           Frequently Asked Questions
         </h2>
+        <p className="mt-3 text-lg text-espresso-muted dark:text-cocoa-muted font-sans">
+          Everything you might want to know in plain human language.
+        </p>
       </div>
 
+      {/* Accordion List */}
       <div className="space-y-4">
         {FAQS.map((faq, i) => {
           const isOpen = openIdx === i;
           return (
             <div
               key={i}
-              className={`rounded-3xl border transition-all duration-200 overflow-hidden ${
+              className={`rounded-2xl border-3 border-espresso transition-all duration-200 overflow-hidden ${
                 isOpen
-                  ? 'bg-[#121320] border-pink-500/40 shadow-xl'
-                  : 'bg-[#0b0c14] border-[#1f2030] hover:border-zinc-700'
+                  ? 'bg-cream-light dark:bg-cocoa-card shadow-pixel'
+                  : 'bg-cream-surface/50 dark:bg-cocoa-canvas/60 hover:bg-cream-surface'
               }`}
             >
               <button
                 onClick={() => toggle(i)}
-                className="w-full flex items-center justify-between p-6 sm:p-7 text-left select-none"
+                className="w-full flex items-center justify-between p-6 sm:p-7 text-left select-none gap-4"
               >
-                <span className="font-heading text-xl sm:text-2xl text-white font-bold tracking-tight">
+                <span className="font-heading text-xl sm:text-2xl text-espresso dark:text-cream font-bold tracking-tight">
                   {faq.q}
                 </span>
-                <ChevronDown
-                  className={`w-6 h-6 text-pink-400 flex-shrink-0 transition-transform duration-200 ${
-                    isOpen ? 'transform rotate-180' : ''
+                <div
+                  className={`p-2 rounded-xl bg-honey/20 border-2 border-espresso text-espresso dark:text-cream shrink-0 transition-transform duration-200 ${
+                    isOpen ? 'rotate-180 bg-honey' : ''
                   }`}
-                />
+                >
+                  <PixelChevronDown className="w-4 h-4" />
+                </div>
               </button>
 
               <AnimatePresence>
@@ -81,7 +92,7 @@ export function FaqAccordion() {
                     exit={{ opacity: 0, height: 0 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <div className="px-6 pb-6 sm:px-7 sm:pb-7 text-zinc-300 text-base sm:text-lg font-sans leading-relaxed border-t border-[#1f2030] pt-4">
+                    <div className="px-6 pb-6 sm:px-7 sm:pb-7 text-espresso-muted dark:text-cocoa-muted text-base sm:text-lg font-sans leading-relaxed border-t-2 border-espresso/10 dark:border-cocoa-border pt-4">
                       {faq.a}
                     </div>
                   </motion.div>

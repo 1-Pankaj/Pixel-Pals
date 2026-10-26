@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { MessageSquareHeart, PawPrint, Music4, ShieldCheck } from 'lucide-react';
+import { PixelMessage, PixelHeart, PixelMusic, PixelShield } from './PixelIcons';
+import { motion } from 'framer-motion';
 
 function Counter({ end, suffix = '', duration = 1200 }) {
   const [val, setVal] = useState(0);
@@ -32,7 +33,7 @@ function Counter({ end, suffix = '', duration = 1200 }) {
   }, [started, end, duration]);
 
   return (
-    <span ref={ref} className="font-heading text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight">
+    <span ref={ref} className="font-heading text-4xl sm:text-5xl font-black text-espresso dark:text-cream tracking-tight">
       {val.toLocaleString()}{suffix}
     </span>
   );
@@ -41,60 +42,64 @@ function Counter({ end, suffix = '', duration = 1200 }) {
 export function StatsTicker() {
   const stats = [
     {
-      icon: MessageSquareHeart,
+      icon: PixelMessage,
       number: 2507,
       suffix: '+',
-      label: 'Unique Things to Say',
-      desc: 'Friendly morning greetings, cozy stories, knock-knock jokes & trivia',
-      color: 'text-pink-400',
-      bg: 'bg-pink-500/10'
+      label: 'Warm Dialogues',
+      desc: 'Morning greetings, cozy life advice, funny animal trivia & friendly check-ins',
+      color: 'bg-coral text-white',
     },
     {
-      icon: PawPrint,
+      icon: PixelHeart,
       number: 6,
-      suffix: ' Buddies',
-      label: 'Handmade Pals',
-      desc: 'Each with their own funny personality and cute little voice',
-      color: 'text-amber-400',
-      bg: 'bg-amber-500/10'
+      suffix: ' Pals',
+      label: 'Unique Companions',
+      desc: 'Mochi, Biscuit, Pudding, Luna, Clover & Miso — each with unique sound synthesis',
+      color: 'bg-honey text-espresso',
     },
     {
-      icon: Music4,
+      icon: PixelMusic,
       number: 0,
-      suffix: ' MB',
-      label: 'Audio Files',
-      desc: 'Lightweight sound engine that synthesizes soft purrs & chimes live',
-      color: 'text-sky-400',
-      bg: 'bg-sky-500/10'
+      suffix: ' Audio Lag',
+      label: 'Pure WebAudio',
+      desc: 'Live synthesized sound chip creates soft animalese babbles with zero storage waste',
+      color: 'bg-mint text-espresso',
     },
     {
-      icon: ShieldCheck,
+      icon: PixelShield,
       number: 100,
       suffix: '%',
-      label: 'Free Forever',
-      desc: 'No logins, no telemetry, no tracking. Runs completely offline',
-      color: 'text-emerald-400',
-      bg: 'bg-emerald-500/10'
+      label: 'Private & Offline',
+      desc: 'Zero telemetry, zero user accounts, zero bloat. Runs purely on your device',
+      color: 'bg-sky text-espresso',
     }
   ];
 
   return (
-    <section className="relative z-10 py-16 px-4 max-w-6xl mx-auto">
+    <section className="relative z-10 py-12 px-4 max-w-6xl mx-auto">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {stats.map((s, i) => {
           const Icon = s.icon;
           return (
-            <div
+            <motion.div
               key={i}
-              className="flex flex-col items-center text-center p-8 rounded-3xl bg-[#0c0d14] border border-[#1f2030] shadow-xl hover:border-zinc-700 transition"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1, duration: 0.5 }}
+              className="retro-card-light dark:retro-card-dark p-7 flex flex-col items-center text-center group"
             >
-              <div className={`p-3.5 rounded-2xl ${s.bg} ${s.color} mb-4`}>
-                <Icon className="w-7 h-7" />
+              <div className={`p-3.5 rounded-2xl ${s.color} border-2 border-espresso mb-4 shadow-pixel-soft`}>
+                <Icon className="w-6 h-6" />
               </div>
               <Counter end={s.number} suffix={s.suffix} />
-              <span className="text-lg font-bold text-white mt-2 font-heading">{s.label}</span>
-              <span className="text-sm text-zinc-400 mt-1 leading-snug">{s.desc}</span>
-            </div>
+              <span className="text-lg font-bold text-espresso dark:text-honey mt-2 font-pixel">
+                {s.label}
+              </span>
+              <span className="text-sm text-espresso-muted dark:text-cocoa-muted mt-2 leading-relaxed">
+                {s.desc}
+              </span>
+            </motion.div>
           );
         })}
       </div>
