@@ -1,104 +1,194 @@
-# Pixel Pals
+<p align="center">
+  <img src="build/icon.png" alt="Pixel Pals Icon" width="90">
+</p>
+
+<h1 align="center">Pixel Pals</h1>
 
 <p align="center">
-  <img src="build/icon.png" alt="Pixel Pals Icon" width="80">
+  <strong>Tiny pixel pets that live on your Windows desktop.</strong><br>
+  Adopt a cozy tabby cat, a cheerful tuxedo penguin, or an aquatic axolotl.<br>
+  They float above your windows, their eyes follow your mouse cursor everywhere,<br>
+  and they keep you company with over a thousand messages, tricks, naps and treats.
 </p>
 
 <p align="center">
-  <strong>Cute pixel pets that live on your Windows desktop.</strong><br>
-  Pick a <b>cat</b>, a <b>penguin</b>, or an <b>axolotl</b>. They float above your windows, follow your cursor with their eyes, and keep you company while you work or study.
+  <a href="https://github.com/1-Pankaj/Pixel-Pals/releases/latest"><img src="https://img.shields.io/github/v/release/1-Pankaj/Pixel-Pals?color=ff7aa8&label=download%20v2.0&style=for-the-badge&logo=windows" alt="Download Release"></a>
+  <a href="https://1-pankaj.github.io/Pixel-Pals/"><img src="https://img.shields.io/badge/Live%20Showcase-Play%20Online-7f8cff?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Live Showcase"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-ffe27a?style=for-the-badge&labelColor=2b2250" alt="MIT License"></a>
+  <a href="https://github.com/1-Pankaj/Pixel-Pals/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/1-Pankaj/Pixel-Pals/ci.yml?branch=main&style=for-the-badge&label=Tests" alt="Build Status"></a>
 </p>
 
 <p align="center">
-  <a href="https://1-pankaj.github.io/Pixel-Pals/"><img src="https://img.shields.io/badge/Website-Try%20it%20online-ff7aa8?style=flat" alt="Live Website"></a>
-  <a href="https://github.com/1-Pankaj/Pixel-Pals/actions/workflows/ci.yml"><img src="https://github.com/1-Pankaj/Pixel-Pals/actions/workflows/ci.yml/badge.svg" alt="CI Status"></a>
-  <a href="https://github.com/1-Pankaj/Pixel-Pals/releases"><img src="https://img.shields.io/github/v/release/1-Pankaj/Pixel-Pals?color=7f8cff&label=download" alt="Download Release"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-ffe27a?style=flat" alt="License: MIT"></a>
-</p>
-
-<p align="center">
-  <a href="https://1-pankaj.github.io/Pixel-Pals/"><strong>Try the interactive web playground &rarr;</strong></a>
+  <a href="#-meet-the-pals">Meet the Pals</a> •
+  <a href="#-how-to-play">How to Play</a> •
+  <a href="#-quick-start">Quick Start</a> •
+  <a href="#-installer--portable-builds">Download & Build</a> •
+  <a href="#-how-it-works">How It Works</a> •
+  <a href="#-pet-home-dashboard">Pet Home</a> •
+  <a href="#-adding-custom-dialogue">Custom Dialogue</a> •
+  <a href="#-tests">Tests</a>
 </p>
 
 ---
 
-Everything is drawn in code using a custom software pixel rasterizer. There are no image files or font assets to ship, no AI, no accounts, and no internet connection needed. 
+<p align="center">
+  <img src="docs/demo.gif" alt="Pixel Pals in Action" width="640" style="border-radius: 8px; box-shadow: 0 12px 32px rgba(43, 34, 80, 0.25);">
+</p>
 
-The pet lives in a transparent, frameless window. Any empty space around the buddy is click-through, so it never steals focus or gets in the way of what you are typing or clicking.
-
----
-
-## The Pals
-
-| Pal | Species | Habitat | Personality | Treat |
-|:---|:---|:---|:---|:---|
-| **Mochi** | Tabby cat | Sunlit room with wooden floorboards | Warm, curious, and loves long naps in a sunbeam. Twitching ears, swishing tail, and cozy purrs. | Fish 🐟 |
-| **Waddle** | Penguin | Mountain tundra with falling snow | Dressed in his finest tuxedo, bringing quiet optimism, sliding dances, and little pebble gifts. | Fish 🐟 |
-| **Axo** | Axolotl | Lagoon with swaying seaweed | A forever-smiling aquatic dragon with frilly gills who blows bubbles and reminds you to stay hydrated. | Shrimp 🦐 |
+<p align="center">
+  <em>Mochi, Waddle, and Axo tracking the cursor, doing tricks, enjoying snacks, and dangling with swing physics.</em>
+</p>
 
 ---
 
-## How to play
+## 🐾 Meet the Pals
 
-| Do this | Get this |
+<table>
+  <tr>
+    <td align="center" width="33%">
+      <img src="build/icon-mochi.png" width="96" alt="Mochi the Cat"><br>
+      <h3>Mochi</h3>
+      <p><b>Tabby Cat</b> • <i>The Cozy Napper</i></p>
+    </td>
+    <td align="center" width="33%">
+      <img src="build/icon-waddle.png" width="96" alt="Waddle the Penguin"><br>
+      <h3>Waddle</h3>
+      <p><b>Penguin</b> • <i>The Slide Specialist</i></p>
+    </td>
+    <td align="center" width="33%">
+      <img src="build/icon-axo.png" width="96" alt="Axo the Axolotl"><br>
+      <h3>Axo</h3>
+      <p><b>Axolotl</b> • <i>The Smiling Water Dragon</i></p>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+      <ul>
+        <li><b>Habitat:</b> Sunlit room with wooden floorboards, yarn ball, and woven pink rug</li>
+        <li><b>Traits:</b> Cuddly, curious, loaf-prone</li>
+        <li><b>Favorite Treat:</b> Fish 🐟</li>
+        <li><b>Signature Move:</b> Ear twitches, tail swishes, and deep purrs</li>
+      </ul>
+    </td>
+    <td valign="top">
+      <ul>
+        <li><b>Habitat:</b> Mountain tundra with snowdrifts, pebble stones, and falling snow</li>
+        <li><b>Traits:</b> Cheerful, loyal, slidey</li>
+        <li><b>Favorite Treat:</b> Fish 🐟</li>
+        <li><b>Signature Move:</b> Wing flappings, sliding dances, and gifting pebbles</li>
+      </ul>
+    </td>
+    <td valign="top">
+      <ul>
+        <li><b>Habitat:</b> Aquatic lagoon with sunbeam caustics, swaying seaweed, and air bubbles</li>
+        <li><b>Traits:</b> Gentle, smiley, wiggly</li>
+        <li><b>Favorite Treat:</b> Shrimp 🦐</li>
+        <li><b>Signature Move:</b> Frilly gill pulses, bubble blowing, and hydration reminders</li>
+      </ul>
+    </td>
+  </tr>
+</table>
+
+---
+
+## 🕹️ How to Play
+
+You can interact with your pal directly on your desktop or via the system tray:
+
+| Action | What happens |
 |:---|:---|
-| **Move the mouse anywhere** | Eyes follow your cursor across the screen, even outside the pet's window |
-| **Click the pet** | Hearts, a friendly sound, and a message. Click repeatedly and it gets dizzy with spinning stars |
-| **Double-click** | A trick: 360° spin, backflip hop, or a dance |
-| **Drag** | Picks the pet up. It dangles and swings with momentum, then lands with a soft squish |
-| **Right-click** | Menu: treat, trick, nap, jokes, facts, switch pal, size, chattiness, and settings |
-| **Leave the mouse still** | The pet yawns, curls up, and naps with floating "Z"s. Move the mouse to wake it up |
-| **System tray icon** | Click to hide or show. Right-click to summon your pal back to the corner |
+| **Move mouse anywhere** | Eyes follow your cursor across the entire screen, even outside the pet window |
+| **Click the pet** | Hearts burst out, accompanied by a sound and friendly thought. Click fast to make them dizzy! |
+| **Double-click** | Triggers a trick: 360° backflip, happy bounce, or a dance |
+| **Click and drag** | Picks the pet up. It dangles and swings with cursor momentum, landing with an elastic squish |
+| **Right-click** | Opens the menu: treat, trick, nap, jokes, facts, switch pal, size, chattiness, and settings |
+| **Leave mouse idle** | The pet yawns, curls up, and takes a cozy nap with floating "Z"s. Moving the cursor wakes it up |
+| **System tray icon** | Click to toggle visibility. Right-click to summon your pal back to the bottom-right corner |
+
+> **Non-intrusive by design:** The pet sits in a frameless, transparent window. Empty space around the sprite is click-through, so it never steals keyboard focus from your IDE, browser, terminal, or games.
 
 ---
 
-## Quick start
+## ⚙️ How It Works
 
-You need [Node.js](https://nodejs.org) 18 or newer.
+* 🎨 **100% Procedural Pixel Software Rasterizer (`Pixel`)**<br>
+  No static PNG sprite sheets or font files are shipped. Every sprite, shadow ramp, outline, and expression is drawn in code via a tiny, custom software rasterizer. Sprites scale cleanly in whole device pixels on any DPI.
+* 👀 **Global Multi-Monitor Cursor Tracking**<br>
+  The Electron main process polls mouse coordinates globally, allowing the pet's gaze to follow your cursor naturally across multiple monitors without bringing the window to the foreground.
+* 💬 **1,000+ Shuffled Dialogue Lines**<br>
+  Messages come from shuffled bags that remember what you've seen so lines don't repeat. Covers time-of-day greetings, weekdays, calendar holidays (`MM-DD`), animal trivia, wholesome jokes, and gentle wellness nudges.
+* 🧲 **Organic Physics Rig (`Brain`)**<br>
+  Features dragging inertia, dangling state, swing angles calculated from cursor velocity, gravity, elastic squash-and-stretch on landing, and smooth roaming along screen edges.
+* 🔊 **Zero-Asset WebAudio Sound Engine**<br>
+  All sound effects (purrs, beeps, chirps, crunches) are synthesized in real-time using WebAudio oscillators, bandpass filters, and gain envelopes.
+* 🔒 **100% Offline & Private**<br>
+  No cloud servers, no user accounts, no telemetry, no analytics, and no internet connection required.
+
+---
+
+## 🏡 Pet Home Dashboard
+
+Open **Pet Home** from the system tray or right-click menu to customize your companion:
+
+<div align="center">
+  <kbd><b>Pet Selector</b></kbd> • <kbd><b>Size (Small / Medium / Large)</b></kbd> • <kbd><b>Chattiness Level</b></kbd> • <kbd><b>Roaming</b></kbd> • <kbd><b>Sound Toggles</b></kbd> • <kbd><b>Wellness Nudges</b></kbd>
+</div>
+
+<br>
+
+* **Pet Switcher:** Adopt Mochi, Waddle, or Axo with live animated habitat previews.
+* **Size:** Small (3×), Medium (4× default), or Large (5×). Whole-pixel scaling prevents blurriness.
+* **Chattiness:** Silent, Quiet (occasional thoughts), Normal, or Chatty.
+* **Behavior Toggles:** Always on top, roam around screen edges, look at cursor, sleep when idle, wellness reminders (water, stretch, rest eyes), fun facts & jokes, synthesized sounds, and launch at login.
+
+Settings are saved locally and atomically in your user data directory as `settings.json`.
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+You need [Node.js](https://nodejs.org) 18 or newer installed on your machine.
+
+### Installation
 
 ```bash
+# 1. Clone the repository
 git clone https://github.com/1-Pankaj/Pixel-Pals.git
 cd Pixel-Pals
+
+# 2. Install dependencies
 npm install
+
+# 3. Launch Pixel Pals
 npm run desktop
 ```
 
-Your pal appears in the bottom-right corner, and the **Pet Home** window opens on first launch so you can adopt who you want.
+Your new companion appears in the bottom-right corner of your desktop, and the **Pet Home** window opens automatically on first launch so you can pick your favorite buddy.
 
 ---
 
-## Windows installer & portable builds
+## 📦 Installer & Portable Builds
+
+To build standalone Windows executables:
 
 ```bash
-# Build the NSIS installer and single-file portable .exe
+# Generate dynamic icons and build Windows installer + portable exe
 npm run dist
 
-# Or build an unpacked directory for quick testing
+# Or build an unpacked directory for fast local testing
 npm run dist:dir
 ```
 
-Output files are created in `dist/`:
-* `Pixel Pals Setup 2.0.0.exe` (installer with desktop and start menu shortcuts)
-* `Pixel Pals-portable-2.0.0.exe` (portable executable, runs anywhere without installation)
+Build outputs are saved to `dist/`:
+* `Pixel Pals Setup 2.0.0.exe` — Full Windows installer with start menu and desktop shortcuts.
+* `Pixel Pals-portable-2.0.0.exe` — Single standalone portable `.exe` (runs without installation).
 
-*(Note: Windows SmartScreen may show an "Unrecognized app" prompt on first run for independent open-source apps. Click **More info** &rarr; **Run anyway**.)*
-
----
-
-## Settings
-
-Open **Pet Home** from the tray icon or the right-click menu:
-
-* **Pet**: Switch between Mochi, Waddle, and Axo anytime.
-* **Size**: Small (3×), Medium (4× default), or Large (5×). Whole-pixel scaling keeps sprites crisp on any DPI.
-* **Chattiness**: Silent, Quiet, Normal, or Chatty.
-* **Toggles**: Always on top, roam around screen edges, look at cursor, sleep when idle, wellness nudges (water, stretch, rest eyes), fun facts and jokes, synthesized sounds, and start on Windows login.
-
-Settings are saved locally in your user data directory as `settings.json`.
+*(Note: Windows SmartScreen may show an "Unrecognized app" prompt on first launch for independent open-source apps. Click **More info** → **Run anyway**.)*
 
 ---
 
-## Project structure
+## 📂 Project Structure
 
 ```
 pixel-pals/
@@ -106,14 +196,14 @@ pixel-pals/
 │   ├── main/                 # Electron main process
 │   │   ├── main.js           # Transparent window, cursor tracking, tray, roaming, IPC
 │   │   ├── preload.js        # Safe context bridge
-│   │   └── settings.js       # Atomic settings store
-│   ├── renderer/             # Windows
-│   │   ├── pet.html/css/js   # Floating desktop pet and speech bubbles
-│   │   └── home.html/css/js  # Pet Home dashboard and animated habitat cards
+│   │   └── settings.js       # Atomic JSON settings store
+│   ├── renderer/             # Frontend windows
+│   │   ├── pet.html/css/js   # Floating desktop pet, speech bubble, organic physics
+│   │   └── home.html/css/js  # Pet Home dashboard & animated habitat preview
 │   └── shared/               # Core engine (runs in Node and browser)
 │       ├── pixel.js          # Software pixel rasterizer (cel-shading, outlines, ramps)
 │       ├── pets.js           # Procedural sprite models for Mochi, Waddle, and Axo
-│       ├── brain.js          # Personality, physics, sleep, roaming, reactions
+│       ├── brain.js          # State machine, physics, sleep, roaming, reactions
 │       ├── effects.js        # Hearts, stars, bubbles, and sleep particles
 │       ├── scenes.js         # Animated habitat backgrounds
 │       ├── sound.js          # Synthesized WebAudio sound effects
@@ -122,63 +212,74 @@ pixel-pals/
 ├── scripts/
 │   ├── selftest.js           # 175-check test suite (lifetime simulation)
 │   ├── preview.js            # Generates preview of all pet expressions
-│   └── make-icons.js         # Generates build/icon.ico and icon.png
+│   ├── make-icons.js         # Generates build/icon.ico and icon.png
+│   └── record-demo.py        # Automated GIF recorder for documentation
 ├── website/                  # Live showcase website with habitat canvases
-├── docs/                     # GitHub Pages mirror
-└── build/                    # App and tray icons
+├── docs/                     # GitHub Pages deployment mirror
+└── build/                    # Generated application and installer icons
 ```
 
 ---
 
-## Adding your own dialogue
+## 💬 Adding Custom Dialogue
 
-Open any file in `src/shared/messages/` and add a line to an array:
-* `core.js`: Greetings, time of day, weekdays, calendar dates (`MM-DD`), petting reactions.
-* `shared.js`: Encouragement, care reminders, work focus, compliments.
-* `facts.js`: Animal facts, trivia, wholesome jokes.
+Dialogue files are neatly split into categories under `src/shared/messages/`:
+* `core.js`: Greetings, time of day, weekdays, calendar dates (`MM-DD`), and petting reactions.
+* `shared.js`: Encouragement, care reminders, work focus, and compliments.
+* `facts.js`: Animal facts, trivia, and wholesome jokes.
 * `mochi.js`, `waddle.js`, `axo.js`: Individual character voices.
 
-An entry can be a plain string or `["text", "mood"]` to trigger an expression (`happy`, `love`, `wide`, `sleepy`, `sad`, `dizzy`, `squint`, `glad`, `calm`):
+To add your own lines, open any of these files and append a string or an expression-tagged tuple:
 
 ```javascript
 "Enjoying the afternoon breeze.",
-["Look what I found!", "happy"]
+["Look what I found for you!", "happy"]
 ```
 
-Lines are served from shuffled bags, so nothing repeats until the entire list has been shown.
+Available expression tags: `happy`, `love`, `wide`, `sleepy`, `sad`, `dizzy`, `squint`, `glad`, `calm`.
 
 ---
 
-## Adding a new pet
+## 🐣 Adding a New Pet
 
-1. In `src/shared/pets.js`, write a drawing function (you can use `drawAxo` or `drawMochi` as a template) and add an entry to `PETS`.
-2. Create `src/shared/messages/yourpet.js` and register it in `messages/index.js` and `<script>` tags in `pet.html` and `home.html`.
-3. Add a habitat scene in `src/shared/scenes.js`.
-4. Run `npm test` to test its simulation.
+1. In `src/shared/pets.js`, write a procedural drawing function (you can use `drawAxo` or `drawMochi` as a reference) and register it in `PETS`.
+2. Create `src/shared/messages/yourpet.js` and register it in `src/shared/messages/index.js` and in `<script>` tags in `pet.html` and `home.html`.
+3. Add an animated habitat scene in `src/shared/scenes.js`.
+4. Run `npm test` to validate your new pet's lifetime simulation.
 
-Pet Home, the menu, and the tray will pick up the new pet automatically.
+The Pet Home adoption dashboard, tray menu, and switcher will automatically detect the new pet.
 
 ---
 
-## Tests
+## 🧪 Tests
 
-Run the built-in test suite:
+Pixel Pals includes a built-in automated verification suite:
+
 ```bash
+# Run the 175-check lifetime simulation suite
 npm test
 ```
-This runs 175 checks:
-* Simulates 2 hours of virtual life for every pet
-* Validates message bags, shuffle mechanics, and expressions
-* Checks settings store and procedural icons
-* Tests the main process against a mocked Electron environment
 
-To test the website:
+This runs:
+* 2 hours of virtual life simulation per pet (verifying movement, speech, napping, and waking)
+* Validation of all 1,089 message lines, shuffle bags, and expression tags
+* Verification of the atomic settings store and procedural icon generators
+* Mock testing of the Electron main process IPC and window lifecycles
+
+To run the Playwright website test suite:
 ```bash
 python website/test_website.py
 ```
 
 ---
 
-## License
+## 💖 Contributing
 
-MIT License. Free and open source for everyone.
+Contributions, dialogue additions, translations, and new pets are always welcome! Feel free to check out [CONTRIBUTING.md](CONTRIBUTING.md) and open a pull request or issue.
+
+---
+
+## 📄 License
+
+Pixel Pals is open source software licensed under the [MIT License](LICENSE).<br>
+Made with love for cozy desktops everywhere.
