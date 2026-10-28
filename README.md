@@ -184,7 +184,17 @@ Build outputs are saved to `dist/`:
 * `Pixel Pals Setup 2.0.0.exe` — Full Windows installer with start menu and desktop shortcuts.
 * `Pixel Pals-portable-2.0.0.exe` — Single standalone portable `.exe` (runs without installation).
 
-*(Note: Windows SmartScreen may show an "Unrecognized app" prompt on first launch for independent open-source apps. Click **More info** → **Run anyway**.)*
+### Verification & SHA-256 Checksums
+
+| Binary Asset | Size | SHA-256 Checksum |
+|:---|:---|:---|
+| `Pixel Pals Setup 2.0.0.exe` | 114 MB | `871b86ae84918d5a10482b668cb52c44d4ee6ec69b8e8b7f765f5be6408edc26` |
+| `Pixel Pals-portable-2.0.0.exe` | 104 MB | `d2c12739fef859185d9c2e074976c16756714faeb158d1dcb5c26b18116b3bdf` |
+
+*(Note: Windows SmartScreen may show an "Unrecognized app" prompt on first launch for independent open-source apps. Click **More info** → **Run anyway**. Builds are unsigned, so verifying the SHA-256 hash confirms binary integrity.)*
+
+### Platform Support
+Pixel Pals is built and tested for **Windows 10 and 11** (64-bit). The underlying procedural rasterizer and state machine run on plain JavaScript and standard Web APIs; macOS and Linux desktop packaging are currently untested, and PRs are welcome!
 
 ---
 

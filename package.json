@@ -3,8 +3,9 @@
   "productName": "Pixel Pals",
   "version": "2.0.0",
   "description": "Cute pixel pets that live on your Windows desktop. A cat, a penguin, and an axolotl whose eyes follow your cursor.",
+  "private": true,
   "main": "src/main/main.js",
-  "author": "Pixel Pals",
+  "author": "Pankaj (https://github.com/1-Pankaj)",
   "license": "MIT",
   "repository": {
     "type": "git",

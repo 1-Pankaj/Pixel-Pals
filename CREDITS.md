@@ -1,18 +1,13 @@
-# Credits & Third-Party Licenses
+# Credits & Acknowledgments
 
-Pixel Pals bundles the following open-source fonts for its retro pixel aesthetic:
+## 100% Procedural & Original
+Pixel Pals is completely asset-free. All sprite models, cel-shaded lighting ramps, animated habitats, particle bursts, and icons are rendered 100% procedurally in code via the custom `Pixel` software rasterizer.
 
-## Pixelify Sans
-- Designer: Stefie Justprince
-- Source: [Pixelify Sans on Google Fonts](https://fonts.google.com/specimen/Pixelify+Sans)
-- License: [SIL Open Font License, Version 1.1](http://scripts.sil.org/OFL)
+All sound effects are synthesized dynamically using WebAudio oscillators with zero audio media files.
 
-## Press Start 2P
-- Designer: CodeMan38
-- Source: [Press Start 2P on Google Fonts](https://fonts.google.com/specimen/Press+Start+2P)
-- License: [SIL Open Font License, Version 1.1](http://scripts.sil.org/OFL)
+All 1,000+ dialogue lines, jokes, facts, and character voices are freshly written for Pixel Pals.
 
-## VT323
-- Designer: Peter Hull
-- Source: [VT323 on Google Fonts](https://fonts.google.com/specimen/VT323)
-- License: [SIL Open Font License, Version 1.1](http://scripts.sil.org/OFL)
+## Web Typography
+The promotional website and Pet Home dashboard utilize Google Fonts for typography:
+* **Pixelify Sans** — Designed by Stefie Justprince ([SIL Open Font License](http://scripts.sil.org/OFL))
+* **Nunito** — Designed by Vernon Adams ([SIL Open Font License](http://scripts.sil.org/OFL))

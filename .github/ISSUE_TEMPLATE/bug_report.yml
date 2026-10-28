@@ -42,8 +42,8 @@ body:
     id: version
     attributes:
       label: Pixel Pals Version
-      description: Found in package.json or app release (e.g. 1.2.1)
-      placeholder: "1.2.1"
+      description: Found in package.json or app release (e.g. 2.0.0)
+      placeholder: "2.0.0"
     validations:
       required: false
   - type: textarea
