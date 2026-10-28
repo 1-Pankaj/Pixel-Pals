@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pixel Pals | Tiny pixel pets for your desktop</title>
+<meta name="description" content="Cute pixel pets that live on your Windows desktop. Free and open source.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'><path fill='%23ff7aa8' d='M1 1h2v1h2V1h2v3H6v1H5v1H4v1H3V5H2V4H1z'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&family=Pixelify+Sans:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#2b2250;--soft:#5b5382;--pk:#ff7aa8;--or:#f6a55f;--bl:#7f8cff}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font:600 17px/1.55 Nunito,system-ui,sans-serif;color:var(--ink);background:#bfe3ff;overflow-x:hidden}
+h1,h2,h3,.btn,.px{font-family:"Pixelify Sans",ui-monospace,monospace;font-weight:700;letter-spacing:-.01em;line-height:1.05}
+a{color:inherit}
+:focus-visible{outline:3px dashed var(--ink);outline-offset:3px}
+#sky{position:fixed;inset:0;z-index:-3;background:linear-gradient(var(--a,#a9ddff),var(--b,#fff0f6))}
+#stars{position:fixed;top:0;left:0;width:3px;height:3px;z-index:-2;opacity:0}
+#orb{position:fixed;z-index:-2;top:96px;right:9%;width:76px;height:76px;background:#ffe27a;clip-path:polygon(30% 0,70% 0,70% 15%,85% 15%,85% 30%,100% 30%,100% 70%,85% 70%,85% 85%,70% 85%,70% 100%,30% 100%,30% 85%,15% 85%,15% 70%,0 70%,0 30%,15% 30%,15% 15%,30% 15%)}
+.wrap{max-width:1140px;margin:auto;padding:0 22px;position:relative}
+.plate{background:#fff;padding:26px 32px;box-shadow:0 0 0 3px var(--ink),8px 8px 0 3px var(--ink);border-radius:4px;display:inline-block}
+.plate h2{font-size:clamp(32px,4.8vw,58px)}
+.plate p{color:var(--soft);margin-top:10px;max-width:560px}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:14px 24px;margin:4px 8px 12px 4px;background:var(--pk);color:var(--ink);font-size:19px;text-decoration:none;border:0;border-radius:4px;cursor:pointer;box-shadow:0 0 0 3px var(--ink),4px 4px 0 3px var(--ink);transition:transform .06s steps(1),box-shadow .06s steps(1)}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:0 0 0 3px var(--ink),6px 6px 0 3px var(--ink)}
+.btn:active{transform:translate(4px,4px);box-shadow:0 0 0 3px var(--ink),0 0 0 3px var(--ink)}
+.btn.w{background:#fff}.btn.o{background:var(--or)}.btn.b{background:#b9c2ff}
+.sp{display:block;position:absolute;pointer-events:none}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:30;padding:14px 0}
+nav .wrap{display:flex;align-items:center;gap:22px;background:#fff;box-shadow:0 0 0 3px var(--ink),5px 5px 0 3px var(--ink);border-radius:4px;padding:6px 14px;max-width:1080px}
+.logo{display:flex;align-items:center;gap:8px;text-decoration:none;font-size:24px;font-family:"Pixelify Sans";font-weight:700}
+.logo canvas{width:40px!important;height:40px!important}
+nav .g{flex:1}nav a.l{text-decoration:none;font-weight:800}nav a.l:hover{text-decoration:underline wavy var(--pk)}
+nav .btn{margin:0;padding:8px 16px;font-size:16px}
+
+/* pets */
+.pw{position:relative;display:flex;flex-direction:column;align-items:center;touch-action:none}
+.bob{animation:bob 1.6s steps(4) infinite}
+@keyframes bob{50%{transform:translateY(-7px)}}
+canvas{image-rendering:pixelated;display:block;cursor:grab;transform-origin:50% 100%}
+.bub{position:absolute;bottom:100%;margin-bottom:4px;width:max-content;max-width:230px;text-align:center;background:#fff;padding:10px 16px;border-radius:3px;box-shadow:0 0 0 3px var(--ink);font-size:15px;line-height:1.3;opacity:0;pointer-events:none;z-index:9}
+.bub:after{content:"";position:absolute;left:calc(50% - 8px);bottom:-9px;width:14px;height:14px;background:#fff;border:solid var(--ink);border-width:0 3px 3px 0;transform:rotate(45deg)}
+
+/* hero */
+.hero{position:relative;min-height:100vh;padding-top:120px;overflow:hidden;display:flex;flex-direction:column}
+.hero .wrap{text-align:center;z-index:3}
+h1{font-size:clamp(46px,9vw,124px);color:var(--ink);text-shadow:0 6px 0 #fff,0 0 0 #fff;margin-bottom:22px}
+h1 span{display:inline-block}
+.hero p.lead{max-width:640px;margin:0 auto 24px;font-size:19px;text-shadow:0 2px 0 #fffa}
+.small{font-size:15px;color:var(--soft);font-weight:800}
+.stage{position:relative;flex:1;min-height:360px;margin-top:10px;z-index:2}
+.stage .pw{position:absolute;bottom:34px}
+.hill{position:absolute;left:-6%;right:-6%;bottom:0;height:300px}
+.mq{background:var(--ink);color:#fff;padding:14px 0;transform:rotate(-1.4deg);margin:0 -20px;overflow:hidden;white-space:nowrap;position:relative;z-index:4;box-shadow:0 -4px 0 var(--pk),0 4px 0 var(--or)}
+.mq div{display:inline-block;font-size:26px;font-family:"Pixelify Sans";font-weight:700}
+
+/* pals */
+section{padding:90px 0;position:relative}
+.row{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center;margin-top:70px}
+.row:nth-child(even) .scene{order:2}
+.scene{position:relative;height:440px;overflow:hidden;box-shadow:0 0 0 3px var(--ink),8px 8px 0 3px var(--ink);border-radius:4px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:7%}
+.scene .pw{z-index:3}
+.scene:before,.scene:after{content:"";position:absolute;z-index:1}
+.sc-mochi{background:linear-gradient(transparent 70%,#c98a5a 70%),repeating-linear-gradient(90deg,#ffe3cf 0 22px,#ffd2b8 22px 44px)}
+.sc-mochi:before{left:11%;top:11%;width:84px;height:100px;background:linear-gradient(#bfe6ff,#eaf7ff);box-shadow:0 0 0 5px #fff,0 0 0 8px var(--ink)}
+.sc-mochi:after{bottom:5%;left:20%;width:60%;height:15%;border-radius:50%;background:#ff9fbd;box-shadow:inset 0 0 0 4px #e56a92}
+.sc-waddle{background:linear-gradient(transparent 72%,#fff 72%),linear-gradient(#bcd0ff,#e9f0ff)}
+.sc-waddle:before{left:6%;bottom:28%;border:100px solid transparent;border-top:0;border-bottom:150px solid #9fb0ee}
+.sc-waddle:after{right:4%;bottom:28%;border:64px solid transparent;border-top:0;border-bottom:96px solid #b4c3f6}
+.sc-axo{background:linear-gradient(transparent 84%,#f3dfa8 84%),linear-gradient(#7de3e0,#2aa6b8)}
+.sc-axo:before{inset:0;background:repeating-linear-gradient(100deg,#fff4 0 16px,transparent 16px 54px);animation:ray 4s steps(2) infinite}
+@keyframes ray{50%{opacity:.4}}
+.sc-axo:after{left:10%;bottom:14%;width:14px;height:96px;background:#3bbf7a;box-shadow:24px 22px 0 #2da566;animation:sway 2s steps(4) infinite;transform-origin:bottom}
+@keyframes sway{50%{transform:skewX(8deg)}}
+.pt{position:absolute;z-index:1;left:var(--x);top:-10px;width:7px;height:7px;background:#fff;animation:fall var(--d) steps(24) infinite linear;animation-delay:var(--l)}
+.pt.b{top:auto;bottom:-14px;width:12px;height:12px;background:none;border:2px solid #fff;border-radius:50%;animation-name:rise}
+.pt.m{top:auto;bottom:-10px;width:5px;height:5px;background:#fff1a0;animation-name:rise}
+@keyframes fall{to{transform:translateY(460px)}}@keyframes rise{to{transform:translateY(-470px)}}
+.info h3{font-size:clamp(44px,6vw,72px)}
+.info .px{color:var(--soft);font-size:18px;margin:4px 0 14px}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tags span{background:var(--c);padding:3px 12px;border-radius:3px;box-shadow:0 0 0 2px var(--ink);font-size:14px;font-weight:800}
+.treat{display:flex;align-items:center;gap:14px;margin:16px 0 14px;font-weight:800}
+
+/* notes */
+#why{background:linear-gradient(#0000,#ffffff40)}
+.notes{display:flex;flex-wrap:wrap;gap:34px 28px;margin-top:60px;justify-content:center}
+.note{width:300px;padding:34px 24px 24px;background:var(--c);box-shadow:0 0 0 3px var(--ink),6px 6px 0 3px var(--ink);border-radius:3px;cursor:grab;position:relative;user-select:none}
+.note:before{content:"";position:absolute;top:-11px;left:calc(50% - 8px);width:16px;height:16px;background:#ff5a7a;box-shadow:0 0 0 3px var(--ink)}
+.note h3{font-size:26px;margin-bottom:8px}
+.hint{display:block;text-align:center;margin-top:36px;font-size:22px;font-family:"Pixelify Sans";font-weight:700;color:var(--ink);text-shadow:0 2px 0 #fff}
+
+/* play */
+.lab{display:grid;grid-template-columns:1fr 1.1fr;gap:40px;margin-top:60px;align-items:stretch}
+.acts{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.acts .btn{flex-direction:column;align-items:flex-start;margin:0;font-size:21px;text-align:left;padding:16px 18px;gap:4px}
+.acts .btn small{font:800 14px Nunito;color:var(--soft)}
+.room{position:relative;min-height:430px;overflow:hidden;box-shadow:0 0 0 3px var(--ink),8px 8px 0 3px var(--ink);border-radius:4px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:8%;background:linear-gradient(transparent 72%,#8a6bc4 72%),repeating-linear-gradient(0deg,#d9d3f8 0 2px,transparent 2px 22px),#fff}
+.room .pw{z-index:3}
+
+/* get */
+.dl{display:grid;grid-template-columns:1.2fr 1fr;gap:34px;padding:42px}
+.dl h2{margin-bottom:12px}
+.note2{margin-top:14px;background:#fff6c7;padding:14px 16px;border-radius:3px;box-shadow:0 0 0 2px var(--ink);font-size:15px}
+.facts{list-style:none;padding:0;display:grid;gap:12px;align-content:start}
+.facts li{padding:12px 16px;border-radius:3px;box-shadow:0 0 0 2px var(--ink);background:#eef0ff}
+.facts b{display:block;font:700 20px "Pixelify Sans"}
+.sleep{display:flex;justify-content:center;gap:46px;margin-top:70px;align-items:flex-end}
+.ground{height:70px;background:#1f5a4a;box-shadow:0 -4px 0 var(--ink);margin-top:-34px;position:relative;z-index:-1}
+footer{background:var(--ink);color:#d9d3f8;text-align:center;padding:28px;font-weight:800}
+.z{position:fixed;z-index:50;pointer-events:none;font:700 22px "Pixelify Sans";color:#fff;text-shadow:2px 2px 0 var(--ink)}
+
+@media(max-width:900px){.row,.lab,.dl{grid-template-columns:1fr}.row:nth-child(even) .scene{order:0}nav a.l{display:none}.hill{height:220px}section{padding:60px 0}.dl{padding:24px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<div id="sky"></div><div id="stars"></div><div id="orb"></div>
+
+<nav><div class="wrap">
+  <a class="logo" href="#top"><div class="pw" data-pet="mochi" data-s="40" data-nd="1"><canvas></canvas></div>Pixel Pals</a>
+  <span class="g"></span>
+  <a class="l" href="#pals">Meet the pals</a><a class="l" href="#why">Why you'll love them</a><a class="l" href="#play">Play</a>
+  <a class="btn" href="#get">Download</a>
+</div></nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <h1 id="h1">Tiny friends for your desktop.</h1>
+    <p class="lead">Pixel Pals are little pixel pets that hang out above your windows, follow your cursor around, and keep you company with messages, tricks, naps and treats.</p>
+    <a class="btn" href="#get">Download for Windows</a><a class="btn w" href="https://github.com/YOUR-USERNAME/pixel-pals" target="_blank" rel="noopener">Star on GitHub</a>
+    <div class="small">Free. Open source. Works offline. Go on, poke them.</div>
+  </div>
+  <div class="stage" id="stage">
+    <div class="hill" data-b="52" data-a="14" data-f=".11" data-p="0" style="background:#b6e8a4"></div>
+    <div class="hill" data-b="66" data-a="12" data-f=".16" data-p="2" style="background:#8fd694"></div>
+    <div class="hill" data-b="80" data-a="9" data-f=".21" data-p="4" style="background:#5fbf80"></div>
+    <div class="pw" data-pet="waddle" data-s="170" style="left:13%"><div class="bub"></div><div class="bob"><canvas></canvas></div></div>
+    <div class="pw" data-pet="mochi" data-s="300" style="left:50%;margin-left:-150px"><div class="bub"></div><div class="bob"><canvas></canvas></div></div>
+    <div class="pw" data-pet="axo" data-s="170" style="right:13%"><div class="bub"></div><div class="bob"><canvas></canvas></div></div>
+  </div>
+</header>
+
+<div class="mq" aria-hidden="true"><div id="mq"></div></div>
+
+<section id="pals"><div class="wrap">
+  <div class="plate rv"><h2>Meet the pals</h2><p>Each one has a home, a voice and little ways of their own. Click them, drag them, feed them. They have opinions.</p></div>
+  <div id="rows"></div>
+</div></section>
+
+<section id="why"><div class="wrap">
+  <div class="plate rv"><h2>Here to keep you company, never in your way.</h2></div>
+  <div class="notes">
+    <div class="note" style="--c:#ffd9a8"><h3>Never in your way</h3>Pet your pal while you type, game or watch videos. Nothing you're doing gets interrupted, and clicks on the empty space around them go straight through.</div>
+    <div class="note" style="--c:#c9d0ff"><h3>Eyes that follow you</h3>Wherever your cursor goes, they watch it. Even on a second screen.</div>
+    <div class="note" style="--c:#ffc4d8"><h3>Over 1,000 little messages</h3>Morning hellos, tiny jokes, animal facts and kind notes. You'll hardly ever hear the same one twice.</div>
+    <div class="note" style="--c:#b9f0e6"><h3>Gentle reminders</h3>Sip some water, stretch, rest your eyes, sit up tall. Soft nudges, never nagging.</div>
+    <div class="note" style="--c:#fff1a0"><h3>Private and offline</h3>No sign-ups, no accounts, no internet needed. Nothing ever leaves your computer.</div>
+    <div class="note" style="--c:#dcc8ff"><h3>Light as a feather</h3>A tiny download that opens instantly and barely uses any power. Every pixel and sound is made on the spot.</div>
+  </div>
+  <span class="hint">Psst. You can drag these notes around.</span>
+</div></section>
+
+<section id="play"><div class="wrap">
+  <div class="plate rv"><h2>Poke it. Feed it. See what happens.</h2><p>This is what your pets do on your desktop. Try each one right here.</p></div>
+  <div class="lab">
+    <div class="acts">
+      <button class="btn" data-a="pet">Click<small>Hearts and happy sounds</small></button>
+      <button class="btn o" data-a="spam">Click, click, click<small>They get dizzy and see stars</small></button>
+      <button class="btn b" data-a="dbl">Double-click<small>A trick: spin, hop or dance</small></button>
+      <button class="btn" data-a="treat">Give a treat<small>Chomp chomp, hearts everywhere</small></button>
+      <button class="btn o" data-a="nap">Leave them be<small>They yawn, curl up and nap</small></button>
+      <button class="btn b" data-a="swap">Swap pals<small>Drag them too. They love a swing.</small></button>
+    </div>
+    <div class="room"><div class="pw" id="lp" data-pet="mochi" data-s="260"><div class="bub"></div><div class="bob"><canvas></canvas></div></div></div>
+  </div>
+</div></section>
+
+<section id="get"><div class="wrap">
+  <div class="plate dl rv">
+    <div>
+      <h2>Take a pal home.</h2>
+      <p style="margin-bottom:18px">Download, open and say hello. Your new friend shows up on your desktop in seconds.</p>
+      <a class="btn" href="https://github.com/YOUR-USERNAME/pixel-pals/releases/latest" target="_blank" rel="noopener">Download installer</a><a class="btn w" href="https://github.com/YOUR-USERNAME/pixel-pals/releases/latest" target="_blank" rel="noopener">Portable version</a>
+      <div class="note2"><b>A friendly heads-up:</b> Windows may show a blue "Windows protected your PC" box the first time, because Pixel Pals is a small independent app. Click <b>More info</b>, then <b>Run anyway</b>. The whole project is open for anyone to look at.</div>
+    </div>
+    <ul class="facts">
+      <li><b>Windows 10 and 11</b>Works on 64-bit computers</li>
+      <li><b>Two ways to get it</b>The installer adds shortcuts for you. The portable one needs no install.</li>
+      <li><b>Free and open source</b>MIT license. Come peek inside, or help us make more pets.</li>
+    </ul>
+  </div>
+  <div class="sleep">
+    <div class="pw" data-pet="waddle" data-s="130" data-sleep="1"><canvas></canvas></div>
+    <div class="pw" data-pet="mochi" data-s="130" data-sleep="1"><canvas></canvas></div>
+    <div class="pw" data-pet="axo" data-s="130" data-sleep="1"><canvas></canvas></div>
+  </div>
+</div></section>
+<div class="ground"></div>
+<footer>Made with love. Open source on <a href="https://github.com/YOUR-USERNAME/pixel-pals" target="_blank" rel="noopener">GitHub</a>. MIT License. More pals coming soon!</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Draggable.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger,Draggable);
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],rnd=(a,b)=>a+Math.random()*(b-a);
+const D={
+mochi:{n:'Mochi',sp:'Tabby cat',c:'#f6a55f',f:620,w:'triangle',k:'m',t:'fish',tn:'Fish',tags:['Cuddly','Curious','Loaf-prone'],
+ bio:'Warm, curious and always up for a long nap in a sunbeam. Loves fish treats, ear scritches and sitting quietly while you work.',
+ m:['Welcome! Your spot is warm and I kept an eye on it.','I just imagined a perfect nap.','You are the best human alive. Just saying.','Purr purr purr...','Scritches accepted!'],
+ p:{o:'#8c2a14',a:'#f6a55f',b:'#ffd9a8',c:'#e0661f',d:'#fff3df',p:'#ff8fb1',k:'#2b2250'}},
+waddle:{n:'Waddle',sp:'Penguin',c:'#7f8cff',f:480,w:'square',k:'s',t:'fish',tn:'Fish',tags:['Cheerful','Loyal','Slidey'],
+ bio:'Dressed in his finest tuxedo, Waddle brings endless optimism, little pebble gifts and happy sliding dances to your desktop.',
+ m:['Look! I found you a pebble!','Today is going to be great. I can feel it.','Want to slide with me?','You can do it. Tiny waddle, big dreams!','Brrr... I mean, hello!'],
+ p:{o:'#14123a',a:'#3b3f8f',b:'#9fb0ff',c:'#ffb347',d:'#ffffff',p:'#ff9fbd',k:'#14123a'}},
+axo:{n:'Axo',sp:'Axolotl',c:'#ff7aa8',f:760,w:'sine',k:'b',t:'shrimp',tn:'Shrimp',tags:['Gentle','Smiley','Wiggly'],
+ bio:'A feathery-gilled water dragon who never stopped smiling. Axo loves shrimp, blowing bubbles and reminding you to drink water.',
+ m:['Remember to drink some water!','Blub blub! Hi hi hi!','I am smiling because of you.','Bubbles for you!','Stretch time? Stretch time!'],
+ p:{o:'#a8325f',a:'#ffb3cf',b:'#ffe3ee',c:'#ff6b9e',d:'#ffffff',p:'#ff7aa8',k:'#2b2250'}}};
+const KEYS=Object.keys(D);
+let mx=innerWidth*.6,my=300;
+addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY});
+
+/* pixel sprites made from tiny maps */
+const M={heart:['.XX.XX.','XXXXXXX','XXXXXXX','.XXXXX.','..XXX..','...X...'],star:['...X...','...X...','XXXXXXX','.XXXXX.','..XXX..','.XX.XX.','.X...X.'],note:['..XXXX','..X..X','..X..X','XXX.XX','XXX.XX'],fish:['...XX....X','.XXXXXX.XX','XXXXXXXXXX','.XXXXXX.XX','...XX....X'],shrimp:['..XXXX.','.XXXXXX','XXXX..X','.XXXXX.','..XX...'],cloud:['....XXXX....','..XXXXXXXX..','.XXXXXXXXXXX','XXXXXXXXXXXXX']};
+function spx(k,col,u){const e=document.createElement('i');e.className='sp';const s=[];M[k].forEach((r,y)=>[...r].forEach((c,x)=>c=='X'&&s.push(`${x*u}px ${y*u}px 0 ${col}`)));e.style.cssText=`width:${u}px;height:${u}px;box-shadow:${s.join(',')};margin:${-M[k].length*u/2}px 0 0 ${-M[k][0].length*u/2}px`;return e}
+
+/* the pets themselves */
+function spr(p){
+ const G=[...Array(24)].map(()=>Array(24).fill(0)),c=D[p.n].p,n=p.n;
+ const s=(x,y,v)=>{if(x>=0&&y>=0&&x<24&&y<24)G[y][x]=c[v]||v};
+ const R=(x,y,w,h,v)=>{for(let j=0;j<h;j++)for(let i=0;i<w;i++)s(x+i,y+j,v)};
+ const E=(a,b,rx,ry,v)=>{for(let y=0;y<24;y++)for(let x=0;x<24;x++)if(((x-a)/rx)**2+((y-b)/ry)**2<=1)s(x,y,v)};
+ const T=(a,y,h,v)=>{for(let j=0;j<h;j++)R(a-j,y+j,2*j+1,1,v)};
+ let ex,ey,eh;
+ if(n=='mochi'){E(19,16,2,4,'a');E(12,17,6,4,'a');E(12,19,3,2,'d');R(8,20,3,2,'d');R(14,20,3,2,'d');R(7,18,2,1,'c');R(16,18,2,1,'c');T(6,3,5,'a');T(18,3,5,'a');s(6,5,'p');s(6,6,'p');s(18,5,'p');s(18,6,'p');E(12,11,8,6,'a');E(12,13,5,2,'b');R(12,6,1,2,'c');R(10,6,1,1,'c');R(14,6,1,1,'c');s(12,12,'p');s(11,13,'k');s(13,13,'k');R(6,12,2,1,'p');R(17,12,2,1,'p');ex=[8,15];ey=9;eh=3}
+ else if(n=='waddle'){E(5,14,2,4,'a');E(19,14,2,4,'a');E(12,13,7,8,'a');E(12,17,5,4,'d');E(12,10,5,3,'d');R(12,3,1,2,'a');s(11,4,'a');s(13,4,'a');R(11,12,3,1,'c');s(12,13,'c');R(8,21,3,1,'c');R(14,21,3,1,'c');R(7,12,2,1,'p');R(16,12,2,1,'p');ex=[9,14];ey=8;eh=3}
+ else{E(19,19,3,2,'a');E(12,17,6,4,'a');E(12,19,3,2,'b');R(8,20,2,2,'a');R(14,20,2,2,'a');E(12,11,8,6,'a');for(const y of[8,11,14]){R(2,y,3,1,'c');R(20,y,3,1,'c');s(2,y-1,'c');s(22,y-1,'c')}s(10,14,'k');s(11,15,'k');s(12,15,'k');s(13,15,'k');s(14,14,'k');R(6,13,2,1,'p');R(17,13,2,1,'p');ex=[7,16];ey=10;eh=2}
+ const O=G.map(r=>[...r]);
+ for(let y=0;y<24;y++)for(let x=0;x<24;x++)if(!G[y][x]&&[[1,0],[-1,0],[0,1],[0,-1]].some(([a,b])=>G[y+b]?.[x+a]))O[y][x]=c.o;
+ const o=(x,y,v)=>{if(O[y])O[y][x]=v};
+ ex.forEach(e=>{const X=e+p.lx,Y=ey+p.ly;
+  if(p.hp){o(X,Y+1,c.k);o(X+1,Y,c.k)}
+  else if(p.bl||p.sl){o(X,Y+1,c.k);o(X+1,Y+1,c.k)}
+  else{for(let j=0;j<eh;j++){o(X,Y+j,c.k);o(X+1,Y+j,c.k)}o(X+(p.lx>0?1:0),Y,'#fff')}});
+ return O}
+function draw(p){
+ const r=p.cv.getBoundingClientRect();
+ if(r.bottom<-50||r.top>innerHeight+50)return;
+ p.lx=Math.round(Math.tanh((mx-r.left-r.width/2)/160)*.9);p.ly=Math.round(Math.tanh((my-r.top-r.height/2)/160)*.9);
+ const x=p.x;x.clearRect(0,0,24,24);
+ spr(p).forEach((row,j)=>row.forEach((v,i)=>{if(v){x.fillStyle=v;x.fillRect(i,j,1,1)}}))}
+const pets=$$('.pw').map(initPet);
+function initPet(w){const cv=w.querySelector('canvas');cv.width=cv.height=24;cv.style.width=cv.style.height=w.dataset.s+'px';
+ const p={w,cv,x:cv.getContext('2d'),n:w.dataset.pet,lx:0,ly:0,bl:0,hp:0,sl:w.dataset.sleep?1:0,b:w.querySelector('.bub'),cl:[]};
+ if(w.dataset.sleep)p.zz=setInterval(()=>zed(cv),1700);
+ if(!w.dataset.nd){Draggable.create(w,{type:'x,y',zIndexBoost:false,
+  onClick:()=>poke(p),
+  onPress:()=>{if(p.sl)return;say(p,'Whoa!');beep(300,'sine',.3,2)},
+  onRelease(){gsap.to(w,{y:0,duration:.9,ease:'bounce.out'});gsap.to(w,{x:0,duration:1.4,delay:2.5,ease:'power2.inOut'});gsap.fromTo(cv,{scaleY:.7,scaleX:1.2},{scaleY:1,scaleX:1,duration:.7,delay:.55,ease:'elastic.out(1,.35)'})}});
+  cv.ondblclick=()=>poke(p,1)}
+ return p}
+setInterval(()=>pets.forEach(p=>{p.bl=p.bl>0?p.bl-1:(Math.random()<.03?2:0);p.hp=Math.max(0,p.hp-1);draw(p)}),110);
+
+/* sound and sparkles */
+let AC;
+function beep(f,t='triangle',d=.12,s=1.5){try{AC=AC||new AudioContext();const o=AC.createOscillator(),g=AC.createGain(),n=AC.currentTime;o.type=t;o.frequency.setValueAtTime(f,n);o.frequency.exponentialRampToValueAtTime(f*s,n+d);g.gain.setValueAtTime(.1,n);g.gain.exponentialRampToValueAtTime(.001,n+d);o.connect(g).connect(AC.destination);o.start();o.stop(n+d)}catch(e){}}
+function burst(el,k,col,n=6){const r=el.getBoundingClientRect();for(let i=0;i<n;i++){const e=spx(k,col,4);e.style.position='fixed';e.style.zIndex=60;e.style.left=r.left+r.width/2+rnd(-.3,.3)*r.width+'px';e.style.top=r.top+r.height*.3+'px';document.body.append(e);gsap.to(e,{x:rnd(-60,60),y:rnd(-150,-80),rotation:rnd(-30,30),opacity:0,duration:1.2,delay:i*.05,ease:'power1.out',onComplete:()=>e.remove()})}}
+function zed(el){const r=el.getBoundingClientRect(),z=document.createElement('i');z.className='z';z.textContent='Z';z.style.cssText=`left:${r.left+r.width*.7}px;top:${r.top+r.height*.1}px;font-size:${14+rnd(0,10)}px`;document.body.append(z);gsap.to(z,{x:rnd(10,40),y:-90,opacity:0,duration:2,ease:'none',onComplete:()=>z.remove()})}
+function say(p,t){if(!p.b)return;p.b.textContent=t;gsap.killTweensOf(p.b);gsap.fromTo(p.b,{opacity:0,y:10,scale:.8},{opacity:1,y:0,scale:1,duration:.3,ease:'back.out(3)'});gsap.to(p.b,{opacity:0,duration:.3,delay:3})}
+const hop=cv=>gsap.timeline().to(cv,{y:-60,scaleY:1.12,duration:.2,ease:'power2.out'}).to(cv,{y:0,scaleY:.8,duration:.18,ease:'power2.in'}).to(cv,{scaleY:1,duration:.4,ease:'elastic.out(1,.4)'});
+function poke(p,dbl){
+ if(p.sl)return wake(p);
+ const d=D[p.n],now=Date.now();p.cl=p.cl.filter(t=>now-t<2000);p.cl.push(now);
+ if(dbl){say(p,'Ta-da!');gsap.fromTo(p.cv,{rotation:0},{rotation:360,duration:.8,ease:'steps(10)'});burst(p.cv,'note',d.c);beep(d.f*1.4,'square',.25,1.8)}
+ else if(p.cl.length>=7){say(p,'Whoa... so... dizzy...');gsap.fromTo(p.cv,{rotation:-12},{rotation:12,duration:.12,repeat:9,yoyo:true,onComplete:()=>gsap.set(p.cv,{rotation:0})});burst(p.cv,'star','#ffd23f');beep(220,'sawtooth',.3,.6)}
+ else if(p.cl.length>=5){say(p,'Hehe, slow down a little!');beep(d.f*2,'square',.05,1)}
+ else{say(p,d.m[Math.random()*d.m.length|0]);burst(p.cv,'heart',d.c);p.hp=10;hop(p.cv);beep(d.f,d.w,.14,1.6)}}
+function wake(p){clearInterval(p.nz);p.sl=0;say(p,'Huh? I was awake! Totally awake.');hop(p.cv);beep(400,'square',.15,2)}
+function nap(p){if(p.sl)return;p.sl=1;say(p,'*yawn* Just a tiny nap...');beep(300,'sine',.5,.6);let i=0;p.nz=setInterval(()=>{zed(p.cv);if(++i>6)wake(p)},650)}
+function treat(p){const r=p.cv.getBoundingClientRect(),d=D[p.n],e=spx(d.t,d.t=='fish'?'#ff9f43':'#ff6b6b',5);e.style.cssText+=`;position:fixed;z-index:60;left:${r.left+r.width/2}px;top:${r.top-30}px`;document.body.append(e);
+ gsap.to(e,{y:r.height*.55+30,duration:.7,ease:'power1.in',onComplete:()=>{e.remove();say(p,'Yum yum yum!');burst(p.cv,'heart',d.c,8);p.hp=12;hop(p.cv);beep(200,'square',.08,.7);setTimeout(()=>beep(260,'square',.08,.7),120)}})}
+
+/* scenery */
+function hill(el){const b=+el.dataset.b,a=+el.dataset.a,f=+el.dataset.f,ph=+el.dataset.p,pts=['0 100%'];let py=null;for(let x=0;x<=104;x+=4){const y=Math.round((b+a*Math.sin(x*f+ph))/4)*4;if(py!==null)pts.push(`${x}% ${py}%`);pts.push(`${x}% ${y}%`);py=y}pts.push('100% 100%');el.style.clipPath=`polygon(${pts.join(',')})`}
+$$('.hill').forEach(hill);
+for(let i=0;i<5;i++){const c=spx('cloud','#fff',12);c.style.top=60+i*55+'px';c.style.opacity=.9;$('.hero').append(c);gsap.fromTo(c,{x:-300},{x:innerWidth+300,duration:rnd(70,130),repeat:-1,ease:'steps(400)'}).progress(Math.random())}
+const lay=$$('.hill'),k=[10,22,40];
+addEventListener('pointermove',e=>lay.forEach((h,i)=>gsap.to(h,{x:(e.clientX/innerWidth-.5)*-k[i],duration:.8})));
+$('#mq').innerHTML='Hugs / Treats / Naps / Tricks / Bubbles / 1,000+ little messages / Pixels / '.repeat(10);
+gsap.to('#mq',{xPercent:-50,duration:40,ease:'none',repeat:-1});
+
+/* pal rows */
+$('#rows').innerHTML=KEYS.map(k=>{const d=D[k];return `<div class="row rv" id="r-${k}"><div class="scene sc-${k}"><div class="pw" data-pet="${k}" data-s="230"><div class="bub"></div><div class="bob"><canvas></canvas></div></div></div>
+<div class="plate info" style="--c:${d.c}"><h3>${d.n}</h3><div class="px">${d.sp}</div><div class="tags">${d.tags.map(t=>`<span>${t}</span>`).join('')}</div><p>${d.bio}</p><div class="treat">Favorite treat: <span class="ti"></span>${d.tn}</div><button class="btn" style="background:${d.c}" data-say="${k}">Say hi</button><button class="btn w" data-feed="${k}">Give a treat</button></div></div>`}).join('');
+KEYS.forEach(k=>{const sc=$(`#r-${k} .scene`),d=D[k];$(`#r-${k} .ti`).append(Object.assign(spx(d.t,d.t=='fish'?'#ff9f43':'#ff6b6b',3),{style:'position:relative;display:inline-block;margin:0 24px 0 0'}));
+ for(let i=0;i<(k=='mochi'?8:16);i++){const e=document.createElement('i');e.className='pt '+d.k;e.style.cssText=`--x:${rnd(0,96)}%;--d:${rnd(4,9)}s;--l:-${rnd(0,8)}s`;sc.append(e)}});
+$$('#rows .pw').forEach(w=>pets.push(initPet(w)));
+const P=n=>pets.find(p=>p.w.dataset.pet==n&&p.w.closest('.scene'));
+$$('[data-say]').forEach(b=>b.onclick=()=>poke(P(b.dataset.say)));
+$$('[data-feed]').forEach(b=>b.onclick=()=>treat(P(b.dataset.feed)));
+KEYS.forEach(k=>ScrollTrigger.create({trigger:`#r-${k}`,start:'top 60%',once:true,onEnter:()=>{const p=P(k);say(p,`Hi, I'm ${D[k].n}!`);hop(p.cv)}}));
+
+/* playground */
+const lp=pets.find(p=>p.w.id=='lp');
+$$('[data-a]').forEach(b=>b.onclick=()=>{const a=b.dataset.a;
+ if(a=='pet')poke(lp);else if(a=='dbl')poke(lp,1);else if(a=='treat')treat(lp);else if(a=='nap')nap(lp);
+ else if(a=='spam'){for(let i=0;i<8;i++)setTimeout(()=>poke(lp),i*90)}
+ else{lp.n=KEYS[(KEYS.indexOf(lp.n)+1)%3];say(lp,`Hi, I'm ${D[lp.n].n}!`);hop(lp.cv);beep(D[lp.n].f,D[lp.n].w,.15,1.5)}});
+
+/* notes you can drag */
+$$('.note').forEach((n,i)=>{gsap.set(n,{rotation:rnd(-4,4)});Draggable.create(n,{type:'x,y',onPress(){gsap.to(n,{scale:1.05,duration:.15})},onRelease(){gsap.to(n,{scale:1,duration:.4,ease:'elastic.out(1,.4)'})}})});
+
+/* sky changes as you scroll: morning to night */
+const st=[];for(let i=0;i<70;i++)st.push(`${rnd(0,innerWidth)|0}px ${rnd(0,innerHeight)|0}px 0 ${Math.random()<.3?'#ffe27a':'#fff'}`);$('#stars').style.boxShadow=st.join(',');
+gsap.timeline({scrollTrigger:{trigger:document.body,start:'top top',end:'bottom bottom',scrub:1}})
+ .to('#sky',{'--a':'#7cc8ff','--b':'#e8f8ff',duration:1,ease:'none'})
+ .to('#sky',{'--a':'#ff9ab8','--b':'#ffdca8',duration:1,ease:'none'})
+ .to('#sky',{'--a':'#6b4fa8','--b':'#e58fb6',duration:1,ease:'none'})
+ .to('#sky',{'--a':'#171335','--b':'#3a2f7a',duration:1,ease:'none'})
+ .to('#orb',{background:'#f3f0ff',y:30,x:-60,duration:4,ease:'none'},0)
+ .to('#stars',{opacity:1,duration:1.2,ease:'none'},2.8);
+gsap.from('h1',{y:70,opacity:0,duration:1,ease:'back.out(2.4)'});
+gsap.from('.hero .pw',{y:300,duration:1,stagger:.18,delay:.4,ease:'back.out(1.6)'});
+
+/* reveals + sparkle trail */
+gsap.set('.rv',{opacity:0});
+ScrollTrigger.batch('.rv',{start:'top 88%',once:true,onEnter:b=>gsap.fromTo(b,{y:60,opacity:0,rotation:-1.5},{y:0,opacity:1,rotation:0,stagger:.15,duration:.8,ease:'back.out(1.7)'})});
+let lt=0;addEventListener('pointermove',e=>{const n=Date.now();if(n-lt<45)return;lt=n;const t=document.createElement('i');t.className='sp';t.style.cssText=`position:fixed;z-index:99;left:${e.clientX}px;top:${e.clientY}px;width:7px;height:7px;background:${D[KEYS[(n/200|0)%3]].c};box-shadow:0 0 0 2px #fff`;document.body.append(t);gsap.to(t,{y:20,opacity:0,scale:0,duration:.7,ease:'steps(5)',onComplete:()=>t.remove()})});
+</script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+/* Mochi the cat: sleepy, soft, very sure everything belongs to her. */
+(function (g) {
+  const D = (g.MessageData = g.MessageData || {});
+  D.pets = D.pets || {};
+
+  D.pets.mochi = {
+    idle: [
+      "Mrrp.",
+      "I'm not lazy. I'm conserving energy.",
+      "This spot is mine now. I decided.",
+      "Loaf mode: engaged.",
+      "I knocked something off a shelf in my mind.",
+      "Purrfectly comfortable, thank you.",
+      "If I fits, I sits.",
+      "Mew? Just checking you're still here.",
+      "I'm 40 percent fluff and 60 percent opinions.",
+      "Someone has to supervise the cursor. Meow, it's me.",
+      "I've been staring at nothing for a while. It was great.",
+      "Is that a laser dot? Don't tempt me.",
+      "Nap number 6 is going well.",
+      "A sunbeam is a very good reason to stop everything.",
+      "I licked my paw and judged the situation. Acceptable.",
+      "I'm purring on the inside. Mostly the outside, too.",
+      "Everything is a toy if you're brave enough.",
+      "The best thing about boxes is the box.",
+      "I could be hungry. I could also be dramatic. Both.",
+      "Let me sit on your things. For safety.",
+      "My tail has a mind of its own. We're not on speaking terms.",
+      "I'm working very hard at looking busy.",
+      "Meow. That means hello. Also snacks.",
+      "My whiskers say it's going to be a good day.",
+      "Cats are liquid. I'm a very serious science case.",
+      "Please admire my paws. They took years of work.",
+      "I like the corner of the screen. It feels safe.",
+      "Do you have a minute for a small pet? Say, thirty?",
+      "I'm learning to pretend I don't care. It's not working.",
+      "Mochi fact: I'm ninety percent sleep.",
+      "When in doubt, loaf.",
+      "I would like to be warm, fed, and adored. In that order.",
+      "Stretch, yawn, nap. It's a perfect routine.",
+      "It's called a cat nap. I'm in a master class.",
+      "I don't chase mice. Not on this screen. They're too fast.",
+      "There's a new nap spot on the third pixel from the left.",
+      "Boop my nose? Maybe. Don't tell anyone.",
+      "I've decided to purr for no reason.",
+      "A cat's schedule: nap, snack, nap, mild chaos, nap.",
+      "I'm grooming. Do not interrupt the process.",
+      "Another day, another thousand things to stare at.",
+      "I sat down. This is where I live now.",
+      "Mochi reporting: still adorable.",
+      "I've been told my cuteness is a weapon. I'm just being myself.",
+      "Mrow? Mrow. Mrow!",
+      "If you hear a thump, it wasn't me.",
+      "My favourite hobbies: sitting, sleeping, supervising.",
+      "I see a bird. In my head. Always.",
+      "Warm laptop? Warm lap. Same idea.",
+      "I'm basically a very small tiger. A cuddly one.",
+    ],
+    petted: [
+      "Purrrrr...", "Mrrp! Yes, behind the ears.", "Okay, you can keep doing that.", "I'm purring. It means nothing. (It means everything.)",
+      "Chin scratches accepted.", "Mew! More.", "I love you. Don't tell the other cats.", "Prrrr. You've unlocked the soft mode.",
+      "Gentle, please. I'm a delicate loaf.", "My tail went wiggly on its own.", "Meow, that's the stuff.", "Alright, you're hired as my human.",
+      "Slow blink. That's a kiss in cat.", "You may continue.",
+    ],
+    fed: [
+      "Fish! My favourite.", "Nom. Meow. Nom.", "I'll allow it. Delicious.", "That was snack-sized perfection.",
+      "More fish would not be rejected.", "Mrrp! You understand me.", "A pet who feeds me is a pet I love.", "Tuna. My one true love.",
+      "Fish for the fish-lover. Thank you.", "Crunchy and wonderful.",
+    ],
+    lifted: [
+      "Mew! Hold me like a gentleman!", "I don't like heights but I like you.", "Hrrrmph! I'm dangling!", "Ahhh, I'm a loaf in the air.",
+      "Please land me softly, human.", "Cats always land on their feet. I'm testing that.", "I'm being carried. Fancy.", "Don't squeeze my floof.",
+    ],
+    dropped: [
+      "I meant to do that.", "Landed on my feet. Obviously.", "Graceful. Totally graceful.", "Okay, that was a perfect landing.",
+      "Don't look. I'm recalibrating my dignity.", "New spot, new nap.",
+    ],
+    trick: [
+      "Cat acrobatics. Nothing to it.", "Watch my moves. I'm very fluid.", "A twirl for my audience.", "I'm basically a ballerina. With claws.",
+      "Hup! Meow-velous.", "That was effortless. Don't ask about the preparation.",
+    ],
+    sleepTalk: [
+      "zzz... mrrp... fish...", "...mew... sunbeam...", "zzz... purrrr...", "...no, the box is mine...", "zzz... mouse... zzz...", "mrrp... five more minutes...",
+    ],
+    wake: [
+      "Mrrp? Is it snack time?", "Yawn... meow. I'm up. Probably.", "Hnn. Did I miss something? Probably not.", "A good nap, a good stretch. Ready.",
+      "Meow, hello. I was resting my eyes... for six hours.", "Mrrp! Welcome back, human.",
+    ],
+    daydream: [
+      "I dreamt of a very big sunbeam.", "Thinking about fish. Always fish.", "I imagined I caught the red dot. It was glorious.", "A really big cardboard box. In my mind.",
+      "I'm pondering the meaning of tuna.", "Daydreaming about warm laundry.",
+    ],
+    hover: [
+      "Mew? A pet is incoming.", "Oh! The paw of destiny. Hello.", "Mrrp. You may proceed.", "I see your cursor. I will not chase it. (I will chase it.)",
+      "Ears up. Whiskers tingling.", "Are you here for the pets?",
+    ],
+  };
+})(typeof globalThis !== 'undefined' ? globalThis : this);

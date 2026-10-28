@@ -1,26 +1,1226 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pixel Pals — An Adorable Desktop Bestie That Lives On Your Screen</title>
-    <meta name="description" content="An adorable desktop companion that lives peacefully on top of your windows. Eyes that follow your mouse, cozy purrs, snack feeding, and zero distraction." />
-    <link rel="icon" type="image/png" href="./icon.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Pixelify+Sans:wght@600;700&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
-    <style>
-      /* Crisp pixel rendering across all browsers */
-      .pixelated {
-        image-rendering: -webkit-crisp-edges;
-        image-rendering: pixelated;
-        image-rendering: crisp-edges;
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pixel Pals | Tiny pixel pets for your desktop</title>
+<meta name="description" content="Cute pixel pets that live on your Windows desktop. Free and open source.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'><path fill='%23ff7aa8' d='M1 1h2v1h2V1h2v3H6v1H5v1H4v1H3V5H2V4H1z'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&family=Pixelify+Sans:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#2b2250;--soft:#5b5382;--pk:#ff7aa8;--or:#f6a55f;--bl:#7f8cff}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font:600 17px/1.55 Nunito,system-ui,sans-serif;color:var(--ink);background:#bfe3ff;overflow-x:hidden}
+h1,h2,h3,.btn,.px{font-family:"Pixelify Sans",ui-monospace,monospace;font-weight:700;letter-spacing:-.01em;line-height:1.05}
+a{color:inherit}
+:focus-visible{outline:3px dashed var(--ink);outline-offset:3px}
+#sky{position:fixed;inset:0;z-index:-3;background:linear-gradient(var(--a,#a9ddff),var(--b,#fff0f6))}
+#stars{position:fixed;top:0;left:0;width:3px;height:3px;z-index:-2;opacity:0}
+#orb{position:fixed;z-index:-2;top:96px;right:9%;width:76px;height:76px;background:#ffe27a;clip-path:polygon(30% 0,70% 0,70% 15%,85% 15%,85% 30%,100% 30%,100% 70%,85% 70%,85% 85%,70% 85%,70% 100%,30% 100%,30% 85%,15% 85%,15% 70%,0 70%,0 30%,15% 30%,15% 15%,30% 15%)}
+.wrap{max-width:1140px;margin:auto;padding:0 22px;position:relative}
+.plate{background:#fff;padding:26px 32px;box-shadow:0 0 0 3px var(--ink),8px 8px 0 3px var(--ink);border-radius:4px;display:inline-block}
+.plate h2{font-size:clamp(32px,4.8vw,58px)}
+.plate p{color:var(--soft);margin-top:10px;max-width:560px}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:14px 24px;margin:4px 8px 12px 4px;background:var(--pk);color:var(--ink);font-size:19px;text-decoration:none;border:0;border-radius:4px;cursor:pointer;box-shadow:0 0 0 3px var(--ink),4px 4px 0 3px var(--ink);transition:transform .06s steps(1),box-shadow .06s steps(1)}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:0 0 0 3px var(--ink),6px 6px 0 3px var(--ink)}
+.btn:active{transform:translate(4px,4px);box-shadow:0 0 0 3px var(--ink),0 0 0 3px var(--ink)}
+.btn.w{background:#fff}.btn.o{background:var(--or)}.btn.b{background:#b9c2ff}
+.sp{display:block;position:absolute;pointer-events:none}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:30;padding:14px 0}
+nav .wrap{display:flex;align-items:center;gap:22px;background:#fff;box-shadow:0 0 0 3px var(--ink),5px 5px 0 3px var(--ink);border-radius:4px;padding:6px 14px;max-width:1080px}
+.logo{display:flex;align-items:center;gap:8px;text-decoration:none;font-size:24px;font-family:"Pixelify Sans";font-weight:700}
+.logo canvas{width:40px!important;height:40px!important}
+nav .g{flex:1}nav a.l{text-decoration:none;font-weight:800}nav a.l:hover{text-decoration:underline wavy var(--pk)}
+nav .btn{margin:0;padding:8px 16px;font-size:16px}
+
+/* pets */
+.pw{position:relative;display:flex;flex-direction:column;align-items:center;touch-action:none}
+.bob{animation:bob 1.6s steps(4) infinite}
+@keyframes bob{50%{transform:translateY(-7px)}}
+canvas{image-rendering:pixelated;image-rendering:crisp-edges;-ms-interpolation-mode:nearest-neighbor;display:block;cursor:grab;transform-origin:50% 100%}
+.bub{position:absolute;bottom:100%;margin-bottom:4px;width:max-content;max-width:230px;text-align:center;background:#fff;padding:10px 16px;border-radius:3px;box-shadow:0 0 0 3px var(--ink);font-size:15px;line-height:1.3;opacity:0;pointer-events:none;z-index:9}
+.bub:after{content:"";position:absolute;left:calc(50% - 8px);bottom:-9px;width:14px;height:14px;background:#fff;border:solid var(--ink);border-width:0 3px 3px 0;transform:rotate(45deg)}
+
+/* hero */
+.hero{position:relative;min-height:100vh;padding-top:120px;overflow:hidden;display:flex;flex-direction:column}
+.hero .wrap{text-align:center;z-index:3}
+h1{font-size:clamp(46px,9vw,124px);color:var(--ink);text-shadow:0 6px 0 #fff,0 0 0 #fff;margin-bottom:22px}
+h1 span{display:inline-block}
+.hero p.lead{max-width:640px;margin:0 auto 24px;font-size:19px;text-shadow:0 2px 0 #fffa}
+.small{font-size:15px;color:var(--soft);font-weight:800}
+.stage{position:relative;flex:1;min-height:360px;margin-top:10px;z-index:2}
+.stage .pw{position:absolute;bottom:34px}
+.hill{position:absolute;left:-6%;right:-6%;bottom:0;height:300px}
+.mq{background:var(--ink);color:#fff;padding:14px 0;transform:rotate(-1.4deg);margin:0 -20px;overflow:hidden;white-space:nowrap;position:relative;z-index:4;box-shadow:0 -4px 0 var(--pk),0 4px 0 var(--or)}
+.mq div{display:inline-block;font-size:26px;font-family:"Pixelify Sans";font-weight:700}
+
+/* pals */
+section{padding:90px 0;position:relative}
+.row{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center;margin-top:70px}
+.row:nth-child(even) .scene{order:2}
+.scene, .room{position:relative;height:440px;overflow:hidden;box-shadow:0 0 0 3px var(--ink),8px 8px 0 3px var(--ink);border-radius:4px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:5.5%;background:var(--ink)}
+.scene-bg{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated;image-rendering:crisp-edges;-ms-interpolation-mode:nearest-neighbor;object-fit:fill;z-index:1;pointer-events:none}
+.scene .pw, .room .pw{position:relative;z-index:3}
+.info h3{font-size:clamp(44px,6vw,72px)}
+.info .px{color:var(--soft);font-size:18px;margin:4px 0 14px}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tags span{background:var(--c);padding:3px 12px;border-radius:3px;box-shadow:0 0 0 2px var(--ink);font-size:14px;font-weight:800}
+.treat{display:flex;align-items:center;gap:14px;margin:16px 0 14px;font-weight:800}
+
+/* notes */
+#why{background:linear-gradient(#0000,#ffffff40)}
+.notes{display:flex;flex-wrap:wrap;gap:34px 28px;margin-top:60px;justify-content:center}
+.note{width:300px;padding:34px 24px 24px;background:var(--c);box-shadow:0 0 0 3px var(--ink),6px 6px 0 3px var(--ink);border-radius:3px;cursor:grab;position:relative;user-select:none}
+.note:before{content:"";position:absolute;top:-11px;left:calc(50% - 8px);width:16px;height:16px;background:#ff5a7a;box-shadow:0 0 0 3px var(--ink)}
+.note h3{font-size:26px;margin-bottom:8px}
+.hint{display:block;text-align:center;margin-top:36px;font-size:22px;font-family:"Pixelify Sans";font-weight:700;color:var(--ink);text-shadow:0 2px 0 #fff}
+
+/* play */
+.lab{display:grid;grid-template-columns:1fr 1.1fr;gap:40px;margin-top:60px;align-items:stretch}
+.acts{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.acts .btn{flex-direction:column;align-items:flex-start;margin:0;font-size:21px;text-align:left;padding:16px 18px;gap:4px}
+.acts .btn small{font:800 14px Nunito;color:var(--soft)}
+
+/* get */
+.dl{display:grid;grid-template-columns:1.2fr 1fr;gap:34px;padding:42px}
+.dl h2{margin-bottom:12px}
+.note2{margin-top:14px;background:#fff6c7;padding:14px 16px;border-radius:3px;box-shadow:0 0 0 2px var(--ink);font-size:15px}
+.facts{list-style:none;padding:0;display:grid;gap:12px;align-content:start}
+.facts li{padding:12px 16px;border-radius:3px;box-shadow:0 0 0 2px var(--ink);background:#eef0ff}
+.facts b{display:block;font:700 20px "Pixelify Sans"}
+.sleep{display:flex;justify-content:center;gap:46px;margin-top:70px;align-items:flex-end}
+.ground{height:70px;background:#1f5a4a;box-shadow:0 -4px 0 var(--ink);margin-top:-34px;position:relative;z-index:-1}
+footer{background:var(--ink);color:#d9d3f8;text-align:center;padding:28px;font-weight:800}
+.z{position:fixed;z-index:50;pointer-events:none;font:700 22px "Pixelify Sans";color:#fff;text-shadow:2px 2px 0 var(--ink)}
+
+@media(max-width:900px){.row,.lab,.dl{grid-template-columns:1fr}.row:nth-child(even) .scene{order:0}nav a.l{display:none}.hill{height:220px}section{padding:60px 0}.dl{padding:24px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<div id="sky"></div><div id="stars"></div><div id="orb"></div>
+
+<nav><div class="wrap">
+  <a class="logo" href="#top"><div class="pw" data-pet="mochi" data-s="40" data-nd="1"><canvas></canvas></div>Pixel Pals</a>
+  <span class="g"></span>
+  <a class="l" href="#pals">Meet the pals</a><a class="l" href="#why">Why you'll love them</a><a class="l" href="#play">Play</a>
+  <a class="btn" href="#get">Download</a>
+</div></nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <h1 id="h1">Tiny friends for your desktop.</h1>
+    <p class="lead">Pixel Pals are little pixel pets that hang out above your windows, follow your cursor around, and keep you company with messages, tricks, naps and treats.</p>
+    <a class="btn" href="#get">Download for Windows</a><a class="btn w" href="https://github.com/1-Pankaj/Pixel-Pals" target="_blank" rel="noopener">Star on GitHub</a>
+    <div class="small">Free. Open source. Works offline. Go on, poke them.</div>
+  </div>
+  <div class="stage" id="stage">
+    <div class="hill" data-b="52" data-a="14" data-f=".11" data-p="0" style="background:#b6e8a4"></div>
+    <div class="hill" data-b="66" data-a="12" data-f=".16" data-p="2" style="background:#8fd694"></div>
+    <div class="hill" data-b="80" data-a="9" data-f=".21" data-p="4" style="background:#5fbf80"></div>
+    <div class="pw" data-pet="waddle" data-s="170" style="left:13%"><div class="bub"></div><div class="bob"><canvas></canvas></div></div>
+    <div class="pw" data-pet="mochi" data-s="300" style="left:50%;margin-left:-150px"><div class="bub"></div><div class="bob"><canvas></canvas></div></div>
+    <div class="pw" data-pet="axo" data-s="170" style="right:13%"><div class="bub"></div><div class="bob"><canvas></canvas></div></div>
+  </div>
+</header>
+
+<div class="mq" aria-hidden="true"><div id="mq"></div></div>
+
+<section id="pals"><div class="wrap">
+  <div class="plate rv"><h2>Meet the pals</h2><p>Each one has a home, a voice and little ways of their own. Click them, drag them, feed them. They have opinions.</p></div>
+  <div id="rows"></div>
+</div></section>
+
+<section id="why"><div class="wrap">
+  <div class="plate rv"><h2>Here to keep you company, never in your way.</h2></div>
+  <div class="notes">
+    <div class="note" style="--c:#ffd9a8"><h3>Never in your way</h3>Pet your pal while you type, game or watch videos. Nothing you're doing gets interrupted, and clicks on the empty space around them go straight through.</div>
+    <div class="note" style="--c:#c9d0ff"><h3>Eyes that follow you</h3>Wherever your cursor goes, they watch it. Even on a second screen.</div>
+    <div class="note" style="--c:#ffc4d8"><h3>Over 1,000 little messages</h3>Morning hellos, tiny jokes, animal facts and kind notes. You'll hardly ever hear the same one twice.</div>
+    <div class="note" style="--c:#b9f0e6"><h3>Gentle reminders</h3>Sip some water, stretch, rest your eyes, sit up tall. Soft nudges, never nagging.</div>
+    <div class="note" style="--c:#fff1a0"><h3>Private and offline</h3>No sign-ups, no accounts, no internet needed. Nothing ever leaves your computer.</div>
+    <div class="note" style="--c:#dcc8ff"><h3>Light as a feather</h3>A tiny download that opens instantly and barely uses any power. Every pixel and sound is made on the spot.</div>
+  </div>
+  <span class="hint">Psst. You can drag these notes around.</span>
+</div></section>
+
+<section id="play"><div class="wrap">
+  <div class="plate rv"><h2>Poke it. Feed it. See what happens.</h2><p>This is what your pets do on your desktop. Try each one right here.</p></div>
+  <div class="lab">
+    <div class="acts">
+      <button class="btn" data-a="pet">Click<small>Hearts and happy sounds</small></button>
+      <button class="btn o" data-a="spam">Click, click, click<small>They get dizzy and see stars</small></button>
+      <button class="btn b" data-a="dbl">Double-click<small>A trick: spin, hop or dance</small></button>
+      <button class="btn" data-a="treat">Give a treat<small>Chomp chomp, hearts everywhere</small></button>
+      <button class="btn o" data-a="nap">Leave them be<small>They yawn, curl up and nap</small></button>
+      <button class="btn b" data-a="swap">Swap pals<small>Drag them too. They love a swing.</small></button>
+    </div>
+    <div class="room"><canvas class="scene-bg" id="room-bg" width="80" height="72"></canvas><div class="pw" id="lp" data-pet="mochi" data-s="260"><div class="bub"></div><div class="bob"><canvas></canvas></div></div></div>
+  </div>
+</div></section>
+
+<section id="get"><div class="wrap">
+  <div class="plate dl rv">
+    <div>
+      <h2>Take a pal home.</h2>
+      <p style="margin-bottom:18px">Download, open and say hello. Your new friend shows up on your desktop in seconds.</p>
+      <a class="btn" href="https://github.com/1-Pankaj/Pixel-Pals/releases/latest" target="_blank" rel="noopener">Download installer</a><a class="btn w" href="https://github.com/1-Pankaj/Pixel-Pals/releases/latest" target="_blank" rel="noopener">Portable version</a>
+      <div class="note2"><b>A friendly heads-up:</b> Windows may show a blue "Windows protected your PC" box the first time, because Pixel Pals is a small independent app. Click <b>More info</b>, then <b>Run anyway</b>. The whole project is open for anyone to look at.</div>
+    </div>
+    <ul class="facts">
+      <li><b>Windows 10 and 11</b>Works on 64-bit computers</li>
+      <li><b>Two ways to get it</b>The installer adds shortcuts for you. The portable one needs no install.</li>
+      <li><b>Free and open source</b>MIT license. Come peek inside, or help us make more pets.</li>
+    </ul>
+  </div>
+  <div class="sleep">
+    <div class="pw" data-pet="waddle" data-s="130" data-sleep="1"><canvas></canvas></div>
+    <div class="pw" data-pet="mochi" data-s="130" data-sleep="1"><canvas></canvas></div>
+    <div class="pw" data-pet="axo" data-s="130" data-sleep="1"><canvas></canvas></div>
+  </div>
+</div></section>
+<div class="ground"></div>
+<footer>Made with love. Open source on <a href="https://github.com/1-Pankaj/Pixel-Pals" target="_blank" rel="noopener">GitHub</a>. MIT License. More pals coming soon!</footer>
+
+<!-- GSAP Animation Libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Draggable.min.js"></script>
+
+<!-- Pixel and Pets Engine (Actual Desktop Pets procedural software rasterizer) -->
+<script>
+/* ───────────────────────── PIXEL ENGINE ───────────────────────── */
+const Pixel = (function () {
+  'use strict';
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  const cache = new Map();
+
+  function rgba(c) {
+    if (typeof c !== 'string') return c;
+    let v = cache.get(c);
+    if (v) return v;
+    let h = c[0] === '#' ? c.slice(1) : c;
+    if (h.length <= 4) h = h.split('').map((x) => x + x).join('');
+    v = [parseInt(h.slice(0, 2), 16), parseInt(h.slice(2, 4), 16), parseInt(h.slice(4, 6), 16), h.length >= 8 ? parseInt(h.slice(6, 8), 16) : 255];
+    cache.set(c, v);
+    return v;
+  }
+
+  function hexToHsl(hex) {
+    const [r, g, b] = rgba(hex).slice(0, 3).map((v) => v / 255);
+    const max = Math.max(r, g, b), min = Math.min(r, g, b);
+    let h = 0, s = 0;
+    const l = (max + min) / 2;
+    if (max !== min) {
+      const d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      if (max === r) h = (g - b) / d + (g < b ? 6 : 0);
+      else if (max === g) h = (b - r) / d + 2;
+      else h = (r - g) / d + 4;
+      h *= 60;
+    }
+    return [h, s, l];
+  }
+
+  function hslToHex(h, s, l) {
+    h = ((h % 360) + 360) % 360;
+    const c = (1 - Math.abs(2 * l - 1)) * s;
+    const x = c * (1 - Math.abs(((h / 60) % 2) - 1));
+    const m = l - c / 2;
+    let r = 0, g = 0, b = 0;
+    if (h < 60) { r = c; g = x; } else if (h < 120) { r = x; g = c; } else if (h < 180) { g = c; b = x; }
+    else if (h < 240) { g = x; b = c; } else if (h < 300) { r = x; b = c; } else { r = c; b = x; }
+    const to = (v) => Math.round(clamp(v + m, 0, 1) * 255).toString(16).padStart(2, '0');
+    return '#' + to(r) + to(g) + to(b);
+  }
+
+  function ramp(hex) {
+    const [h, s, l] = hexToHsl(hex);
+    const d = ((260 - h + 540) % 360) - 180;
+    const sd = Math.sign(d) * Math.min(Math.abs(d) * 0.15, 12);
+    const mk = (dh, ds, dl) => hslToHex(h + dh, clamp(s + ds, 0, 1), clamp(l + dl, 0.03, 0.97));
+    return {
+      hi: mk(-sd * 0.5, -0.06, 0.17),
+      light: mk(-sd * 0.25, -0.02, 0.08),
+      base: hex,
+      shade: mk(sd, 0.05, -0.11),
+      deep: mk(sd * 1.5, 0.08, -0.22),
+      line: mk(sd * 2, 0.1, -0.4),
+    };
+  }
+
+  class PixelBuffer {
+    constructor(w, h) {
+      this.w = w; this.h = h;
+      this.data = new Uint8ClampedArray(w * h * 4);
+      this._s = null; this._a = null;
+    }
+    clear() { this.data.fill(0); return this; }
+    alpha(x, y) { return x < 0 || y < 0 || x >= this.w || y >= this.h ? 0 : this.data[(y * this.w + x) * 4 + 3]; }
+    set(x, y, c) {
+      x = Math.floor(x); y = Math.floor(y);
+      if (x < 0 || y < 0 || x >= this.w || y >= this.h) return;
+      const col = rgba(c), d = this.data, i = (y * this.w + x) * 4, a = col[3];
+      if (a === 255 || d[i + 3] === 0) { d[i] = col[0]; d[i + 1] = col[1]; d[i + 2] = col[2]; d[i + 3] = a; return; }
+      const fa = a / 255, da = d[i + 3] / 255, oa = fa + da * (1 - fa);
+      d[i] = (col[0] * fa + d[i] * da * (1 - fa)) / oa;
+      d[i + 1] = (col[1] * fa + d[i + 1] * da * (1 - fa)) / oa;
+      d[i + 2] = (col[2] * fa + d[i + 2] * da * (1 - fa)) / oa;
+      d[i + 3] = oa * 255;
+    }
+    rect(x, y, w, h, c) {
+      x = Math.round(x); y = Math.round(y);
+      for (let j = 0; j < h; j++) for (let i = 0; i < w; i++) this.set(x + i, y + j, c);
+    }
+    line(x0, y0, x1, y1, c) {
+      x0 = Math.round(x0); y0 = Math.round(y0); x1 = Math.round(x1); y1 = Math.round(y1);
+      const dx = Math.abs(x1 - x0), dy = -Math.abs(y1 - y0), sx = x0 < x1 ? 1 : -1, sy = y0 < y1 ? 1 : -1;
+      let err = dx + dy;
+      for (;;) {
+        this.set(x0, y0, c);
+        if (x0 === x1 && y0 === y1) break;
+        const e2 = 2 * err;
+        if (e2 >= dy) { err += dy; x0 += sx; }
+        if (e2 <= dx) { err += dx; y0 += sy; }
       }
-    </style>
-    <script type="module" crossorigin src="./assets/index-7f5Dmdh-.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-Kl0hx_O3.css">
-  </head>
-  <body class="font-sans antialiased overflow-x-hidden transition-colors duration-300">
-    <div id="root"></div>
-  </body>
+    }
+    ellipse(cx, cy, rx, ry, c, rot = 0) {
+      if (rx <= 0.01 || ry <= 0.01) return;
+      const cs = Math.cos(rot), sn = Math.sin(rot), m = Math.ceil(Math.max(rx, ry)) + 1;
+      for (let y = Math.floor(cy - m); y <= Math.ceil(cy + m); y++) {
+        for (let x = Math.floor(cx - m); x <= Math.ceil(cx + m); x++) {
+          const dx = x + 0.5 - cx, dy = y + 0.5 - cy;
+          const u = (dx * cs + dy * sn) / rx, v = (-dx * sn + dy * cs) / ry;
+          if (u * u + v * v <= 1) this.set(x, y, c);
+        }
+      }
+    }
+    sphere(cx, cy, rx, ry, pal, o, rot = 0) {
+      o = o || {};
+      if (rx <= 0.01 || ry <= 0.01) return;
+      const L = o.light || [-0.42, -0.62, 0.66], T = o.t || [0.1, 0.55, 0.9];
+      const cs = Math.cos(rot), sn = Math.sin(rot), m = Math.ceil(Math.max(rx, ry)) + 1;
+      for (let y = Math.floor(cy - m); y <= Math.ceil(cy + m); y++) {
+        for (let x = Math.floor(cx - m); x <= Math.ceil(cx + m); x++) {
+          const dx = x + 0.5 - cx, dy = y + 0.5 - cy;
+          const u = (dx * cs + dy * sn) / rx, v = (-dx * sn + dy * cs) / ry, r2 = u * u + v * v;
+          if (r2 > 1) continue;
+          const nz = Math.sqrt(1 - r2), nx = u * cs - v * sn, ny = u * sn + v * cs;
+          const i = nx * L[0] + ny * L[1] + nz * L[2];
+          const col = i < T[0] ? pal.shade : i < T[1] ? pal.base : (i < T[2] || o.hi === false) ? pal.light : pal.hi;
+          this.set(x, y, col);
+        }
+      }
+    }
+    tri(ax, ay, bx, by, cx, cy, c) {
+      const area = (bx - ax) * (cy - ay) - (by - ay) * (cx - ax);
+      if (!area) return;
+      const x0 = Math.floor(Math.min(ax, bx, cx)), x1 = Math.ceil(Math.max(ax, bx, cx));
+      const y0 = Math.floor(Math.min(ay, by, cy)), y1 = Math.ceil(Math.max(ay, by, cy));
+      for (let y = y0; y <= y1; y++) {
+        for (let x = x0; x <= x1; x++) {
+          const px = x + 0.5, py = y + 0.5;
+          const w0 = ((bx - px) * (cy - py) - (by - py) * (cx - px)) / area;
+          const w1 = ((cx - px) * (ay - py) - (cy - py) * (ax - px)) / area;
+          if (w0 >= 0 && w1 >= 0 && w0 + w1 <= 1) this.set(x, y, c);
+        }
+      }
+    }
+    outline(c, diag) {
+      const w = this.w, h = this.h, d = this.data, hits = [];
+      for (let y = 0; y < h; y++) {
+        for (let x = 0; x < w; x++) {
+          if (d[(y * w + x) * 4 + 3] !== 0) continue;
+          if (this.alpha(x - 1, y) || this.alpha(x + 1, y) || this.alpha(x, y - 1) || this.alpha(x, y + 1) ||
+            (diag && (this.alpha(x - 1, y - 1) || this.alpha(x + 1, y - 1) || this.alpha(x - 1, y + 1) || this.alpha(x + 1, y + 1)))) hits.push(x, y);
+        }
+      }
+      for (let i = 0; i < hits.length; i += 2) this.set(hits[i], hits[i + 1], c);
+    }
+    blit(src, atop) {
+      const s = src.data, d = this.data;
+      for (let i = 0; i < s.length; i += 4) {
+        const a = s[i + 3];
+        if (!a) continue;
+        if (atop && !d[i + 3]) continue;
+        if (a === 255) { d[i] = s[i]; d[i + 1] = s[i + 1]; d[i + 2] = s[i + 2]; d[i + 3] = 255; }
+        else { const p = i >> 2; this.set(p % this.w, (p / this.w) | 0, [s[i], s[i + 1], s[i + 2], a]); }
+      }
+    }
+    part(fn, outline) {
+      const s = this._s || (this._s = new PixelBuffer(this.w, this.h));
+      s.clear(); fn(s);
+      if (outline) s.outline(outline);
+      this.blit(s);
+    }
+    atop(fn) {
+      const s = this._a || (this._a = new PixelBuffer(this.w, this.h));
+      s.clear(); fn(s);
+      this.blit(s, true);
+    }
+  }
+
+  class Rig {
+    constructor(buf, px, py, t) {
+      t = t || {};
+      this.b = buf; this.t = buf; this.px = px; this.py = py;
+      this.sx = t.sx == null ? 1 : t.sx;
+      this.sy = t.sy == null ? 1 : t.sy;
+      this.ox = t.ox || 0; this.oy = t.oy || 0;
+      this.ax = Math.max(0.05, Math.abs(this.sx));
+      this.cx = Math.floor(px) + Math.round(this.ox);
+    }
+    X(x) { return this.px + this.ox + x * this.sx; }
+    Y(y) { return this.py + this.oy + y * this.sy; }
+    ell(cx, cy, rx, ry, c, rot) { this.t.ellipse(this.X(cx), this.Y(cy), rx * this.ax, ry * this.sy, c, (rot || 0) * (this.sx < 0 ? -1 : 1)); }
+    ball(cx, cy, rx, ry, pal, o, rot) { this.t.sphere(this.X(cx), this.Y(cy), rx * this.ax, ry * this.sy, pal, o, (rot || 0) * (this.sx < 0 ? -1 : 1)); }
+    tri(ax, ay, bx, by, cx, cy, c) { this.t.tri(this.X(ax), this.Y(ay), this.X(bx), this.Y(by), this.X(cx), this.Y(cy), c); }
+    rect(dx, y, w, h, c) {
+      const y0 = Math.round(this.Y(y)), y1 = Math.round(this.Y(y + h));
+      this.t.rect(this.cx + Math.round(dx * this.sx), y0, Math.max(1, Math.round(w * this.ax)), Math.max(1, y1 - y0), c);
+    }
+    dot(dx, y, c) { this.t.set(this.cx + Math.round(dx * this.sx), Math.round(this.Y(y)), c); }
+    part(outline, fn) { const prev = this.t; prev.part((s) => { this.t = s; fn(); }, outline); this.t = prev; }
+    atop(fn) { const prev = this.t; prev.atop((s) => { this.t = s; fn(); }); this.t = prev; }
+  }
+
+  return { PixelBuffer, Rig, rgba, ramp, clamp };
+})();
+
+/* ───────────────────────── PETS RUNTIME ───────────────────────── */
+const Pets = (function (Pixel) {
+  'use strict';
+  const { Rig, ramp } = Pixel;
+  const BUF = 64, CX = 32, FEET = 56;
+  const EYE = '#2b1b33', HL = '#ffffff', TONGUE = '#ff7d97', MOUTH_IN = '#5b2437';
+
+  const DEFAULTS = {
+    t: 0, ox: 0, oy: 0, sx: 1, sy: 1,
+    lookX: 0, lookY: 0, eyes: 'open', mouth: 'smile',
+    blink: 0, blush: 0.3, step: 0, walking: 0,
+    sleepy: 0, held: 0, swing: 0, flap: 0, ear: 0, gill: 0,
+    tail: 0, back: false,
+  };
+
+  const PAT = {
+    happy: [[-2, 0], [-1, -1], [0, -1], [1, -1], [2, 0]],
+    sleep: [[-2, -1], [-1, 0], [0, 0], [1, 0], [2, -1]],
+    blink: [[-2, 0], [-1, 0], [0, 0], [1, 0], [2, 0]],
+    dizzy: [[-2, -2], [-1, -1], [0, 0], [1, 1], [2, 2], [2, -2], [1, -1], [-1, 1], [-2, 2]],
+    gt: [[-2, -2], [-1, -1], [0, 0], [-1, 1], [-2, 2]],
+    lt: [[2, -2], [1, -1], [0, 0], [1, 1], [2, 2]],
+    heart: [[-1, -2], [1, -2], [-2, -1], [-1, -1], [0, -1], [1, -1], [2, -1], [-2, 0], [-1, 0], [0, 0], [1, 0], [2, 0], [-1, 1], [0, 1], [1, 1], [0, 2]],
+  };
+  const dots = (b, pts, x, y, c) => { for (const p of pts) b.set(x + p[0], y + p[1], c); };
+
+  function drawEye(b, s, ex, ey, side, o) {
+    o = o || {};
+    const col = o.col || EYE;
+    let kind = s.eyes;
+    if (s.blink > 0.55 && (kind === 'open' || kind === 'wide' || kind === 'sad' || kind === 'sleepy')) kind = 'blink';
+    switch (kind) {
+      case 'happy': return dots(b, PAT.happy, ex, ey, col);
+      case 'sleep': return dots(b, PAT.sleep, ex, ey, col);
+      case 'blink': return dots(b, PAT.blink, ex, ey, col);
+      case 'dizzy': return dots(b, PAT.dizzy, ex, ey, col);
+      case 'squint': return dots(b, side < 0 ? PAT.gt : PAT.lt, ex, ey, col);
+      case 'love': dots(b, PAT.heart, ex, ey, '#ff4f7d'); b.set(ex - 1, ey - 1, '#ffc7d6'); return;
+      default: break;
+    }
+    let rx = o.rx || 2.5, ry = o.ry || 3, cy = ey;
+    if (kind === 'wide') { rx += 1.1; ry += 0.8; }
+    if (kind === 'sleepy') { ry = 2; cy = ey + 1; }
+    b.ellipse(ex + 0.5, cy, rx, ry, col);
+    const top = Math.ceil(cy - ry - 0.5), bot = Math.floor(cy + ry - 0.5);
+    if (kind === 'sleepy') b.set(ex - 1, top + 1, HL);
+    else { b.rect(ex - 1, top + 1, 2, 2, HL); b.set(ex + 1, bot - 1, HL); }
+    if (kind === 'sad') { b.set(ex + side * 2, bot + 1, '#8fd8ff'); b.set(ex + side * 2, bot + 2, '#8fd8ff'); }
+  }
+
+  function blush(b, s, x, y) {
+    if (s.blush < 0.15) return;
+    b.ellipse(x + 0.5, y, 1.7, 1.05, [255, 120, 150, Math.round(80 + s.blush * 150)]);
+  }
+
+  /* ─────── MOCHI · cat ─────── */
+  const CAT = { body: ramp('#f6a55f'), cream: ramp('#fff1da'), ear: '#ff9fb3', nose: '#f4708a' };
+
+  function catMouth(b, kind, x, y) {
+    switch (kind) {
+      case 'open': b.rect(x - 1, y, 3, 3, MOUTH_IN); b.set(x, y + 2, TONGUE); break;
+      case 'o': b.ellipse(x + 0.5, y + 1.5, 1.3, 1.3, MOUTH_IN); break;
+      case 'yawn': b.ellipse(x + 0.5, y + 2, 2.6, 3, MOUTH_IN); b.rect(x - 1, y + 3, 3, 1, TONGUE); break;
+      case 'flat': b.rect(x - 1, y, 3, 1, EYE); break;
+      case 'frown': dots(b, [[-2, 1], [-1, 0], [0, 0], [1, 0], [2, 1]], x, y, EYE); break;
+      case 'sleep': b.set(x, y, EYE); break;
+      case 'tongue': dots(b, [[-2, 0], [0, 0], [2, 0], [-1, 1], [1, 1]], x, y, EYE); b.set(x, y + 2, TONGUE); break;
+      default: dots(b, [[-2, 0], [0, 0], [2, 0], [-1, 1], [1, 1]], x, y, EYE);
+    }
+  }
+
+  function drawCat(r, s) {
+    const b = r.b, P = CAT, line = P.body.line;
+    const fxl = Math.round(s.lookX * 2.4), fyl = Math.round(s.lookY * 1.4);
+    const hy = -21 + s.sleepy * 3.5;
+    const ax = r.cx + fxl, ay = Math.round(r.Y(hy)) + fyl;
+    const lift = (sd) => (s.walking ? Math.max(0, sd * Math.sin(s.step)) * 2.4 : 0);
+
+    r.part(line, () => {
+      for (let i = 0; i <= 9; i++) {
+        const u = i / 9;
+        const x = 6.5 + 10.8 * Math.sin(u * 1.3) + Math.sin(s.tail + u * 2.6) * 2.6 * u + s.swing * 2.6 * u;
+        const y = -4.5 - 15.5 * u + s.held * 1.2 * u;
+        const rad = 2.9 - 1.1 * u;
+        r.ell(x, y, rad, rad, u > 0.84 ? P.cream.base : (i === 3 || i === 6 ? P.body.shade : P.body.base));
+      }
+    });
+
+    r.part(line, () => {
+      r.ball(0, -9.2, 9.8, 8.8, P.body);
+      r.atop(() => {
+        r.ball(0, -7.0, 5.9, 6.6, P.cream, { hi: false });
+        r.rect(-10, -12, 3, 1, P.body.deep); r.rect(8, -12, 3, 1, P.body.deep);
+        r.rect(-10, -9, 2, 1, P.body.deep); r.rect(9, -9, 2, 1, P.body.deep);
+      });
+    });
+
+    r.part(line, () => {
+      for (const sd of [-1, 1]) {
+        r.ball(sd * 4.7 + s.swing * s.held * 1.5, -2 - lift(sd) + s.held * 1.8, 3.5, 2.3, P.cream, { hi: false });
+      }
+    });
+    if (!s.walking) for (const sd of [-1, 1]) r.dot(sd * 5, -1.4 + s.held * 1.8, line);
+
+    r.part(line, () => {
+      for (const sd of [-1, 1]) {
+        const tw = sd < 0 ? Math.max(0, s.ear) : Math.max(0, -s.ear);
+        const tx = sd * (11.4 + s.sleepy * 1.4) + fxl * 0.5, ty = hy - 16.2 + s.sleepy * 3.2 + tw * 2.4;
+        r.tri(sd * 12.9, hy - 3.2, sd * 3.6, hy - 10.4, tx, ty, P.body.base);
+        r.tri(sd * 10.7, hy - 5.8, sd * 6.0, hy - 9.6, tx - sd * 0.6, ty + 3.4, P.ear);
+      }
+      r.ball(0, hy, 13, 11, P.body);
+      r.atop(() => {
+        r.ball(fxl, hy + 4.8, 5.6, 3.7, P.cream, { hi: false });
+        r.rect(fxl - 3, hy - 10.4, 1, 3, P.body.deep); r.rect(fxl, hy - 10.8, 1, 4, P.body.deep); r.rect(fxl + 3, hy - 10.4, 1, 3, P.body.deep);
+        r.rect(-12 + fxl, hy - 1, 3, 1, P.body.deep); r.rect(-12 + fxl, hy + 1, 2, 1, P.body.deep);
+        r.rect(10 + fxl, hy - 1, 3, 1, P.body.deep); r.rect(11 + fxl, hy + 1, 2, 1, P.body.deep);
+      });
+    });
+
+    if (s.back) return;
+    drawEye(b, s, ax - 6, ay + 1, -1); drawEye(b, s, ax + 6, ay + 1, 1);
+    blush(b, s, ax - 9, ay + 4); blush(b, s, ax + 9, ay + 4);
+    b.rect(ax - 1, ay + 3, 3, 1, P.nose); b.set(ax, ay + 4, P.nose);
+    catMouth(b, s.mouth, ax, ay + 5);
+    for (const sd of [-1, 1]) {
+      b.set(ax + sd * 14, ay + 4, line); b.set(ax + sd * 15, ay + 3, line);
+      b.set(ax + sd * 14, ay + 6, line); b.set(ax + sd * 15, ay + 7, line);
+    }
+  }
+
+  /* ─────── WADDLE · penguin ─────── */
+  const PEN = { body: ramp('#46539e'), belly: ramp('#f6f8ff'), orange: ramp('#ffab35'), line: '#161b45' };
+
+  function drawPenguin(r, s) {
+    const b = r.b, P = PEN, line = P.line;
+    const fxl = Math.round(s.lookX * 2.2), fyl = Math.round(s.lookY * 1.3);
+    const hy = -22 + s.sleepy * 2.5;
+    const ax = r.cx + fxl, ay = Math.round(r.Y(hy)) + fyl;
+    const lift = (sd) => (s.walking ? Math.max(0, sd * Math.sin(s.step)) * 2.2 : 0);
+    const W = P.belly.base;
+
+    r.part(line, () => {
+      r.tri(-2.6, -27.5, 0.4 + s.swing, -33.5, 2.8, -27.5, P.body.base);
+      r.ball(0, -14.8, 12.6, 14.8, P.body);
+      r.atop(() => {
+        r.ball(0, -8.0, 8.3, 7.7, P.belly, { hi: false });
+        r.ell(fxl - 6, hy, 4.7, 5.1, W); r.ell(fxl + 6, hy, 4.7, 5.1, W); r.ell(fxl, hy + 1.2, 3.4, 3.2, W);
+      });
+    });
+
+    r.part(line, () => {
+      const fl = Math.max(s.flap, s.held * 0.55);
+      for (const sd of [-1, 1]) {
+        r.ball(sd * (12.8 + fl * 2.4), -13 - fl * 5, 2.9, 6.9, P.body, { hi: false }, -sd * (0.26 + fl * 0.95 + Math.abs(s.swing) * 0.2));
+      }
+    });
+
+    r.part(line, () => {
+      for (const sd of [-1, 1]) r.ball(sd * 5.3, -1.5 - lift(sd) + s.held * 1.5, 4.4, 2.1, P.orange, { hi: false });
+    });
+
+    if (s.back) return;
+    const px = Math.round(s.lookX * 1.5), py = Math.round(s.lookY * 1.2);
+    drawEye(b, s, ax - 6 + px, ay + py, -1); drawEye(b, s, ax + 6 + px, ay + py, 1);
+    blush(b, s, ax - 10, ay + 4); blush(b, s, ax + 10, ay + 4);
+    const by = ay + 5, o = P.orange;
+    if (s.mouth === 'open' || s.mouth === 'o' || s.mouth === 'yawn') {
+      const g = s.mouth === 'yawn' ? 3 : (s.mouth === 'o' ? 1 : 2);
+      b.ellipse(ax + 0.5, by + 1, 3.5, 1.3, MOUTH_IN);
+      b.ellipse(ax + 0.5, by - 0.2, 3.4, 1.3, o.light);
+      b.ellipse(ax + 0.5, by + 1 + g, 2.8, 1.1, o.base);
+      if (g > 1) b.rect(ax - 1, by + 2, 3, 1, TONGUE);
+    } else {
+      b.ellipse(ax + 0.5, by + 0.5, 3.6, 1.5, o.base);
+      b.rect(ax - 2, by - 1, 5, 1, o.light);
+      b.rect(ax - 3, by + 1, 7, 1, o.shade);
+    }
+  }
+
+  /* ─────── AXO · axolotl ─────── */
+  const AXO = { body: ramp('#ffb4c9'), belly: ramp('#ffe6ee'), gill: ramp('#ff6f9f'), tip: '#ff4a86', line: '#8e3a63' };
+
+  function axoMouth(b, kind, x, y) {
+    const M = '#a43b65';
+    switch (kind) {
+      case 'open': b.ellipse(x + 0.5, y + 1, 3.6, 2.4, M); b.rect(x - 1, y + 2, 3, 1, TONGUE); break;
+      case 'o': b.ellipse(x + 0.5, y + 1, 1.6, 1.6, M); break;
+      case 'yawn': b.ellipse(x + 0.5, y + 1.5, 4.2, 3.2, M); b.rect(x - 2, y + 3, 5, 1, TONGUE); break;
+      case 'flat': b.rect(x - 2, y, 5, 1, M); break;
+      case 'frown': dots(b, [[-3, 1], [-2, 0], [-1, 0], [0, 0], [1, 0], [2, 0], [3, 1]], x, y, M); break;
+      case 'sleep': b.rect(x - 2, y, 5, 1, M); break;
+      case 'tongue': b.rect(x - 3, y, 7, 1, M); b.set(x - 4, y - 1, M); b.set(x + 4, y - 1, M); b.rect(x, y + 1, 2, 2, TONGUE); break;
+      default: b.rect(x - 3, y, 7, 1, M); b.set(x - 4, y - 1, M); b.set(x + 4, y - 1, M);
+    }
+  }
+
+  function drawAxo(r, s) {
+    const b = r.b, P = AXO, line = P.line;
+    const fxl = Math.round(s.lookX * 2.6), fyl = Math.round(s.lookY * 1.4);
+    const hy = -12.2 + s.sleepy * 2.2;
+    const ax = r.cx + fxl, ay = Math.round(r.Y(hy)) + fyl;
+    const lift = (sd) => (s.walking ? Math.max(0, sd * Math.sin(s.step)) * 2.2 : 0);
+
+    for (const sd of [-1, 1]) r.part(P.gill.deep, () => {
+      const stalks = [[-17.5, -0.8, -0.6, 8.5], [-13.8, -0.97, -0.2, 9.4], [-10.2, -0.85, 0.5, 7.8]];
+      stalks.forEach((st, k) => {
+        for (let j = 0; j <= 6; j++) {
+          const u = j / 6;
+          const wig = Math.sin(s.t * 3 + k * 1.7 + u * 3 + (sd > 0 ? 1.3 : 0)) * (0.7 + s.gill * 1.8 + Math.abs(s.swing)) * u;
+          const x = sd * (12.4 - st[1] * st[3] * u), y = st[0] + st[2] * st[3] * u + wig;
+          r.ell(x, y, j === 6 ? 2.1 : 1.9 - u * 0.4, j === 6 ? 2.1 : 1.9 - u * 0.4, j === 6 ? P.tip : P.gill.base);
+        }
+      });
+    });
+
+    r.part(line, () => {
+      for (let i = 0; i <= 6; i++) {
+        const u = i / 6;
+        r.ell(9.5 + 10 * u, -4.5 - 2.5 * u + Math.sin(s.tail + u * 2.4) * 1.8 * u + s.swing * 2 * u, 3.3 - 1.7 * u, 3.1 - 1.8 * u, i > 3 ? P.gill.light : P.body.base);
+      }
+    });
+
+    r.part(line, () => {
+      r.ball(0, -11.4, 14.6, 11.2, P.body);
+      r.atop(() => {
+        r.ball(0, -5.2, 10.6, 5.4, P.belly, { hi: false });
+        for (const [fx, fy] of [[-7, -17], [-4, -19], [6, -18], [9, -15], [-10, -14]]) r.dot(fx, fy, P.body.shade);
+      });
+    });
+
+    r.part(line, () => {
+      for (const sd of [-1, 1]) r.ball(sd * 9.8 + s.swing * s.held * 1.5, -1.9 - lift(sd) + s.held * 1.8, 3.8, 2.3, P.body, { hi: false });
+    });
+    for (const sd of [-1, 1]) { r.dot(sd * 9, -1.2 - lift(sd) + s.held * 1.8, P.body.deep); r.dot(sd * 11, -1.2 - lift(sd) + s.held * 1.8, P.body.deep); }
+
+    if (s.back) return;
+    drawEye(b, s, ax - 9, ay - 1, -1, { ry: 2.6 }); drawEye(b, s, ax + 9, ay - 1, 1, { ry: 2.6 });
+    blush(b, s, ax - 12, ay + 2); blush(b, s, ax + 12, ay + 2);
+    axoMouth(b, s.mouth, ax, ay + 4);
+  }
+
+  const PETS = {
+    mochi: { id: 'mochi', name: 'Mochi', species: 'Cat', accent: '#f6a55f', draw: drawCat, shadowW: 11, treat: 'fish' },
+    waddle: { id: 'waddle', name: 'Waddle', species: 'Penguin', accent: '#7f8cff', draw: drawPenguin, shadowW: 11, treat: 'fish' },
+    axo: { id: 'axo', name: 'Axo', species: 'Axolotl', accent: '#ff7aa8', draw: drawAxo, shadowW: 14, treat: 'shrimp' },
+  };
+
+  function render(buf, id, state) {
+    const pet = PETS[id] || PETS.mochi;
+    const s = Object.assign({}, DEFAULTS, state);
+    buf.clear();
+    const air = Math.max(0, -s.oy), k = Math.max(0.5, 1 - air / 24) * (s.held ? 0.8 : 1);
+    buf.ellipse(CX + 0.5, FEET + 0.5, pet.shadowW * k * Math.max(0.6, Math.abs(s.sx)), 2.4 * k, '#2a1b4d55');
+    pet.draw(new Rig(buf, CX + 0.5, FEET, { sx: s.sx, sy: s.sy, ox: s.ox, oy: s.oy }), s);
+    return buf;
+  }
+
+  return { BUF, CX, FEET, PETS, render, DEFAULTS };
+})(Pixel);
+
+/* ───────────────────────── SCENES ENGINE (Actual Habitats) ───────────────────────── */
+const Scenes = (function () {
+  'use strict';
+  const W = 80, H = 72, PET_X = 8, PET_Y = 8;
+
+  function mochi(b, t) {
+    b.rect(0, 0, W, 54, '#ffe6c7');
+    for (let x = 0; x < W; x += 10) b.rect(x, 0, 2, 54, '#ffdcb4');
+    b.rect(0, 50, W, 4, '#f1c796'); b.rect(0, 54, W, 1, '#c99359');
+    b.rect(0, 55, W, H - 55, '#e0a569');
+    for (let y = 61; y < H; y += 6) b.rect(0, y, W, 1, '#c98f56');
+    for (let r = 0; r < 3; r++) for (let x = (r % 2) * 10 + 4; x < W; x += 20) b.rect(x, 55 + r * 6, 1, 6, '#c98f56');
+    b.rect(5, 5, 26, 26, '#fff7e8'); b.rect(7, 7, 22, 22, '#bfe4ff');
+    b.rect(17, 7, 2, 22, '#fff7e8'); b.rect(7, 17, 22, 2, '#fff7e8');
+    b.rect(9, 9, 6, 3, '#e6f5ff'); b.rect(21, 21, 6, 3, '#9fd0f5');
+    b.tri(12, 56, 40, 56, 24, H, [255, 242, 190, 55]);
+    if (Math.floor(t * 1.6) % 2) { b.set(11, 10, '#ffffff'); b.set(26, 25, '#ffffff'); }
+    b.ellipse(40, 66, 31, 5.6, '#f27c95'); b.ellipse(40, 66, 27, 4.4, '#ffa7b9'); b.ellipse(40, 66, 16, 2.6, '#f27c95');
+    b.part((s) => { s.ellipse(67, 63, 4.2, 4, '#ff6b81'); s.set(64, 61, '#ffa5b4'); s.line(63, 64, 71, 62, '#d9475f'); s.line(64, 66, 70, 60, '#d9475f'); }, '#9c2a42');
+    b.rect(46, 14, 14, 11, '#b9824f'); b.rect(47, 15, 12, 9, '#ffe0e8'); b.set(53, 19, '#ff7ba0'); b.set(52, 18, '#ff7ba0'); b.set(54, 18, '#ff7ba0'); b.set(53, 20, '#ff7ba0');
+  }
+
+  function waddle(b, t) {
+    ['#8fb8ff', '#a2c3ff', '#b7d1ff', '#cde0ff', '#e0ecff', '#eff6ff'].forEach((c, i) => b.rect(0, i * 9, W, 9, c));
+    b.tri(-8, 54, 14, 26, 36, 54, '#c9d8fb'); b.tri(18, 54, 46, 20, 74, 54, '#bccdf8'); b.tri(52, 54, 72, 30, 92, 54, '#c9d8fb');
+    b.tri(40, 28, 46, 20, 52, 28, '#f4f8ff'); b.tri(9, 33, 14, 26, 19, 33, '#f4f8ff');
+    b.rect(0, 54, W, H - 54, '#f7fbff'); b.rect(0, 54, W, 1, '#ffffff');
+    for (let x = 3; x < W; x += 13) b.rect(x, 62 + ((x / 13) % 2) * 4, 7, 1, '#dbe7ff');
+    b.ellipse(40, 66, 30, 4, '#e6efff');
+    b.part((s) => { s.rect(3, 55, 11, 9, '#bfe6ff'); s.rect(4, 56, 3, 2, '#f1fbff'); s.rect(10, 61, 3, 2, '#98d0f0'); }, '#5f9ccc');
+    b.part((s) => { s.ellipse(63, 64, 3.2, 2, '#aab2d6'); s.ellipse(69, 66, 2.6, 1.6, '#9aa3c9'); s.ellipse(59, 67, 2, 1.3, '#b8c0e0'); }, '#5d6591');
+    for (let i = 0; i < 18; i++) {
+      const x = ((i * 29) % 80) + Math.sin(t * 0.9 + i) * 2, y = ((i * 17) % 72 + t * (5 + (i % 3) * 3)) % 72;
+      b.set(x, y, i % 4 === 0 ? '#ffffff' : [255, 255, 255, 190]);
+      if (i % 5 === 0) b.set(x + 1, y, '#ffffff');
+    }
+  }
+
+  function axo(b, t) {
+    ['#d5f6f0', '#c2f0ea', '#aee9e4', '#99e0e0', '#85d5d9', '#72c9d3', '#62bccb', '#55aec3'].forEach((c, i) => b.rect(0, i * 9, W, 9, c));
+    for (let i = 0; i < 4; i++) { const x0 = 6 + i * 20 + Math.sin(t * 0.5 + i) * 3; b.tri(x0, 0, x0 + 8, 0, x0 + 24, 58, [255, 255, 255, 30]); }
+    b.rect(0, 59, W, H - 59, '#f3e0b8'); b.rect(0, 59, W, 1, '#fff3d6');
+    for (let x = 2; x < W; x += 7) b.set(x + (x % 3), 63 + (x % 4) * 2, '#d9c18c');
+    b.part((s) => { s.ellipse(8, 60, 6.5, 3.6, '#8fa0ba'); s.ellipse(16, 62, 4, 2.4, '#7d8ea8'); s.set(6, 58, '#b9c5da'); s.set(7, 58, '#b9c5da'); }, '#4b5873');
+    for (let bi = 0; bi < 3; bi++) {
+      const bx = 65 + bi * 5;
+      for (let j = 0; j <= 15 - bi * 2; j++) {
+        const x = Math.round(bx + Math.sin(t * 1.6 + j * 0.45 + bi) * (j * 0.16));
+        b.set(x, 59 - j, '#3fba7f'); b.set(x + 1, 59 - j, '#2c9a66');
+      }
+    }
+    for (let i = 0; i < 7; i++) {
+      const x = 10 + i * 10 + Math.sin(t + i * 1.7) * 2, y = 70 - ((t * 7 + i * 13) % 68), r = 1.2 + (i % 3) * 0.55;
+      b.part((s) => s.ellipse(x, y, r, r, [255, 255, 255, 110]), '#9fe9ee'); b.set(x - 0.5, y - 0.5, '#ffffff');
+    }
+  }
+
+  const SCENES = { mochi, waddle, axo };
+  function draw(buf, id, t) { buf.clear(); (SCENES[id] || mochi)(buf, t || 0); }
+  return { W, H, PET_X, PET_Y, draw };
+})();
+
+/* ───────────────────────── MAIN SITE INTERACTION LOGIC ───────────────────────── */
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)], rnd = (a, b) => a + Math.random() * (b - a);
+const D = {
+  mochi: {
+    n: 'Mochi', sp: 'Tabby cat', c: '#f6a55f', f: 540, w: 'triangle', k: 'm', t: 'fish', tn: 'Fish',
+    tags: ['Cuddly', 'Curious', 'Loaf-prone'],
+    bio: 'Warm, curious and always up for a long nap in a sunbeam. Loves fish treats, ear scritches and sitting quietly while you work.',
+    m: ['Welcome! Your spot is warm and I kept an eye on it.', 'I just imagined a perfect nap.', 'You are the best human alive. Just saying.', 'Purr purr purr...', 'Scritches accepted!']
+  },
+  waddle: {
+    n: 'Waddle', sp: 'Penguin', c: '#7f8cff', f: 430, w: 'triangle', k: 's', t: 'fish', tn: 'Fish',
+    tags: ['Cheerful', 'Loyal', 'Slidey'],
+    bio: 'Dressed in his finest tuxedo, Waddle brings endless optimism, little pebble gifts and happy sliding dances to your desktop.',
+    m: ['Look! I found you a pebble!', 'Today is going to be great. I can feel it.', 'Want to slide with me?', 'You can do it. Tiny waddle, big dreams!', 'Brrr... I mean, hello!']
+  },
+  axo: {
+    n: 'Axo', sp: 'Axolotl', c: '#ff7aa8', f: 690, w: 'sine', k: 'b', t: 'shrimp', tn: 'Shrimp',
+    tags: ['Gentle', 'Smiley', 'Wiggly'],
+    bio: 'A forever-smiling water dragon who never stopped smiling. Axo loves shrimp, blowing bubbles and reminding you to drink water.',
+    m: ['Remember to drink some water!', 'Blub blub! Hi hi hi!', 'I am smiling because of you.', 'Bubbles for you!', 'Stretch time? Stretch time!']
+  }
+};
+const KEYS = Object.keys(D);
+let mx = innerWidth * 0.6, my = 300;
+addEventListener('pointermove', e => { mx = e.clientX; my = e.clientY; });
+
+/* Pixel Sprite Icons */
+const M = {
+  heart: ['.XX.XX.', 'XXXXXXX', 'XXXXXXX', '.XXXXX.', '..XXX..', '...X...'],
+  star: ['...X...', '...X...', 'XXXXXXX', '.XXXXX.', '..XXX..', '.XX.XX.', '.X...X.'],
+  note: ['..XXXX', '..X..X', '..X..X', 'XXX.XX', 'XXX.XX'],
+  fish: ['...XX....X', '.XXXXXX.XX', 'XXXXXXXXXX', '.XXXXXX.XX', '...XX....X'],
+  shrimp: ['..XXXX.', '.XXXXXX', 'XXXX..X', '.XXXXX.', '..XX...'],
+  cloud: ['....XXXX....', '..XXXXXXXX..', '.XXXXXXXXXXX', 'XXXXXXXXXXXXX']
+};
+
+function spx(k, col, u) {
+  const e = document.createElement('i'); e.className = 'sp'; const s = [];
+  M[k].forEach((r, y) => [...r].forEach((c, x) => c === 'X' && s.push(`${x * u}px ${y * u}px 0 ${col}`)));
+  e.style.cssText = `width:${u}px;height:${u}px;box-shadow:${s.join(',')};margin:${-M[k].length * u / 2}px 0 0 ${-M[k][0].length * u / 2}px`;
+  return e;
+}
+
+/* Sound synthesis (WebAudio, completely asset-free) */
+let AC = null;
+function beep(f, t = 'triangle', d = 0.12, s = 1.5) {
+  try {
+    const C = window.AudioContext || window.webkitAudioContext;
+    if (!C) return;
+    AC = AC || new C();
+    if (AC.state === 'suspended') AC.resume().catch(() => {});
+    const o = AC.createOscillator(), g = AC.createGain(), n = AC.currentTime;
+    o.type = t;
+    o.frequency.setValueAtTime(f, n);
+    o.frequency.exponentialRampToValueAtTime(f * s, n + d);
+    g.gain.setValueAtTime(0.08, n);
+    g.gain.exponentialRampToValueAtTime(0.001, n + d);
+    o.connect(g); g.connect(AC.destination);
+    o.start(); o.stop(n + d);
+  } catch (err) {}
+}
+
+function burst(el, k, col, n = 6) {
+  const r = el.getBoundingClientRect();
+  for (let i = 0; i < n; i++) {
+    const e = spx(k, col, 4);
+    e.style.position = 'fixed'; e.style.zIndex = '60';
+    e.style.left = r.left + r.width / 2 + rnd(-0.3, 0.3) * r.width + 'px';
+    e.style.top = r.top + r.height * 0.3 + 'px';
+    document.body.append(e);
+    gsap.to(e, {
+      x: rnd(-60, 60), y: rnd(-150, -80), rotation: rnd(-30, 30),
+      opacity: 0, duration: 1.2, delay: i * 0.05, ease: 'power1.out',
+      onComplete: () => e.remove()
+    });
+  }
+}
+
+function zed(el) {
+  const r = el.getBoundingClientRect(), z = document.createElement('i');
+  z.className = 'z'; z.textContent = 'Z';
+  z.style.cssText = `left:${r.left + r.width * 0.7}px;top:${r.top + r.height * 0.1}px;font-size:${14 + rnd(0, 10)}px`;
+  document.body.append(z);
+  gsap.to(z, { x: rnd(10, 40), y: -90, opacity: 0, duration: 2, ease: 'none', onComplete: () => z.remove() });
+}
+
+function say(p, t) {
+  if (!p.b) return;
+  p.b.textContent = t;
+  gsap.killTweensOf(p.b);
+  gsap.fromTo(p.b, { opacity: 0, y: 10, scale: 0.8 }, { opacity: 1, y: 0, scale: 1, duration: 0.3, ease: 'back.out(3)' });
+  gsap.to(p.b, { opacity: 0, duration: 0.3, delay: 3 });
+}
+
+const hop = cv => gsap.timeline()
+  .to(cv, { y: -60, scaleY: 1.12, duration: 0.2, ease: 'power2.out' })
+  .to(cv, { y: 0, scaleY: 0.8, duration: 0.18, ease: 'power2.in' })
+  .to(cv, { scaleY: 1, duration: 0.4, ease: 'elastic.out(1, 0.4)' });
+
+/* Pet Instance Setup */
+const pets = [];
+function initPet(w) {
+  const cv = w.querySelector('canvas');
+  cv.width = 64; cv.height = 64;
+  cv.style.width = cv.style.height = w.dataset.s + 'px';
+  const ctx = cv.getContext('2d');
+  const buf = new Pixel.PixelBuffer(64, 64);
+  const isSleep = !!w.dataset.sleep;
+
+  const p = {
+    w, cv, ctx, buf,
+    n: w.dataset.pet || 'mochi',
+    b: w.querySelector('.bub'),
+    cl: [],
+    sleeping: isSleep,
+    eating: false,
+    moodUntil: 0,
+    blinkUntil: 0,
+    nextBlink: performance.now() + 1500 + Math.random() * 2500,
+    s: {
+      t: 0, ox: 0, oy: 0, sx: 1, sy: 1,
+      lookX: 0, lookY: 0,
+      eyes: isSleep ? 'sleep' : 'open',
+      mouth: isSleep ? 'sleep' : 'smile',
+      blink: 0, blush: 0.3,
+      step: 0, walking: 0,
+      sleepy: isSleep ? 1 : 0,
+      held: 0, swing: 0, flap: 0, ear: 0, gill: 0,
+      tail: 0, back: false
+    }
+  };
+
+  if (isSleep) {
+    p.zz = setInterval(() => zed(cv), 1700);
+  }
+
+  // Pre-render initial frame so canvas is never blank
+  Pets.render(p.buf, p.n, p.s);
+  p.ctx.putImageData(new ImageData(p.buf.data, 64, 64), 0, 0);
+
+  if (!w.dataset.nd) {
+    let lastX = 0, lastTime = Date.now();
+    Draggable.create(w, {
+      type: 'x,y',
+      zIndexBoost: false,
+      onClick: () => poke(p),
+      onPress: () => {
+        if (p.sleeping) return;
+        p.s.held = 1;
+        p.s.eyes = 'wide';
+        p.s.mouth = 'o';
+        say(p, 'Whoa!');
+        beep(300, 'sine', 0.3, 2);
+      },
+      onDrag: function () {
+        if (p.sleeping) return;
+        const now = Date.now();
+        const dt = Math.max(1, now - lastTime);
+        const vx = ((this.x - lastX) / dt) * 1000;
+        lastX = this.x; lastTime = now;
+        p.s.held = 1;
+        p.s.swing = Math.max(-1, Math.min(1, -vx / 450));
+      },
+      onRelease: function () {
+        p.s.held = 0; p.s.swing = 0;
+        gsap.to(w, { y: 0, duration: 0.9, ease: 'bounce.out' });
+        gsap.to(w, { x: 0, duration: 1.4, delay: 2.5, ease: 'power2.inOut' });
+        gsap.fromTo(cv, { scaleY: 0.7, scaleX: 1.2 }, { scaleY: 1, scaleX: 1, duration: 0.7, delay: 0.55, ease: 'elastic.out(1, 0.35)' });
+        p.s.eyes = 'happy'; p.s.mouth = 'open';
+        p.moodUntil = performance.now() + 1000;
+      }
+    });
+    cv.ondblclick = () => poke(p, 1);
+  }
+
+  return p;
+}
+
+/* Pet Interactions */
+function poke(p, dbl) {
+  if (p.sleeping) return wake(p);
+  const d = D[p.n], now = Date.now();
+  p.cl = p.cl.filter(t => now - t < 2200);
+  p.cl.push(now);
+
+  if (dbl) {
+    say(p, 'Ta-da!');
+    p.s.eyes = 'happy'; p.s.mouth = 'open'; p.s.blush = 0.8;
+    p.moodUntil = performance.now() + 1500;
+    burst(p.cv, 'note', d.c);
+    gsap.fromTo(p.cv, { rotation: 0 }, {
+      rotation: 360, duration: 0.85, ease: 'steps(10)',
+      onUpdate() {
+        const prog = this.progress();
+        p.s.back = prog > 0.28 && prog < 0.75;
+      },
+      onComplete() { p.s.back = false; }
+    });
+    beep(d.f * 1.4, 'square', 0.25, 1.8);
+  } else if (p.cl.length >= 7) {
+    say(p, 'Whoa... so... dizzy...');
+    p.s.eyes = 'dizzy'; p.s.mouth = 'o'; p.s.blush = 0.5;
+    p.moodUntil = performance.now() + 2600;
+    burst(p.cv, 'star', '#ffd23f');
+    gsap.fromTo(p.cv, { rotation: -12 }, { rotation: 12, duration: 0.12, repeat: 9, yoyo: true, onComplete: () => gsap.set(p.cv, { rotation: 0 }) });
+    beep(220, 'sawtooth', 0.3, 0.6);
+  } else if (p.cl.length >= 5) {
+    say(p, 'Hehe, slow down a little!');
+    p.s.eyes = 'squint'; p.s.mouth = 'flat'; p.s.blush = 0.6;
+    p.moodUntil = performance.now() + 1400;
+    beep(d.f * 2, 'square', 0.05, 1);
+  } else {
+    p.s.eyes = (Math.random() < 0.35) ? 'love' : 'happy';
+    p.s.mouth = (p.s.eyes === 'love') ? 'tongue' : 'open';
+    p.s.blush = 0.9;
+    p.moodUntil = performance.now() + 1800;
+    say(p, d.m[Math.floor(Math.random() * d.m.length)]);
+    burst(p.cv, 'heart', d.c);
+    hop(p.cv);
+    beep(d.f, d.w, 0.14, 1.6);
+  }
+}
+
+function wake(p) {
+  clearInterval(p.nz);
+  p.sleeping = false;
+  p.s.sleepy = 0;
+  p.s.eyes = 'wide'; p.s.mouth = 'open'; p.s.blush = 0.4;
+  p.moodUntil = performance.now() + 1500;
+  say(p, 'Huh? I was awake! Totally awake.');
+  hop(p.cv);
+  beep(400, 'square', 0.15, 2);
+}
+
+function nap(p) {
+  if (p.sleeping) return;
+  p.sleeping = true;
+  p.s.sleepy = 0.8;
+  p.s.eyes = 'sleepy'; p.s.mouth = 'yawn';
+  say(p, '*yawn* Just a tiny nap...');
+  beep(300, 'sine', 0.5, 0.6);
+  setTimeout(() => {
+    if (p.sleeping) {
+      p.s.sleepy = 1;
+      p.s.eyes = 'sleep'; p.s.mouth = 'sleep';
+    }
+  }, 700);
+  let count = 0;
+  p.nz = setInterval(() => {
+    zed(p.cv);
+    if (++count > 7) wake(p);
+  }, 650);
+}
+
+function treat(p) {
+  const r = p.cv.getBoundingClientRect(), d = D[p.n];
+  const e = spx(d.t, d.t === 'fish' ? '#ff9f43' : '#ff6b6b', 5);
+  e.style.cssText += `;position:fixed;z-index:60;left:${r.left + r.width / 2}px;top:${r.top - 30}px`;
+  document.body.append(e);
+  p.eating = true;
+  p.s.eyes = 'wide'; p.s.mouth = 'o';
+
+  gsap.to(e, {
+    y: r.height * 0.55 + 30, duration: 0.7, ease: 'power1.in',
+    onComplete: () => {
+      e.remove();
+      p.s.mouth = 'open';
+      setTimeout(() => { p.s.mouth = 'flat'; }, 120);
+      setTimeout(() => { p.s.mouth = 'open'; }, 240);
+      setTimeout(() => {
+        p.eating = false;
+        p.s.eyes = 'happy'; p.s.mouth = 'smile'; p.s.blush = 0.85;
+        p.moodUntil = performance.now() + 2000;
+        say(p, 'Yum yum yum!');
+        burst(p.cv, 'heart', d.c, 8);
+        hop(p.cv);
+        beep(200, 'square', 0.08, 0.7);
+        setTimeout(() => beep(260, 'square', 0.08, 0.7), 120);
+      }, 360);
+    }
+  });
+}
+
+/* Update Frame Loop */
+function draw(p, now) {
+  const r = p.cv.getBoundingClientRect();
+  if (r.bottom < -60 || r.top > innerHeight + 60) return;
+
+  const t = now / 1000;
+  p.s.t = t;
+
+  if (!p.sleeping) {
+    const cx = r.left + r.width / 2;
+    const cy = r.top + r.height * 0.45;
+    const targetLx = Math.tanh((mx - cx) / 140);
+    const targetLy = Math.tanh((my - cy) / 140);
+    p.s.lookX += (targetLx - p.s.lookX) * 0.22;
+    p.s.lookY += (targetLy - p.s.lookY) * 0.22;
+  } else {
+    p.s.lookX = 0; p.s.lookY = 0.3;
+  }
+
+  // Blinking
+  if (!p.sleeping && now > p.nextBlink) {
+    p.s.blink = 1;
+    p.blinkUntil = now + 130;
+    p.nextBlink = now + 2400 + Math.random() * 3200;
+  }
+  if (p.s.blink && now > p.blinkUntil) {
+    p.s.blink = 0;
+  }
+
+  // Idle organic movement
+  const breath = Math.sin(t * (p.sleeping ? 1.4 : 2.2)) * 0.02;
+  p.s.sy = 1 + breath;
+  p.s.sx = 1 - breath * 0.6;
+  p.s.tail = t * 2.5;
+
+  if (p.n === 'mochi') {
+    p.s.ear = Math.sin(t * 3.4) * 0.4;
+  } else if (p.n === 'waddle') {
+    p.s.flap = Math.max(0, Math.sin(t * 3.1)) * 0.5;
+  } else if (p.n === 'axo') {
+    p.s.gill = Math.sin(t * 2.3);
+  }
+
+  if (now > p.moodUntil && !p.sleeping && !p.eating) {
+    p.s.eyes = 'open';
+    p.s.mouth = 'smile';
+    p.s.blush = 0.3;
+  }
+
+  Pets.render(p.buf, p.n, p.s);
+  p.ctx.putImageData(new ImageData(p.buf.data, 64, 64), 0, 0);
+}
+
+const sceneCanvases = [];
+function initSceneBg(cv, petIdGetter) {
+  cv.width = 80; cv.height = 72;
+  const ctx = cv.getContext('2d');
+  const buf = new Pixel.PixelBuffer(80, 72);
+  const sc = { cv, ctx, buf, getPetId: typeof petIdGetter === 'function' ? petIdGetter : () => petIdGetter };
+  Scenes.draw(sc.buf, sc.getPetId(), 0);
+  sc.ctx.putImageData(new ImageData(sc.buf.data, 80, 72), 0, 0);
+  sceneCanvases.push(sc);
+  return sc;
+}
+
+function tick(now) {
+  requestAnimationFrame(tick);
+  const t = now / 1000;
+  sceneCanvases.forEach(sc => {
+    const r = sc.cv.getBoundingClientRect();
+    if (r.bottom < -60 || r.top > innerHeight + 60) return;
+    Scenes.draw(sc.buf, sc.getPetId(), t);
+    sc.ctx.putImageData(new ImageData(sc.buf.data, 80, 72), 0, 0);
+  });
+  pets.forEach(p => draw(p, now));
+}
+
+/* Initialize static DOM pets */
+$$('.pw').forEach(w => pets.push(initPet(w)));
+
+/* Scenery and interactive environment */
+function hill(el) {
+  const b = +el.dataset.b, a = +el.dataset.a, f = +el.dataset.f, ph = +el.dataset.p, pts = ['0 100%'];
+  let py = null;
+  for (let x = 0; x <= 104; x += 4) {
+    const y = Math.round((b + a * Math.sin(x * f + ph)) / 4) * 4;
+    if (py !== null) pts.push(`${x}% ${py}%`);
+    pts.push(`${x}% ${y}%`);
+    py = y;
+  }
+  pts.push('100% 100%');
+  el.style.clipPath = `polygon(${pts.join(',')})`;
+}
+$$('.hill').forEach(hill);
+
+for (let i = 0; i < 5; i++) {
+  const c = spx('cloud', '#fff', 12);
+  c.style.top = 60 + i * 55 + 'px'; c.style.opacity = '0.9';
+  $('.hero').append(c);
+  gsap.fromTo(c, { x: -300 }, { x: innerWidth + 300, duration: rnd(70, 130), repeat: -1, ease: 'steps(400)' }).progress(Math.random());
+}
+
+const lay = $$('.hill'), k = [10, 22, 40];
+addEventListener('pointermove', e => lay.forEach((h, i) => gsap.to(h, { x: (e.clientX / innerWidth - 0.5) * -k[i], duration: 0.8 })));
+
+$('#mq').innerHTML = 'Hugs / Treats / Naps / Tricks / Bubbles / 1,000+ little messages / Pixels / '.repeat(10);
+gsap.to('#mq', { xPercent: -50, duration: 40, ease: 'none', repeat: -1 });
+
+/* Dynamic Pal Rows */
+$('#rows').innerHTML = KEYS.map(k => {
+  const d = D[k];
+  return `<div class="row rv" id="r-${k}">
+    <div class="scene" data-scene="${k}">
+      <canvas class="scene-bg" width="80" height="72"></canvas>
+      <div class="pw" data-pet="${k}" data-s="230"><div class="bub"></div><div class="bob"><canvas></canvas></div></div>
+    </div>
+    <div class="plate info" style="--c:${d.c}">
+      <h3>${d.n}</h3><div class="px">${d.sp}</div>
+      <div class="tags">${d.tags.map(t => `<span>${t}</span>`).join('')}</div>
+      <p>${d.bio}</p>
+      <div class="treat">Favorite treat: <span class="ti"></span>${d.tn}</div>
+      <button class="btn" style="background:${d.c}" data-say="${k}">Say hi</button>
+      <button class="btn w" data-feed="${k}">Give a treat</button>
+    </div>
+  </div>`;
+}).join('');
+
+KEYS.forEach(k => {
+  const sc = $(`#r-${k} .scene`), d = D[k];
+  $(`#r-${k} .ti`).append(Object.assign(spx(d.t, d.t === 'fish' ? '#ff9f43' : '#ff6b6b', 3), { style: 'position:relative;display:inline-block;margin:0 24px 0 0' }));
+  const bgCv = sc.querySelector('canvas.scene-bg');
+  if (bgCv) initSceneBg(bgCv, k);
+});
+
+$$('#rows .pw').forEach(w => pets.push(initPet(w)));
+
+const P = n => pets.find(p => p.w.dataset.pet === n && p.w.closest('.scene'));
+$$('[data-say]').forEach(b => b.onclick = () => poke(P(b.dataset.say)));
+$$('[data-feed]').forEach(b => b.onclick = () => treat(P(b.dataset.feed)));
+
+KEYS.forEach(k => ScrollTrigger.create({
+  trigger: `#r-${k}`, start: 'top 60%', once: true,
+  onEnter: () => {
+    const p = P(k);
+    if (p) { say(p, `Hi, I'm ${D[k].n}!`); hop(p.cv); }
+  }
+}));
+
+/* Playground Actions */
+const lp = pets.find(p => p.w.id === 'lp');
+const roomBg = $('#room-bg');
+let roomScene = null;
+if (roomBg) {
+  roomScene = initSceneBg(roomBg, () => (lp ? lp.n : 'mochi'));
+}
+
+$$('[data-a]').forEach(b => b.onclick = () => {
+  const a = b.dataset.a;
+  if (!lp) return;
+  if (a === 'pet') poke(lp);
+  else if (a === 'dbl') poke(lp, 1);
+  else if (a === 'treat') treat(lp);
+  else if (a === 'nap') nap(lp);
+  else if (a === 'spam') {
+    for (let i = 0; i < 8; i++) setTimeout(() => poke(lp), i * 90);
+  } else if (a === 'swap') {
+    lp.n = KEYS[(KEYS.indexOf(lp.n) + 1) % 3];
+    if (roomScene) {
+      Scenes.draw(roomScene.buf, roomScene.getPetId(), performance.now() / 1000);
+      roomScene.ctx.putImageData(new ImageData(roomScene.buf.data, 80, 72), 0, 0);
+    }
+    say(lp, `Hi, I'm ${D[lp.n].n}!`);
+    hop(lp.cv);
+    beep(D[lp.n].f, D[lp.n].w, 0.15, 1.5);
+  }
+});
+
+/* Draggable Sticky Notes */
+$$('.note').forEach(n => {
+  gsap.set(n, { rotation: rnd(-4, 4) });
+  Draggable.create(n, {
+    type: 'x,y',
+    onPress() { gsap.to(n, { scale: 1.05, duration: 0.15 }); },
+    onRelease() { gsap.to(n, { scale: 1, duration: 0.4, ease: 'elastic.out(1, 0.4)' }); }
+  });
+});
+
+/* Sky Gradient Animation across scroll */
+const st = [];
+for (let i = 0; i < 70; i++) st.push(`${rnd(0, innerWidth) | 0}px ${rnd(0, innerHeight) | 0}px 0 ${Math.random() < 0.3 ? '#ffe27a' : '#fff'}`);
+$('#stars').style.boxShadow = st.join(',');
+
+gsap.timeline({ scrollTrigger: { trigger: document.body, start: 'top top', end: 'bottom bottom', scrub: 1 } })
+  .to('#sky', { '--a': '#7cc8ff', '--b': '#e8f8ff', duration: 1, ease: 'none' })
+  .to('#sky', { '--a': '#ff9ab8', '--b': '#ffdca8', duration: 1, ease: 'none' })
+  .to('#sky', { '--a': '#6b4fa8', '--b': '#e58fb6', duration: 1, ease: 'none' })
+  .to('#sky', { '--a': '#171335', '--b': '#3a2f7a', duration: 1, ease: 'none' })
+  .to('#orb', { background: '#f3f0ff', y: 30, x: -60, duration: 4, ease: 'none' }, 0)
+  .to('#stars', { opacity: 1, duration: 1.2, ease: 'none' }, 2.8);
+
+gsap.from('h1', { y: 70, opacity: 0, duration: 1, ease: 'back.out(2.4)' });
+gsap.from('.hero .pw', { y: 300, duration: 1, stagger: 0.18, delay: 0.4, ease: 'back.out(1.6)' });
+
+/* Reveal Animations */
+gsap.set('.rv', { opacity: 0 });
+ScrollTrigger.batch('.rv', {
+  start: 'top 88%', once: true,
+  onEnter: b => gsap.fromTo(b, { y: 60, opacity: 0, rotation: -1.5 }, { y: 0, opacity: 1, rotation: 0, stagger: 0.15, duration: 0.8, ease: 'back.out(1.7)' })
+});
+
+/* Pointer sparkle trail */
+let lt = 0;
+addEventListener('pointermove', e => {
+  const n = Date.now();
+  if (n - lt < 45) return;
+  lt = n;
+  const t = document.createElement('i');
+  t.className = 'sp';
+  t.style.cssText = `position:fixed;z-index:99;left:${e.clientX}px;top:${e.clientY}px;width:7px;height:7px;background:${D[KEYS[(n / 200 | 0) % 3]].c};box-shadow:0 0 0 2px #fff`;
+  document.body.append(t);
+  gsap.to(t, { y: 20, opacity: 0, scale: 0, duration: 0.7, ease: 'steps(5)', onComplete: () => t.remove() });
+});
+
+/* Start animation loop */
+requestAnimationFrame(tick);
+</script>
+</body>
 </html>

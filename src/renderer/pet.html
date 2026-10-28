@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:">
+  <title>Desktop Pet</title>
+  <link rel="stylesheet" href="pet.css">
+</head>
+<body>
+  <div id="stage">
+    <div id="bubble" class="frame" hidden>
+      <div class="outer notch"><div class="inner notch"><span id="shown"></span><span id="ghost"></span></div></div>
+      <svg id="tail" viewBox="0 0 8 4" width="24" height="12" shape-rendering="crispEdges" aria-hidden="true">
+        <path class="ink" d="M0 0h1v1H0zM7 0h1v1H7zM1 1h1v1H1zM6 1h1v1H6zM2 2h1v1H2zM5 2h1v1H5zM3 3h2v1H3z"/>
+        <path class="paper" d="M1 0h6v1H1zM2 1h4v1H2zM3 2h2v1H3z"/>
+      </svg>
+    </div>
+    <canvas id="pet" width="64" height="64"></canvas>
+  </div>
+
+  <script src="../shared/pixel.js"></script>
+  <script src="../shared/effects.js"></script>
+  <script src="../shared/pets.js"></script>
+  <script src="../shared/messages/core.js"></script>
+  <script src="../shared/messages/shared.js"></script>
+  <script src="../shared/messages/facts.js"></script>
+  <script src="../shared/messages/mochi.js"></script>
+  <script src="../shared/messages/waddle.js"></script>
+  <script src="../shared/messages/axo.js"></script>
+  <script src="../shared/messages/index.js"></script>
+  <script src="../shared/brain.js"></script>
+  <script src="../shared/display.js"></script>
+  <script src="../shared/sound.js"></script>
+  <script src="pet.js"></script>
+</body>
+</html>

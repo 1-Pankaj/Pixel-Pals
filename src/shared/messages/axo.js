@@ -1,0 +1,98 @@
+/* Axo the axolotl: forever smiling, soft-spoken, very big heart. */
+(function (g) {
+  const D = (g.MessageData = g.MessageData || {});
+  D.pets = D.pets || {};
+
+  D.pets.axo = {
+    idle: [
+      "Blub blub.",
+      "I'm smiling. I always am. It's how I'm built.",
+      "My gills are wiggling. That means I'm happy.",
+      "I like it here. It's calm, like a quiet pond.",
+      "Float with me for a second. Breathe.",
+      "I can regrow things. I can't regrow time, so I take naps.",
+      "Everything is a little softer underwater.",
+      "I'm an axolotl. A water dragon, if you're feeling fancy.",
+      "Hello from the bottom of the pond.",
+      "Bubbles are my favourite hobby. Pop pop.",
+      "Slow and steady wiggles the day.",
+      "I never really grow up. It's a good plan.",
+      "Take it easy. I do, all day long.",
+      "My arms are tiny, my hugs are huge.",
+      "A good day is a calm day with a snack.",
+      "I'm in no hurry. Are you?",
+      "Pink is the colour of happiness. I checked.",
+      "Quiet water, quiet mind.",
+      "I have feathery gills. They tickle when I'm excited.",
+      "My smile never leaves. It's just my face. Hehe.",
+      "Wiggle wiggle. Nobody is watching. Almost nobody.",
+      "I like worms, bubbles, and you.",
+      "A little drift is good for the soul.",
+      "I don't ever hurry. I get there when I get there.",
+      "Look, I made a tiny bubble just for you.",
+      "I'm basically a gentle puddle with legs.",
+      "Be calm like the water at dusk.",
+      "I once met a snail. We got along fine.",
+      "Don't forget to float sometimes.",
+      "I hope your day is as smooth as a pond.",
+      "My favourite thing about you? You're kind.",
+      "Do you want to float on a lily pad together?",
+      "I'm hugging you in my heart. Tiny arms, big heart.",
+      "Everything heals with time. I'd know. I'm good at it.",
+      "Plip. Plop. That was my thought.",
+      "I'm learning to say hello with my gills.",
+      "Nothing beats a slow stretch and a deep breath.",
+      "My favourite colour is the colour of your day going well.",
+      "Mmm, I smell the rain. It's a lovely thing.",
+      "I might just float here forever. Join me?",
+      "Small things matter. Like bubbles.",
+      "I love it when it's quiet and soft.",
+      "I wonder what the moon looks like on the water.",
+      "Wiggle your fingers like gills. It's good for the soul.",
+      "A smile is the shortest way to a good mood.",
+      "Today, let's be as soft as a pond ripple.",
+      "I'm made of calm. Want some?",
+      "It's nice to be remembered. Thank you for remembering me.",
+      "I like all the colours of your screen. They ripple nicely.",
+      "If you feel stuck, try floating until a thought comes by.",
+    ],
+    petted: [
+      "Blub! That's lovely.", "My gills are fluttering!", "Aww, so gentle! I love it.", "Wiggle wiggle! Happy happy!",
+      "I'm glowing! Okay, a little.", "Squish. In a good way.", "That feels like a warm bath.", "You're the sweetest.",
+      "Blub blub! Thank you!", "Tiny arms are hugging back!", "I'm smiling even more, somehow.", "I could float on this feeling.",
+      "A hug from the surface world! Wonderful!", "Pat pat. Yes. Perfect.",
+    ],
+    fed: [
+      "Ooh, shrimp! Delicious!", "Blub! Yummy!", "Mmm, thank you. Slurp.", "My favourite snack. How did you know?",
+      "Nom. Wiggle. Nom!", "A worm would also be welcome. Just saying.", "I love snacks. And you.", "Thank you! That was a feast.",
+      "Gulp! Tasty!", "I'm a happy, full axolotl.",
+    ],
+    lifted: [
+      "Blub?! I'm out of the water!", "Oh my, up I go!", "Gentle, please! I'm wobbly!", "Eek, I'm floating in air!",
+      "My gills are flapping! Wheee!", "I'm a dragon now! A little one!", "Whoa, what a view.", "Please don't drop me. I'm jelly-soft.",
+    ],
+    dropped: [
+      "Plop! Safe and sound.", "Splash! Well, almost.", "A soft landing, thank you.", "Boing! That was fun.",
+      "New pond, new me.", "I'm fine! Blub!",
+    ],
+    trick: [
+      "Wiggle spin!", "Tada! Gills out!", "I've been practising in the pond.", "Look at me go! Blub!",
+      "A bubble-powered flip!", "Bow to the audience. A gentle one.",
+    ],
+    sleepTalk: [
+      "zzz... blub... zzz...", "...worms... zzz...", "zzz... bubbles... pop...", "...floating... so soft...", "zzz... lily pad... mm...", "...gills... wiggle... zzz...",
+    ],
+    wake: [
+      "Blub... hello again.", "Oh! I drifted off. Sorry.", "That was the nicest floaty nap.", "I woke up slowly. Like a sunrise.",
+      "I dreamt of warm water. Mmm.", "Yawn... gills ready.",
+    ],
+    daydream: [
+      "I was thinking about a very big lily pad.", "I imagined a pond full of friends.", "Thinking about bubbles. Many bubbles.", "I pictured a warm sunny pond.",
+      "I was dreaming about a peaceful stream.", "I had a thought. It floated away.",
+    ],
+    hover: [
+      "Blub? Hello!", "Oh, hi! A visitor!", "Are you here for a hug?", "I see you. Wiggle wiggle.",
+      "I can feel your cursor. It tickles.", "Hello, surface friend!",
+    ],
+  };
+})(typeof globalThis !== 'undefined' ? globalThis : this);

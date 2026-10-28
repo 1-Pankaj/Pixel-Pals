@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pixel Pals</title>
+  <link rel="stylesheet" href="home.css">
+</head>
+<body>
+  <div class="titlebar"><span class="brand">Pixel Pals</span></div>
+
+  <main class="page">
+    <header class="hero">
+      <h1>Pick a pet for your desktop</h1>
+      <p>They float above your windows, follow your cursor with their eyes, and keep you company while you work, study, create or play.</p>
+      <p class="count"><b id="count">1,000+</b> little messages, plus tricks, naps, treats and a few surprises.</p>
+    </header>
+
+    <section class="cards" id="cards" aria-label="Choose your pet"></section>
+
+    <div class="cols">
+      <section class="panel"><div class="in">
+        <h2>How it behaves</h2>
+        <div class="rows" id="toggles"></div>
+      </div></section>
+
+      <div class="stack">
+        <section class="panel"><div class="in">
+          <h2>Make it yours</h2>
+          <div class="field">
+            <span class="fl" id="size-l">Size</span>
+            <div class="seg" role="radiogroup" aria-labelledby="size-l" data-seg="scale">
+              <button type="button" role="radio" data-v="3">Small</button>
+              <button type="button" role="radio" data-v="4">Medium</button>
+              <button type="button" role="radio" data-v="5">Large</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="fl" id="chat-l">Chattiness</span>
+            <div class="seg" role="radiogroup" aria-labelledby="chat-l" data-seg="chatty">
+              <button type="button" role="radio" data-v="silent">Silent</button>
+              <button type="button" role="radio" data-v="quiet">Quiet</button>
+              <button type="button" role="radio" data-v="normal">Normal</button>
+              <button type="button" role="radio" data-v="chatty">Chatty</button>
+            </div>
+            <p class="hint" id="chat-hint"></p>
+          </div>
+        </div></section>
+
+        <section class="panel"><div class="in">
+          <h2 id="play-title">Play together</h2>
+          <div class="play">
+            <button type="button" class="btn" data-cmd="treat">Give a treat</button>
+            <button type="button" class="btn" data-cmd="trick">Do a trick</button>
+            <button type="button" class="btn" data-cmd="joke">Tell a joke</button>
+            <button type="button" class="btn" data-cmd="nap">Take a nap</button>
+          </div>
+        </div></section>
+      </div>
+    </div>
+
+    <footer class="foot">
+      <p class="tips">Drag to move &middot; Click to pet &middot; Double-click for tricks &middot; Right-click for the menu &middot; Tray icon to hide or show</p>
+      <div class="acts">
+        <button type="button" class="btn ghost" id="toggle-vis">Hide pet</button>
+        <button type="button" class="btn ghost" id="reset-pos">Bring pet back</button>
+        <button type="button" class="btn ghost danger" id="quit">Quit</button>
+      </div>
+    </footer>
+  </main>
+
+  <script src="../shared/pixel.js"></script>
+  <script src="../shared/effects.js"></script>
+  <script src="../shared/pets.js"></script>
+  <script src="../shared/scenes.js"></script>
+  <script src="../shared/messages/core.js"></script>
+  <script src="../shared/messages/shared.js"></script>
+  <script src="../shared/messages/facts.js"></script>
+  <script src="../shared/messages/mochi.js"></script>
+  <script src="../shared/messages/waddle.js"></script>
+  <script src="../shared/messages/axo.js"></script>
+  <script src="../shared/messages/index.js"></script>
+  <script src="../shared/brain.js"></script>
+  <script src="../shared/display.js"></script>
+  <script src="home.js"></script>
+</body>
+</html>

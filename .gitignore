@@ -7,7 +7,15 @@ node_modules/
 dist/
 out/
 release/
-build/
+build/preview.png
+build/film*.png
+build/zoom.png
+build/scenes.png
+build/icons-sheet.png
+
+# Python
+__pycache__/
+*.pyc
 
 # Logs
 logs/

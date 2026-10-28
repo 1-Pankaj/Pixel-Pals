@@ -1,192 +1,201 @@
 # Pixel Pals
 
 <p align="center">
-  <img src="assets/icon.png" alt="Pixel Pals Icon" width="72">
+  <img src="build/icon.png" alt="Pixel Pals Icon" width="80">
 </p>
 
 <p align="center">
-  <strong>A cozy pixelated desktop companion that lives on top of your windows.</strong><br>
-  Adopt one of six handcrafted pals with global mouse-tracking eyes, 2,500+ dialogue lines, interactive choice questions, mini-games, snack feeding, breathing breaks, focus timers, and a live synthesized sound engine.
+  <strong>Cute pixel pets that live on your desktop.</strong><br>
+  Pick a <b>cat</b>, a <b>penguin</b>, or an <b>axolotl</b>. They float above your windows, their eyes follow your cursor wherever it goes, and they keep you company with over a thousand little messages, tricks, naps and treats.
 </p>
 
 <p align="center">
-  <a href="https://1-pankaj.github.io/Pixel-Pals/"><img src="https://img.shields.io/badge/Website-Live%20Playground-fab387?style=flat" alt="Live Website"></a>
+  <a href="https://1-pankaj.github.io/Pixel-Pals/"><img src="https://img.shields.io/badge/Website-Live%20Showcase-fab387?style=flat" alt="Live Website"></a>
   <a href="https://github.com/1-Pankaj/Pixel-Pals/actions/workflows/ci.yml"><img src="https://github.com/1-Pankaj/Pixel-Pals/actions/workflows/ci.yml/badge.svg" alt="CI Status"></a>
   <a href="https://github.com/1-Pankaj/Pixel-Pals/releases"><img src="https://img.shields.io/github/v/release/1-Pankaj/Pixel-Pals?include_prereleases&color=fab387&label=release" alt="GitHub Release"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
-  <a href="https://github.com/1-Pankaj/Pixel-Pals"><img src="https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-blue.svg" alt="Platform"></a>
-  <a href="https://github.com/1-Pankaj/Pixel-Pals/discussions"><img src="https://img.shields.io/badge/Discussions-Join%20In-green.svg" alt="GitHub Discussions"></a>
+  <a href="https://github.com/1-Pankaj/Pixel-Pals"><img src="https://img.shields.io/badge/Platform-Windows%2010%20%2F%2011-blue.svg" alt="Platform"></a>
   <a href="CONTRIBUTING.md"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome"></a>
 </p>
 
 <p align="center">
-  <img src="assets/demo.gif" alt="Pixel Pals in Action" width="340" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+  <a href="https://1-pankaj.github.io/Pixel-Pals/"><strong>Explore the Interactive Web Showcase &rarr;</strong></a>
 </p>
 
 ---
 
-## The Six Pals
+## What makes Pixel Pals special?
 
-<p align="center">
-  <img src="assets/pals-banner.png" alt="Pixel Pals Lineup" width="100%" style="border-radius: 8px;">
-</p>
-
-| Pal | Species | Personality & Quirks |
-|:---|:---|:---|
-| **Mochi** | Orange Tabby | Professional napper. Judgy about your playlist, but loves you anyway. |
-| **Biscuit** | Shiba Inu | Maximum loyalty, minimum chill. Will do backflips for any snack. |
-| **Pudding** | Mint Slime | Small, squishy, bouncy, and full of gelatinous dreams. |
-| **Luna** | Little Ghost | Cozy hovering vibes. Floats gently above your desktop without haunting. |
-| **Clover** | Bunny | High-altitude ears, soft heart, and rapid-fire hops. |
-| **Miso** | Axolotl | Perpetual cheerful grin. Scientifically incapable of frowning. |
-
-Each buddy features custom 32×32 pixel art, 5 distinct facial expressions, wagging tails, sway overlays, and **40 unique personality lines** in addition to the shared message pool.
+* 🎨 **100% Procedural Pixel Software Rasterizer**: No static PNG sprite sheets or font files are shipped. Every pixel, shadow ramp, outline, and expression is drawn in code via a tiny, custom software rasterizer (`Pixel`).
+* 🖥️ **Always-on-Top & Click-Through**: Lives in a transparent, frameless window. Empty space around the pet is click-through, and interacting with your pet never steals focus from your IDE, browser, or game.
+* 👀 **Global Cursor Eye-Tracking**: Your pet's eyes track your mouse cursor across your entire multi-monitor setup in real-time.
+* 💬 **1,000+ Handcrafted Dialogue Lines**: Shuffled bags of context-aware lines covering morning/evening greetings, weekdays, calendar holidays, jokes, animal facts, and gentle wellness check-ins. No repetition until the whole bag is seen.
+* 🏠 **Interactive "Pet Home" Hub**: A cozy desktop dashboard featuring real-time animated pixel habitats, instant pet switcher, size adjustment, chattiness tuning, and interaction buttons.
+* 🧲 **Organic Physics Rig**: Dragging picks your pet up to dangle and swing with momentum, landing with an elastic squish-and-stretch bounce.
+* 🔊 **WebAudio Cozy Sound Synthesis**: Warm purrs, beeps, chirps, and crunch effects synthesized live with WebAudio oscillators—completely asset-free.
+* 🔒 **Zero Telemetry, 100% Offline**: No accounts, no internet required, no analytics, and no AI hallucinations.
 
 ---
 
-## Core Highlights
+## Meet the Pals
 
-- 🫧 **Transparent & Non-Intrusive**: Always-on-top, frameless window with forward mouse-event pass-through. Clicks fall through everywhere except the pet and active choice bubbles, so it never interrupts your work.
-- 👀 **Global Eye Tracking**: Your pal's eyes follow your mouse cursor across any monitor, even when working inside other applications.
-- 💬 **2,500+ Handcrafted Messages**: No AI, no cloud accounts, and zero subscriptions. Time-aware greetings (morning, afternoon, evening, night), weekday/weekend quips, trivia, shower thoughts, and anti-repeat shuffle bags.
-- 🎯 **Interactive Question Bubbles**: The pet asks *you* questions. The speech bubble expands with clickable buttons for Yes/No dilemmas, This-or-That, three-choice Trivia, and emotional check-ins.
-- 🎲 **Mini-Games**: Play Rock-Paper-Scissors with drumroll reveals, flip coins, shake the Magic 8-Ball, or go through multi-step Knock-Knock jokes.
-- 🍪 **Snack Time**: Feed your buddy a cookie, donut, or boba cup. Features 3 animated crunchy bites, crumbs, and mood boosts.
-- 🔊 **Zero-Asset WebAudio Synthesizer**: No external audio files. Sounds are synthesized live through custom oscillator nodes, filtered noise bursts, lowpass filters, and compressors for soft, warm, kawaii-game tones.
-- ⏱️ **Gentle Productivity & Wellness**: Main-process focus timers (15/25/50 min), countdown alarms, guided 1-minute 4-4-4 breathing exercises, water reminders, and stretch nudges.
-- 🧲 **Fling Physics**: Pick up and drag your pal with 1:1 cursor follow. Flinging calculates release velocity and adds gravity with elastic screen-edge bouncing.
+| Pal | Species | Habitat | Personality & Quirks | Favorite Treat |
+|:---|:---|:---|:---|:---|
+| **Mochi** | Tabby Cat | Cozy Sunlit Room | Warm, curious and always up for a long nap in a sunbeam. Twitching ears, swishing tail, and cozy purrs. | Fish 🐟 |
+| **Waddle** | Penguin | Mountain Tundra | Dressed in his finest tuxedo, Waddle brings endless optimism, sliding dances on snowdrifts, and pebble gifts. | Fish 🐟 |
+| **Axo** | Axolotl | Oceanic Lagoon | A forever-smiling aquatic dragon with pulsing frilly gills, blowing bubbles and reminding you to stay hydrated. | Shrimp 🦐 |
 
 ---
 
-## Controls
-
-### Mouse Gestures
+## How to Play
 
 | Action | Result |
 |:---|:---|
-| **Single click** | Poke reaction: jump, giggle, spin, or squish (3 quick pokes triggers dizzy stars) |
-| **Double click** | Dance party! Wiggle animation + music notes |
-| **Hold (≈0.5s)** | Squish! Squeezes the pet with bursting hearts |
-| **Drag** | Pick it up — dangles with wide eyes (speech bubble stays anchored to the head) |
-| **Shake during drag** | Rapidly wiggle cursor left and right to make the pet dizzy on drop |
-| **Fling** | Fast drag + release launches the pet with bouncy edge collisions |
-| **Tickle** | Wiggle cursor over the pet to trigger a giggle fit |
-| **Scroll wheel** | Scroll up = happy hops; Scroll down = squish flat |
-| **Right click** | Open in-game context menu (feed, question, dance, focus, nap, switch pal) |
-| **System Tray** | Access all settings, timers, reminders, pal switching, or quit |
-
-### Global Keyboard Shortcuts
-
-Because the pet window intentionally avoids stealing window focus, interactions can be triggered system-wide via keyboard shortcuts (toggleable in tray):
-
-| Shortcut | Action |
-|:---|:---|
-| `Alt+Shift+P` | Pet (burst hearts) |
-| `Alt+Shift+B` | Say something |
-| `Alt+Shift+F` | Drop a snack |
-| `Alt+Shift+D` | Start dance party |
-| `Alt+Shift+N` | Toggle nap / wake |
-| `Alt+Shift+T` | Ask current time |
-| `Alt+Shift+S` | Hangout statistics |
-| `Alt+Shift+Q` | Ask a random question |
-| `Alt+Shift+R` | Rock, Paper, Scissors |
-| `Alt+Shift+C` | Flip a coin |
-| `Alt+Shift+M` | Ask Magic 8-ball |
-| `Alt+Shift+K` | Tell a knock-knock joke |
-| `Alt+Shift+Y` | Tell a 3-part story |
-| `Alt+Shift+E` | Guided breathing break (1 min) |
-| `Alt+Shift+G` | Start 25-minute focus timer |
-| `Alt+Shift+H` | Stop focus timer |
-| `Alt+Shift+1` / `2` / `3` | Answer open question choice 1, 2, or 3 |
-| `Alt+Shift+X` | Dismiss bubble / question |
+| **Move mouse anywhere** | Eyes smoothly follow cursor across the screen |
+| **Click the pet** | Happy hearts, a friendly sound, and a message. Click repeatedly to make them dizzy with spinning stars |
+| **Double-click** | A special trick: 360° spin, backflip hop, or dance |
+| **Click & Drag** | Picks the pet up! It dangles and swings with cursor momentum, then lands with an elastic bounce |
+| **Right-click** | Context menu: treat, trick, nap, jokes, facts, switch pal, size, chattiness, and settings |
+| **Leave mouse idle** | Your pal yawns, curls up, and takes a peaceful nap with floating "Z"s. Moving the mouse gently wakes them |
+| **System Tray icon** | Single-click to toggle visibility. Right-click for quick actions or to summon your pal back to the corner |
 
 ---
 
-## Getting Started
+## Quick Start
 
-### Option 1: Download Pre-built Executable (Windows)
-
-Visit the [Releases](https://github.com/1-Pankaj/Pixel-Pals/releases) page to download:
-- **`Pixel Pals.exe`** — Standalone portable version (no installation needed, run directly).
-- **`Pixel Pals Setup.exe`** — Standard Windows installer.
-
-### Option 2: Run from Source
-
-**Prerequisites**: [Node.js](https://nodejs.org/) 18 or higher.
+You need [Node.js](https://nodejs.org) 18 or newer.
 
 ```bash
-# Clone repository
+# Clone the repository
 git clone https://github.com/1-Pankaj/Pixel-Pals.git
 cd Pixel-Pals
 
 # Install dependencies
 npm install
 
-# Launch desktop app
+# Launch Pixel Pals
 npm run desktop
 ```
 
-On first launch, the **Adopt-a-Buddy** picker window opens. Select your buddy to spawn them on your desktop!
+Your pal appears in the bottom-right corner of your desktop, and the **Pet Home** window opens on first launch so you can adopt your favorite buddy.
 
 ---
 
-## Project Architecture
+## Build Windows Installers
+
+```bash
+# Build both standard installer (.exe) and portable single-executable (.exe)
+npm run dist
+
+# Or build an unpacked directory for fast local testing
+npm run dist:dir
+```
+
+Output executables are saved to `dist/`:
+- `Pixel Pals Setup 2.0.0.exe` (NSIS installer with desktop & start menu shortcuts)
+- `Pixel Pals-portable-2.0.0.exe` (Single-file portable executable, no install needed)
+
+---
+
+## Settings
+
+Configure everything from the **Pet Home** window or the right-click tray menu:
+* **Pet Selection**: Switch between Mochi, Waddle, and Axo anytime.
+* **Size**: Small (3×), Medium (4× default), or Large (5×). Whole device-pixel scaling ensures crisp pixels on high-DPI displays.
+* **Chattiness**: Silent, Quiet (occasional thoughts), Normal, or Chatty.
+* **Behaviors**: Always on top, roam around screen edges, look at cursor, sleep when idle, wellness nudges (drink water, stretch, eye rest), fun facts & jokes, synthesized sounds, and launch at login.
+
+Settings are saved atomically in your user data directory as `settings.json`.
+
+---
+
+## Project Structure
 
 ```
-Pixel-Pals/
-├── main.js              # Electron main process (lifecycle, physics, timers, tray, shortcuts)
-├── preload.js           # Safe contextBridge IPC layer
-├── assets/
-│   ├── icon.ico/.png    # App icons
-│   ├── tray-*.png       # System tray icons for each pet
-│   ├── demo.gif         # Showcase animation
-│   ├── pals-banner.png  # Character lineup banner
-│   └── fonts/           # Local WOFF2 pixel fonts (Pixelify Sans, Press Start 2P, VT323)
+pixel-pals/
 ├── src/
-│   ├── pet.html/css/js  # Pet window: DPR canvas, state machine, particles, choice bubbles
-│   ├── picker.html/css/js # Adopt-a-buddy window with live preview rendering
-│   ├── sprites.js       # Hand-authored 32x32 sprite generator & palette tables
-│   ├── sounds.js        # Pure WebAudio synthesizer (zero audio assets)
-│   ├── messages.js      # Core greetings, idle lines, pet personalities
-│   ├── messages-fun.js  # Jokes, facts, stories, knock-knock jokes
-│   ├── messages-react.js# Interaction reactions (petting, flinging, naps, timers)
-│   └── messages-ask.js  # Questions, trivia, games (RPS, coin, 8-ball)
-└── test/                # Test harnesses, validation suites, and recorders
+│   ├── main/                 # Electron main process
+│   │   ├── main.js           # Transparent window, cursor tracking, tray, IPC
+│   │   ├── preload.js        # Context-isolated secure bridge
+│   │   └── settings.js       # Validated atomic JSON store
+│   ├── renderer/             # Frontend windows
+│   │   ├── pet.html/css/js   # Floating pet view, speech bubble, organic physics
+│   │   └── home.html/css/js  # Pet Home dashboard & animated habitat preview
+│   └── shared/               # Plain JS engine (Node & browser compatible)
+│       ├── pixel.js          # Software pixel rasterizer (cel-shading, outlines)
+│       ├── pets.js           # Procedural sprite models & rigs (Mochi, Waddle, Axo)
+│       ├── brain.js          # State machine, physics, roaming, emotions
+│       ├── effects.js        # Burst particles (hearts, stars, bubbles, zzz)
+│       ├── scenes.js         # Procedural animated habitat backgrounds
+│       ├── sound.js          # WebAudio live sound synthesis
+│       ├── icons.js, png.js  # Dynamic icon generation from pixel rigs
+│       └── messages/         # 1,000+ dialogue lines in shuffled bags
+├── scripts/
+│   ├── selftest.js           # 175-check automated verification suite
+│   ├── preview.js            # Sprite sheet preview generator
+│   └── make-icons.js         # Generates build/icon.ico & build/icon.png
+├── website/                  # Interactive landing page showcase
+│   ├── index.html            # Responsive website with live procedural habitats
+│   └── test_website.py       # Automated Playwright test suite
+├── docs/                     # GitHub Pages deployment mirror
+├── build/                    # Generated app & installer icons
+└── package.json
 ```
 
-### Technical Highlights
-- **Bubble Anchoring**: The speech bubble is anchored by a GPU-composited CSS `transform` on `#bubble-anchor` updated per frame, cleanly decoupled from layout styling. This completely prevents the bubble from sliding or trailing behind during window drags.
-- **DPR Scaling**: Canvas dimensions and transforms dynamically respect `window.devicePixelRatio`, ensuring crisp pixel art on high-DPI displays (125%–200% Windows scaling).
-- **Main-Process Timers**: Pomodoro and countdown timers run directly in Electron's main process, surviving renderer reloads without losing time.
-- **Memory Footprint**: Offscreen canvases pre-bake pet layer frames once at startup, keeping idle CPU usage near 0%.
+---
+
+## Adding Custom Dialogue
+
+Dialogue files are organized cleanly in `src/shared/messages/`:
+* `core.js`: Greetings, time-of-day phrases, weekdays, calendar dates (`MM-DD`), petting/feeding reactions.
+* `shared.js`: Gentle encouragement, care reminders, work focus, compliments.
+* `facts.js`: Curated world & animal trivia, wholesome jokes.
+* `mochi.js`, `waddle.js`, `axo.js`: Individual character voices.
+
+To add custom lines, open any of these files and append a string or an expression-tagged tuple:
+```javascript
+"Here is a brand new cozy thought!",
+["I am super excited!", "happy"]
+```
+Available moods: `happy`, `love`, `wide`, `sleepy`, `sad`, `dizzy`, `squint`, `glad`, `calm`.
 
 ---
 
-## Development Scripts
+## Adding a New Pet
 
-| Command | Purpose |
-|:---|:---|
-| `npm run desktop` | Run the desktop app |
-| `npm run dev` | Run the app with detached DevTools enabled |
-| `npm test` | Run the automated message validation suite |
-| `npm run preview:sprites` | Render full sprite sheet of all pet frames to `out/sprites.png` |
-| `npm run preview:app` | Launch the adopt-a-buddy picker in standalone preview mode |
-| `npm run record:gif` | Run automated headless demo recorder to compile `assets/demo.gif` |
-| `npm run dist` | Build Windows NSIS installer and portable `.exe` with electron-builder |
-| `npm run dist:portable` | Build only the portable `.exe` binary |
+1. In `src/shared/pets.js`, define your pet drawing function (e.g. `drawBunny(rig, state)`) and register it in `PETS`.
+2. Create `src/shared/messages/yourpet.js` with dialogue bags and register it in `src/shared/messages/index.js` and `<script>` tags in `pet.html`/`home.html`.
+3. Add an animated habitat scene in `src/shared/scenes.js`.
+4. Run `npm test` to validate the new pet's lifetime simulation.
 
 ---
 
-## Community & Discussions
+## Testing & Quality Assurance
 
-- Have questions, feature suggestions, or custom pet ideas? Head over to **[GitHub Discussions](https://github.com/1-Pankaj/Pixel-Pals/discussions)**!
-- Found a bug? Open a structured report using our **[Bug Report Form](https://github.com/1-Pankaj/Pixel-Pals/issues/new?template=bug_report.yml)**.
-- Want to contribute? Check out our **[Contributing Guide](CONTRIBUTING.md)** and **[Code of Conduct](CODE_OF_CONDUCT.md)**.
+Run the built-in self-test suite:
+```bash
+npm test
+```
+This runs 175 automated checks:
+- Simulates 2 hours of virtual life for every pet
+- Verifies dialogue bags, shuffle integrity, and mood tags
+- Validates the settings store and procedural icon generators
+- Boots the Electron main process logic against a mocked harness
+
+To test the landing page with Playwright:
+```bash
+python website/test_website.py
+```
+
+---
+
+## Contributing
+
+Contributions, custom pets, dialogue lines, and translations are very welcome! Please check out [CONTRIBUTING.md](CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
 
 ---
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
-
-Bundled pixel fonts are open-source under the SIL Open Font License 1.1. See [CREDITS.md](CREDITS.md) for full font notices and designer credits.
+Pixel Pals is free and open-source software licensed under the [MIT License](LICENSE).
+Made with love for cozy desktops everywhere.

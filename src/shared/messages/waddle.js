@@ -1,0 +1,98 @@
+/* Waddle the penguin: an optimist in a tuxedo who gives out pebbles and good vibes. */
+(function (g) {
+  const D = (g.MessageData = g.MessageData || {});
+  D.pets = D.pets || {};
+
+  D.pets.waddle = {
+    idle: [
+      "Waddle waddle!",
+      "I found a pebble. It's perfect. You can have it.",
+      "Don't worry, I'm cool. Literally. It's an arctic thing.",
+      "Today is a great day to slide on something.",
+      "I'm dressed up and nowhere to go. Wonderful.",
+      "I'm wearing a tuxedo every day. Zero regrets.",
+      "Ice to see you! ...Sorry, couldn't resist.",
+      "I'm a very formal bird. Mostly sliding, mostly.",
+      "My flippers are for hugging, mostly.",
+      "A good day is a good slide plus a good fish.",
+      "I tried to fly once. It was a tragedy. A fun one.",
+      "Penguins have excellent posture. Look at this posture.",
+      "Waddling is just walking with extra enthusiasm.",
+      "Did you know I can hold my breath? I won't, but I could.",
+      "A pebble a day keeps the sad away.",
+      "My belly is for sliding. My heart is for you.",
+      "Is it chilly? I brought a little ice. Or maybe a little hope.",
+      "Sometimes I just stand there and feel proud.",
+      "I wonder how many pebbles are on this desktop.",
+      "I can't fly, but I can shuffle with confidence.",
+      "Every penguin deserves a snug huddle.",
+      "Let's huddle! Everyone's warmer together.",
+      "I've decided today I'm the president of snacks.",
+      "I practise my waddle in the mirror. It's improving.",
+      "Cool facts about me: I'm cool.",
+      "I'm excellent at standing still. Look at me stand.",
+      "The best swimmer on this desktop? It's me. The only swimmer, but still.",
+      "A little sliding makes any day better.",
+      "I told a seagull I love fish. He judged me.",
+      "My favourite season is winter. And also the other ones.",
+      "Hey, hey! I love the way the light hits my flippers.",
+      "Penguin protocol: be cute, be kind, be warm.",
+      "I'm fairly sure I'm the best-dressed pet here.",
+      "Every day is a good day for a pebble hunt.",
+      "A snowflake landed on my nose in my imagination.",
+      "Dignity is optional when there's fish.",
+      "You can't spell waddle without a little wobble.",
+      "I'm so excited! About what? Everything!",
+      "Waddle tip: lean forward, believe in yourself.",
+      "I like your keyboard. It looks climbable.",
+      "I've perfected my tummy slide. Want a demo?",
+      "Penguins are super social. You're my flock now.",
+      "I'm gathering pebbles for someone special. You.",
+      "Whenever I feel small, I remember the ocean is huge, and I'm still in it.",
+      "Quick, someone tell me a fish joke!",
+      "Wibble wobble, I'm back.",
+      "I'm cooler than your average bird.",
+      "A good hug warms up the whole iceberg.",
+      "Friendship is the best kind of ice. It never melts.",
+      "I do my best thinking with my beak up.",
+    ],
+    petted: [
+      "Eeee! That's so nice!", "Waddle waddle, happy happy!", "My flippers are flapping with joy!", "I'm warm all the way to my toes!",
+      "Aww, thank you for the cuddles!", "You get an extra pebble for that.", "Best friends forever! Is that okay?", "My heart's doing a little slide!",
+      "Hehe, my feathers are fluffy now!", "Tuxedo smoothed. Thank you!", "Yay! You're so kind!", "Flap flap flap! Love it!",
+      "You're warmer than a sunbeam!", "Group hug! Just us!",
+    ],
+    fed: [
+      "Fish! Wonderful! Thank you!", "Gulp! Delicious!", "That's a prime catch!", "You're the best at fish delivery.",
+      "Mmm. Fresh and crunchy.", "I'll save the tail for later. Just kidding, nom!", "Nom nom! Flap flap!", "A fish a day keeps the doldrums away.",
+      "Top-tier fish! My compliments to the chef!", "I'm so full of joy and fish!",
+    ],
+    lifted: [
+      "Whoa! I'm airborne! Finally!", "Look, I'm flying! Sort of! Wheee!", "Flap flap flap! Is it working?", "Penguin takeoff!",
+      "I always wanted to be lifted like this.", "Eep! I'm very high!", "I might actually be a bird after all!", "Hold on tight, I'm precious.",
+    ],
+    dropped: [
+      "Splat! I mean, perfect landing!", "Slide! Where's my slide?", "Belly flop, tada!", "Ouch, nope, I'm fine!",
+      "New iceberg, same me.", "Waddling right along!",
+    ],
+    trick: [
+      "Watch this spin!", "I call it the Penguin Pirouette!", "Ta-da! Flap flap!", "Ooh! Tricks! I can do tricks!",
+      "Show-off mode: activated!", "Applause, please. Flipper applause.",
+    ],
+    sleepTalk: [
+      "zzz... fish... zzz...", "...pebbles for everyone...", "zzz... waddle... waddle...", "...zzz... slide...", "zzz... huddle... warm...", "...flap... zzz...",
+    ],
+    wake: [
+      "Whoa! I fell asleep standing up!", "Hmm? Huh? Oh! Hello!", "Good morning! Or whenever it is!", "I slept like a rock. A very comfy rock.",
+      "I dreamt of a giant fish. A friendly one.", "Rise and slide!",
+    ],
+    daydream: [
+      "I dreamed of a giant slide into the ocean.", "I was thinking about the best fish of my life.", "I imagined a huge colony of friends. All of them were you.", "Thinking about pebbles. As usual.",
+      "I pictured a blizzard party. Everyone was invited.", "I've been daydreaming about swimming.",
+    ],
+    hover: [
+      "Hi hi hi! Hello!", "Ooh, are we hanging out?", "You came! Yay!", "A visitor! Do I need to bow?",
+      "Flippers up for hellos!", "Wanna see me waddle?",
+    ],
+  };
+})(typeof globalThis !== 'undefined' ? globalThis : this);

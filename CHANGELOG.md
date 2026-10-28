@@ -3,6 +3,35 @@
 All notable changes to Pixel Pals are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2026-10-28
+
+### Added
+- **100% Procedural Software Pixel Rasterizer (`Pixel`)**: Completely asset-free rendering engine executing software cel-shading, hue-shifted lighting ramps, automatic dark outlines, and dynamic scaling in whole device pixels at zero GPU runtime cost.
+- **Three Handcrafted Pals**:
+  - **Mochi**: Tabby cat with twitching ears, swishing tail, loving naps on her woven rug, and fish treats.
+  - **Waddle**: Cheerful tuxedo penguin with flappable wings, pebble gifts, and sliding dances on snowdrifts.
+  - **Axo**: Smiling aquatic axolotl with pulsing frilly gills, bubble blows, and gentle hydration reminders.
+- **Dynamic Procedural Habitats (`Scenes`)**:
+  - Mochi's cozy room with wooden wall paneling, floorboards, window glints, yarn ball, and woven oval rug.
+  - Waddle's mountain tundra with snow-capped peaks, soft gradient skies, translucent ice block, pebble rocks, and falling snowflakes.
+  - Axo's deep aqua lagoon with sunlight caustics, depth bands, seabed rocks, swaying seaweed stalks, and rising air bubbles.
+- **Interactive "Pet Home" Settings Suite**: Dedicated frameless hub window (`home.html`) featuring animated habitat cards, real-time pet switcher, size selection (Small, Medium, Large), chattiness controls, wellness toggles, and live interaction triggers.
+- **Organic Physics & State Machine (`Brain`)**:
+  - Real-time drag with inertia, velocity-based swinging, dangling states, gravity, and squish-and-stretch bounce on landing.
+  - Global cursor tracking that follows the mouse across multi-monitors without stealing window focus.
+  - Idle sleep cycles with snoring "Z" particles and organic awakening.
+  - Gentle roaming behavior with smooth stepping animations.
+- **1,000+ Dialogue Lines**: Context-aware shuffled bags covering greetings, time of day, weekdays, calendar events, wellness check-ins, jokes, and animal facts paired with expressive mood tags (`happy`, `love`, `wide`, `sleepy`, `sad`, `dizzy`, `squint`, `glad`, `calm`).
+- **Comprehensive Self-Test Suite**: 175 rigorous automated unit checks simulating 2 hours of pet life per animal, message bags, and mock Electron main processes.
+- **Modern Interactive Landing Website**: Responsive, asset-free showcase website with live procedural canvases, draggable notes, sound synthesizer, and Playwright verification suite.
+
+### Changed
+- Replaced static PNG sprite sheets and external font dependencies with zero-dependency procedural software rasterization.
+- Replaced legacy picker with modern, responsive Pet Home interface.
+- Upgraded desktop packaging to Electron 44 and Electron Builder 26 for streamlined NSIS installer and portable single-executable releases.
+
+---
+
 ## [1.2.1] - 2026-10-25
 
 ### Added
