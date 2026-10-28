@@ -2,7 +2,7 @@
   "name": "pixel-pals",
   "productName": "Pixel Pals",
   "version": "2.0.0",
-  "description": "Cute pixel pets that live on your desktop. A cat, a penguin and an axolotl whose eyes follow your cursor. 100% procedural software pixel rasterizer, offline, zero dependencies.",
+  "description": "Cute pixel pets that live on your Windows desktop. A cat, a penguin, and an axolotl whose eyes follow your cursor.",
   "main": "src/main/main.js",
   "author": "Pixel Pals",
   "license": "MIT",
@@ -17,13 +17,12 @@
   "keywords": [
     "desktop-pet",
     "pixel-art",
-    "electron",
     "virtual-pet",
-    "procedural",
-    "cel-shaded",
+    "electron",
+    "tamagotchi",
     "cozy",
-    "wellness",
-    "productivity"
+    "pixel-pets",
+    "windows-desktop"
   ],
   "engines": {
     "node": ">=18"
